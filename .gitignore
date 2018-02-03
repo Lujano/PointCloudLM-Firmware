@@ -1,5 +1,5 @@
 #Ignorar metadata
-[metadata]/
+[.metadata]/
 [RemoteLaunch]/
 [RemoteSystemsTempFiles]/
 [.settings]/
