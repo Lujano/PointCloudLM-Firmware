@@ -1,7 +1,7 @@
 #Ignorar metadata
-[.metadata]/
-[RemoteLaunch]/
-[RemoteSystemsTempFiles]/
-[.settings]/
-[Documentation]/
-[Project_Settings]/
+*/.metadata
+*/RemoteLaunch
+*/RemoteSystemsTempFiles
+*/.settings
+*/Documentation
+*/Project_Settings
