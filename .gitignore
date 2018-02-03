@@ -1,1 +1,7 @@
-.xml
+#Ignorar metadata
+[metadata]/
+[RemoteLaunch]/
+[RemoteSystemsTempFiles]/
+[.settings]/
+[Documentation]/
+[Project_Settings]/
