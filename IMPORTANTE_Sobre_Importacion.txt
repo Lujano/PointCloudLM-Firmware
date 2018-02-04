@@ -1,0 +1,5 @@
+Para importar los projectos, cree un projecto en codewarrior bajo el mismo nombre y reemplaze las siguientes carpetas con las descargadas de github:
+-Generated_Code
+-Sources
+
+y los archivos que se encuentran fuera de la carpeta
