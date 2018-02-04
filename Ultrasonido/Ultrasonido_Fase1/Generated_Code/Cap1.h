@@ -6,7 +6,7 @@
 **     Component   : Capture
 **     Version     : Component 02.223, Driver 01.30, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-02-03, 10:47, # CodeGen: 3
+**     Date/Time   : 2018-02-04, 08:53, # CodeGen: 37
 **     Abstract    :
 **         This component "Capture" simply implements the capture function
 **         of timer. The counter counts the same way as in free run mode. On
@@ -17,8 +17,8 @@
 **             Timer capture encapsulation : Capture
 **
 **         Timer
-**             Timer                   : TPM1
-**             Counter shared          : Yes
+**             Timer                   : TPM2
+**             Counter shared          : No
 **
 **         High speed mode
 **             Prescaler               : divide-by-16
@@ -36,22 +36,22 @@
 **              Events                 : Enabled
 **
 **         Timer registers
-**              Capture                : TPM1C0V   [$0046]
-**              Counter                : TPM1CNT   [$0041]
-**              Mode                   : TPM1SC    [$0040]
-**              Run                    : TPM1SC    [$0040]
-**              Prescaler              : TPM1SC    [$0040]
+**              Capture                : TPM2C2V   [$005C]
+**              Counter                : TPM2CNT   [$0051]
+**              Mode                   : TPM2SC    [$0050]
+**              Run                    : TPM2SC    [$0050]
+**              Prescaler              : TPM2SC    [$0050]
 **
 **         Used input pin              : 
 **             ----------------------------------------------------
 **                Number (on package)  |    Name
 **             ----------------------------------------------------
-**                       62            |  PTA0_KBI1P0_TPM1CH0_ADP0_ACMP1PLUS
+**                       47            |  PTA7_TPM2CH2_ADP9
 **             ----------------------------------------------------
 **
 **         Port name                   : PTA
-**         Bit number (in port)        : 0
-**         Bit mask of the port        : $0001
+**         Bit number (in port)        : 7
+**         Bit mask of the port        : $0080
 **
 **         Signal edge/level           : both
 **         Priority                    : 
@@ -134,11 +134,9 @@
 #endif
 
 
-extern volatile word Cap1_CntrState;   /* Content of counter */
-
 
 #define Cap1_Reset() \
-  (Cap1_CntrState = TPM1CNT , (byte)ERR_OK)
+  (TPM2CNTH = 0U , (byte)ERR_OK)
 /*
 ** ===================================================================
 **     Method      :  Cap1_Reset (component Capture)
@@ -156,9 +154,7 @@ extern volatile word Cap1_CntrState;   /* Content of counter */
 
 #define Cap1_GetCaptureValue(Value) \
   /*lint -save  -e926 -e927 -e928 -e929 Disable MISRA rule (11.4) checking. */\
-  (((*(Cap1_TCapturedValue*)(Value) = TPM1C0V), \
-  (*(Cap1_TCapturedValue*)(Value) -= Cap1_CntrState)), \
-  ERR_OK) \
+  (*(Cap1_TCapturedValue*)(Value) = TPM2C2V , (byte)ERR_OK) \
   /*lint -restore Enable MISRA rule (11.4) checking. */
 /*
 ** ===================================================================

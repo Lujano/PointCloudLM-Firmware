@@ -6,7 +6,7 @@
 **     Component   : Capture
 **     Version     : Component 02.223, Driver 01.30, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-02-03, 10:47, # CodeGen: 3
+**     Date/Time   : 2018-02-04, 08:53, # CodeGen: 37
 **     Abstract    :
 **         This component "Capture" simply implements the capture function
 **         of timer. The counter counts the same way as in free run mode. On
@@ -17,8 +17,8 @@
 **             Timer capture encapsulation : Capture
 **
 **         Timer
-**             Timer                   : TPM1
-**             Counter shared          : Yes
+**             Timer                   : TPM2
+**             Counter shared          : No
 **
 **         High speed mode
 **             Prescaler               : divide-by-16
@@ -36,22 +36,22 @@
 **              Events                 : Enabled
 **
 **         Timer registers
-**              Capture                : TPM1C0V   [$0046]
-**              Counter                : TPM1CNT   [$0041]
-**              Mode                   : TPM1SC    [$0040]
-**              Run                    : TPM1SC    [$0040]
-**              Prescaler              : TPM1SC    [$0040]
+**              Capture                : TPM2C2V   [$005C]
+**              Counter                : TPM2CNT   [$0051]
+**              Mode                   : TPM2SC    [$0050]
+**              Run                    : TPM2SC    [$0050]
+**              Prescaler              : TPM2SC    [$0050]
 **
 **         Used input pin              : 
 **             ----------------------------------------------------
 **                Number (on package)  |    Name
 **             ----------------------------------------------------
-**                       62            |  PTA0_KBI1P0_TPM1CH0_ADP0_ACMP1PLUS
+**                       47            |  PTA7_TPM2CH2_ADP9
 **             ----------------------------------------------------
 **
 **         Port name                   : PTA
-**         Bit number (in port)        : 0
-**         Bit mask of the port        : $0001
+**         Bit number (in port)        : 7
+**         Bit mask of the port        : $0080
 **
 **         Signal edge/level           : both
 **         Priority                    : 
@@ -113,7 +113,6 @@
 #include "Cap1.h"
 
 
-volatile word Cap1_CntrState;          /* Content of counter */
 
 
 /*
@@ -173,11 +172,20 @@ byte Cap1_GetCaptureValue(Cap1_TCapturedValue *Value)
 */
 void Cap1_Init(void)
 {
-  /* TPM1C0V: BIT15=0,BIT14=0,BIT13=0,BIT12=0,BIT11=0,BIT10=0,BIT9=0,BIT8=0,BIT7=0,BIT6=0,BIT5=0,BIT4=0,BIT3=0,BIT2=0,BIT1=0,BIT0=0 */
-  setReg16(TPM1C0V, 0x00U);            /* Clear capture register */ 
-  Cap1_CntrState = 0x00U;              /* Clear variable */
-  /* TPM1C0SC: CH0F=0,CH0IE=1,MS0B=0,MS0A=0,ELS0B=1,ELS0A=1,??=0,??=0 */
-  setReg8(TPM1C0SC, 0x4CU);            /* Enable both interrupt and capture function */ 
+  /* TPM2SC: TOF=0,TOIE=0,CPWMS=0,CLKSB=0,CLKSA=0,PS2=0,PS1=0,PS0=0 */
+  setReg8(TPM2SC, 0x00U);              /* Stop HW */ 
+  /* TPM2MOD: BIT15=0,BIT14=0,BIT13=0,BIT12=0,BIT11=0,BIT10=0,BIT9=0,BIT8=0,BIT7=0,BIT6=0,BIT5=0,BIT4=0,BIT3=0,BIT2=0,BIT1=0,BIT0=0 */
+  setReg16(TPM2MOD, 0x00U);            /* Disable modulo register */ 
+  /* TPM2CNTH: BIT15=0,BIT14=0,BIT13=0,BIT12=0,BIT11=0,BIT10=0,BIT9=0,BIT8=0 */
+  setReg8(TPM2CNTH, 0x00U);            /* Reset counter */ 
+  /* TPM2C2V: BIT15=0,BIT14=0,BIT13=0,BIT12=0,BIT11=0,BIT10=0,BIT9=0,BIT8=0,BIT7=0,BIT6=0,BIT5=0,BIT4=0,BIT3=0,BIT2=0,BIT1=0,BIT0=0 */
+  setReg16(TPM2C2V, 0x00U);            /* Clear capture register */ 
+  /* TPM2SC: PS2=1,PS1=0,PS0=0 */
+  clrSetReg8Bits(TPM2SC, 0x03U, 0x04U); /* Set prescaler register */ 
+  /* TPM2C2SC: CH2F=0,CH2IE=1,MS2B=0,MS2A=0,ELS2B=1,ELS2A=1,??=0,??=0 */
+  setReg8(TPM2C2SC, 0x4CU);            /* Enable both interrupt and capture function */ 
+  /* TPM2SC: CLKSB=0,CLKSA=1 */
+  clrSetReg8Bits(TPM2SC, 0x10U, 0x08U); /* Run counter */ 
 }
 
 
@@ -193,9 +201,9 @@ void Cap1_Init(void)
 */
 ISR(Cap1_Interrupt)
 {
-  (void)TPM1C0SC;                      /* Dummy read to reset interrupt request flag */
-  /* TPM1C0SC: CH0F=0 */
-  clrReg8Bits(TPM1C0SC, 0x80U);        /* Reset interrupt request flag */ 
+  (void)TPM2C2SC;                      /* Dummy read to reset interrupt request flag */
+  /* TPM2C2SC: CH2F=0 */
+  clrReg8Bits(TPM2C2SC, 0x80U);        /* Reset interrupt request flag */ 
   Cap1_OnCapture();                    /* Invoke user event */
 }
 

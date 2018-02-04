@@ -6,10 +6,11 @@
 **     Component   : BitIO
 **     Version     : Component 02.086, Driver 03.27, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-02-03, 10:47, # CodeGen: 3
+**     Date/Time   : 2018-02-04, 07:20, # CodeGen: 13
 **     Abstract    :
 **         This component "BitIO" implements an one-bit input/output.
 **         It uses one bit/pin of a port.
+**         Note: This component is set to work in Output direction only.
 **         Methods of this component are mostly implemented as a macros
 **         (if supported by target language and compiler).
 **     Settings    :
@@ -17,29 +18,28 @@
 **             ----------------------------------------------------
 **                Number (on package)  |    Name
 **             ----------------------------------------------------
-**                       2             |  PTD0_KBI2P0_SPSCK2
+**                       20            |  PTE6
 **             ----------------------------------------------------
 **
-**         Port name                   : PTD
+**         Port name                   : PTE
 **
-**         Bit number (in port)        : 0
-**         Bit mask of the port        : $0001
+**         Bit number (in port)        : 6
+**         Bit mask of the port        : $0040
 **
-**         Initial direction           : Output (direction can be changed)
-**         Safe mode                   : yes
+**         Initial direction           : Output (direction cannot be changed)
 **         Initial output value        : 0
-**         Initial pull option         : off
+**         Initial pull option         : up
 **
-**         Port data register          : PTDD      [$0006]
-**         Port control register       : PTDDD     [$0007]
+**         Port data register          : PTED      [$0008]
+**         Port control register       : PTEDD     [$0009]
 **
 **         Optimization for            : speed
 **     Contents    :
-**         SetDir - void Bit3_SetDir(bool Dir);
 **         GetVal - bool Bit3_GetVal(void);
 **         PutVal - void Bit3_PutVal(bool Val);
 **         ClrVal - void Bit3_ClrVal(void);
 **         SetVal - void Bit3_SetVal(void);
+**         NegVal - void Bit3_NegVal(void);
 **
 **     Copyright : 1997 - 2014 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -78,6 +78,7 @@
 ** @brief
 **         This component "BitIO" implements an one-bit input/output.
 **         It uses one bit/pin of a port.
+**         Note: This component is set to work in Output direction only.
 **         Methods of this component are mostly implemented as a macros
 **         (if supported by target language and compiler).
 */         
@@ -105,6 +106,7 @@
 **           a) direction = Input  : reads the input value from the
 **                                   pin and returns it
 **           b) direction = Output : returns the last written value
+**         Note: This component is set to work in Output direction only.
 **     Parameters  : None
 **     Returns     :
 **         ---             - Input value. Possible values:
@@ -124,13 +126,6 @@ bool Bit3_GetVal(void)
 **     Method      :  Bit3_PutVal (component BitIO)
 **     Description :
 **         This method writes the new output value.
-**           a) direction = Input  : sets the new output value;
-**                                   this operation will be shown on
-**                                   output after the direction has
-**                                   been switched to output
-**                                   (SetDir(TRUE);)
-**           b) direction = Output : directly writes the value to the
-**                                   appropriate pin
 **     Parameters  :
 **         NAME       - DESCRIPTION
 **         Val             - Output value. Possible values:
@@ -142,11 +137,9 @@ bool Bit3_GetVal(void)
 void Bit3_PutVal(bool Val)
 {
   if (Val) {
-    setReg8Bits(PTDD, 0x01U);          /* PTDD0=0x01U */
-    Shadow_PTD |= 0x01U;               /* Set-up shadow variable */
+    setReg8Bits(PTED, 0x40U);          /* PTED6=0x01U */
   } else { /* !Val */
-    clrReg8Bits(PTDD, 0x01U);          /* PTDD0=0x00U */
-    Shadow_PTD &= 0xFEU;               /* Set-up shadow variable */
+    clrReg8Bits(PTED, 0x40U);          /* PTED6=0x00U */
   } /* !Val */
 }
 
@@ -155,13 +148,6 @@ void Bit3_PutVal(bool Val)
 **     Method      :  Bit3_ClrVal (component BitIO)
 **     Description :
 **         This method clears (sets to zero) the output value.
-**           a) direction = Input  : sets the output value to "0";
-**                                   this operation will be shown on
-**                                   output after the direction has
-**                                   been switched to output
-**                                   (SetDir(TRUE);)
-**           b) direction = Output : directly writes "0" to the
-**                                   appropriate pin
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================
@@ -177,13 +163,6 @@ void Bit3_ClrVal(void)
 **     Method      :  Bit3_SetVal (component BitIO)
 **     Description :
 **         This method sets (sets to one) the output value.
-**           a) direction = Input  : sets the output value to "1";
-**                                   this operation will be shown on
-**                                   output after the direction has
-**                                   been switched to output
-**                                   (SetDir(TRUE);)
-**           b) direction = Output : directly writes "1" to the
-**                                   appropriate pin
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================
@@ -196,25 +175,18 @@ void Bit3_SetVal(void)
 
 /*
 ** ===================================================================
-**     Method      :  Bit3_SetDir (component BitIO)
+**     Method      :  Bit3_NegVal (component BitIO)
 **     Description :
-**         This method sets direction of the component.
-**     Parameters  :
-**         NAME       - DESCRIPTION
-**         Dir        - Direction to set (FALSE or TRUE)
-**                      FALSE = Input, TRUE = Output
+**         This method negates (inverts) the output value.
+**     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================
 */
-void Bit3_SetDir(bool Dir)
-{
-  if (Dir) {
-    setReg8(PTDD, (getReg8(PTDD) & (byte)(~(byte)0x01U)) | (Shadow_PTD & 0x01U)); /* PTDD0=Shadow_PTD[bit 0] */
-    setReg8Bits(PTDDD, 0x01U);         /* PTDDD0=0x01U */
-  } else { /* !Dir */
-    clrReg8Bits(PTDDD, 0x01U);         /* PTDDD0=0x00U */
-  } /* !Dir */
-}
+/*
+void Bit3_NegVal(void)
+
+**  This method is implemented as a macro. See Bit3.h file.  **
+*/
 
 
 /* END Bit3. */

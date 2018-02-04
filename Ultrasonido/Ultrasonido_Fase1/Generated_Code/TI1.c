@@ -6,7 +6,7 @@
 **     Component   : TimerInt
 **     Version     : Component 02.161, Driver 01.23, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-02-03, 10:47, # CodeGen: 3
+**     Date/Time   : 2018-02-04, 08:53, # CodeGen: 37
 **     Abstract    :
 **         This component "TimerInt" implements a periodic interrupt.
 **         When the component and its events are enabled, the "OnInterrupt"
@@ -17,16 +17,16 @@
 **     Settings    :
 **         Timer name                  : TPM1 (16-bit)
 **         Compare name                : TPM11
-**         Counter shared              : Yes
+**         Counter shared              : No
 **
 **         High speed mode
-**             Prescaler               : divide-by-16
-**             Clock                   : 1048576 Hz
+**             Prescaler               : divide-by-1
+**             Clock                   : 16777216 Hz
 **           Initial period/frequency
 **             microseconds            : 10
-**             seconds (real)          : 0.000009536743
-**             Hz                      : 104858
-**             kHz                     : 105
+**             seconds (real)          : 0.000010073185
+**             Hz                      : 99273
+**             kHz                     : 99
 **
 **         Runtime setting             : none
 **
@@ -107,7 +107,6 @@
 #pragma MESSAGE DISABLE C4002          /* Disable warning C4002 "Result not used" */
 
 static bool EnUser;                    /* Enable device by user */
-static word CmpVal;                    /* Value added to compare register in ISR */
 /*** Internal macros and method prototypes ***/
 
 /*
@@ -121,7 +120,7 @@ static word CmpVal;                    /* Value added to compare register in ISR
 ** ===================================================================
 */
 #define TI1_SetCV(_Val) ( \
-  ((TPM1C1V = (word)(TPM1CNT + (_Val)),((CmpVal = (_Val))))))
+  TPM1MOD = (TPM1C1V = (word)(_Val)) )
 
 /*
 ** ===================================================================
@@ -152,19 +151,13 @@ static void HWEnDi(void);
 */
 static void HWEnDi(void)
 {
-  word TmpCmpVal;                      /* Temporary variable for compare value */
-
   if (EnUser) {
-    TmpCmpVal = (word)(TPM1CNT + CmpVal); /* Count current value for the compare register */
-    TPM1C1V = TmpCmpVal;               /* Set compare register */
-    while (TPM1C1V != TmpCmpVal) {}    /* Wait for register update (because of Latching mechanism) */
-    /* TPM1C1SC: CH1F=0 */
-    clrReg8Bits(TPM1C1SC, 0x80U);      /* Reset request flag */ 
-    /* TPM1C1SC: CH1IE=1 */
-    setReg8Bits(TPM1C1SC, 0x40U);      /* Enable compare interrupt */ 
+    TPM1SC |= 0x08U;                   /* Run counter (set CLKSB:CLKSA) */
   } else {
-    /* TPM1C1SC: CH1IE=0 */
-    clrReg8Bits(TPM1C1SC, 0x40U);      /* Disable Compare interrupt */ 
+    /* TPM1SC: CLKSB=0,CLKSA=0 */
+    clrReg8Bits(TPM1SC, 0x18U);        /* Stop counter (CLKSB:CLKSA = 00) */ 
+    /* TPM1CNTH: BIT15=0,BIT14=0,BIT13=0,BIT12=0,BIT11=0,BIT10=0,BIT9=0,BIT8=0 */
+    setReg8(TPM1CNTH, 0x00U);          /* Clear counter register - any write clears complete counter */ 
   }
 }
 
@@ -229,13 +222,13 @@ void TI1_Init(void)
 {
   /* TPM1SC: TOF=0,TOIE=0,CPWMS=0,CLKSB=0,CLKSA=0,PS2=0,PS1=0,PS0=0 */
   setReg8(TPM1SC, 0x00U);              /* Stop HW; disable overflow interrupt and set prescaler to 0 */ 
-  /* TPM1MOD: BIT15=0,BIT14=0,BIT13=0,BIT12=0,BIT11=0,BIT10=0,BIT9=0,BIT8=0,BIT7=0,BIT6=0,BIT5=0,BIT4=0,BIT3=0,BIT2=0,BIT1=0,BIT0=0 */
-  setReg16(TPM1MOD, 0x00U);            /* Clear modulo register: e.g. set free-running mode */ 
-  /* TPM1C1SC: CH1F=0,CH1IE=0,MS1B=0,MS1A=1,ELS1B=0,ELS1A=0,??=0,??=0 */
-  setReg8(TPM1C1SC, 0x10U);            /* Set output compare mode and disable compare interrupt */ 
+  /* TPM1C1SC: CH1F=0,CH1IE=1,MS1B=0,MS1A=1,ELS1B=0,ELS1A=0,??=0,??=0 */
+  setReg8(TPM1C1SC, 0x50U);            /* Set output compare mode and enable compare interrupt */ 
   EnUser = TRUE;                       /* Enable device */
-  TI1_SetCV(0x0AU);                    /* Initialize appropriate value to the compare/modulo/reload register */
-  clrSetReg8Bits(TPM1SC, 0x03U, 0x04U); /* Set prescaler */
+  TI1_SetCV(0xA8U);                    /* Initialize appropriate value to the compare/modulo/reload register */
+  clrSetReg8Bits(TPM1SC, 0x07U, 0x00U); /* Set prescaler */
+  /* TPM1CNTH: BIT15=0,BIT14=0,BIT13=0,BIT12=0,BIT11=0,BIT10=0,BIT9=0,BIT8=0 */
+  setReg8(TPM1CNTH, 0x00U);            /* Reset HW Counter */ 
   HWEnDi();
 }
 
@@ -254,7 +247,6 @@ ISR(TI1_Interrupt)
 {
   /* TPM1C1SC: CH1F=0 */
   clrReg8Bits(TPM1C1SC, 0x80U);        /* Reset compare interrupt request flag */ 
-  TPM1C1V += CmpVal;                   /* Set new value to the compare register */
   TI1_OnInterrupt();                   /* Invoke user event */
 }
 

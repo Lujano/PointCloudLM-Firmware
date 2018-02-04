@@ -38,6 +38,8 @@
 #include "Bit2.h"
 #include "Cap1.h"
 #include "Bit3.h"
+#include "AD1.h"
+#include "Bit4.h"
 /* Include shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
@@ -57,11 +59,11 @@ void main(void)
 {
   /* Write your local variable definition here */
 
-	
   /*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
   PE_low_level_init();
   /*** End of Processor Expert internal initialization.                    ***/
 
+  init();
   /* Write your code here */
     
   /* For example: for(;;) { } */
@@ -75,17 +77,19 @@ void main(void)
   				
   			 
   		case MEDIR:
-  			trigger();
   			estado_echo = ECHO_TRIGGERED;
+  			trigger();
   			while(estado_echo!= ECHO_TERMINADO){
+  				
   				
   			}
   			estado = ENVIAR;
   			break;
 	  			
   		case ENVIAR:
-  			AS1_SendChar((medicion) & 0xFF);
   			AS1_SendChar((medicion>>8) & 0xFF);
+  			AS1_SendChar((medicion) & 0xFF);
+  			
   			  			
   			estado = ESPERAR;
   			break;
@@ -114,6 +118,7 @@ void trigger(void){
 
 void init(void){
 	Bit1_ClrVal();
+	Bit3_ClrVal();
 	
 };
 /* END main */

@@ -45,6 +45,7 @@ void TI1_OnInterrupt(void)
 		}
 	else if (estado_trigger == TRIGGER_ALTO){
 		Bit1_ClrVal();
+		estado_trigger = TRIGGER_TERMINADO;
 		}
 }
 
@@ -54,7 +55,6 @@ void TI2_OnInterrupt(void)
   /* Write your code here ... */
 		
 	Bit2_NegVal();
-
 	if (estado == ESPERAR){
 	estado = MEDIR;
 	}
@@ -261,18 +261,39 @@ void Cap1_OnCapture(void)
 	/* Write your code here ... */
 			
 		if (estado_echo == ECHO_TRIGGERED){
+			Bit3_SetVal();
 			Cap1_Reset(); // Se detecta el Rising edge, resetear registro de captura
-			estado = ECHO_MEDIR;
+			estado_echo = ECHO_MEDIR;
 		}
 		else if (estado_echo == ECHO_MEDIR){
 			Cap1_GetCaptureValue(&medicion); // Se guarda el valor medido en el Falling edge
-			estado = ECHO_TERMINADO;
+			estado_echo= ECHO_TERMINADO;
 			}
 		else if (estado_echo == ECHO_TERMINADO){
 
 			}
   /* Write your code here ... */
 }
+
+/*
+** ===================================================================
+**     Event       :  AD1_OnEnd (module Events)
+**
+**     Component   :  AD1 [ADC]
+**     Description :
+**         This event is called after the measurement (which consists
+**         of <1 or more conversions>) is/are finished.
+**         The event is available only when the <Interrupt
+**         service/event> property is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void AD1_OnEnd(void)
+{
+  /* Write your code here ... */
+}
+
 
 /* END Events */
 

@@ -34,14 +34,15 @@
         <Line>Project_Settings\Linker_Files\ProcessorExpert.prm</Line>
         <Line>Generated_Code\Vectors.c</Line>
       </GenExtraFiles>
-      <XtraAge1>1279478026</XtraAge1>
+      <XtraAge1>1279542950</XtraAge1>
       <GenExtraFileType1>4</GenExtraFileType1>
       <GenExtraFileType0>4</GenExtraFileType0>
       <GenLinkedFiles lines_count="0" />
       <GenEventModules lines_count="1">
         <Line>Events</Line>
       </GenEventModules>
-      <GenMethodsInEvents lines_count="13">
+      <GenMethodsInEvents lines_count="14">
+        <Line>AD1_OnEnd</Line>
         <Line>Cap1_OnCapture</Line>
         <Line>TI2_OnInterrupt</Line>
         <Line>AS2_OnError</Line>
@@ -56,12 +57,14 @@
         <Line>AS1_OnFullRxBuf</Line>
         <Line>AS1_OnFreeTxBuf</Line>
       </GenMethodsInEvents>
-      <GenAllModules lines_count="14">
+      <GenAllModules lines_count="16">
+        <Line>AD1</Line>
         <Line>AS1</Line>
         <Line>AS2</Line>
         <Line>Bit1</Line>
         <Line>Bit2</Line>
         <Line>Bit3</Line>
+        <Line>Bit4</Line>
         <Line>Cap1</Line>
         <Line>Cpu</Line>
         <Line>Events</Line>
@@ -73,7 +76,7 @@
         <Line>TI2</Line>
       </GenAllModules>
       <GenExternModules lines_count="0" />
-      <GenBeanModules lines_count="8">
+      <GenBeanModules lines_count="10">
         <Line>AS1</Line>
         <Line>TI1</Line>
         <Line>AS2</Line>
@@ -82,11 +85,13 @@
         <Line>Bit2</Line>
         <Line>Cap1</Line>
         <Line>Bit3</Line>
+        <Line>AD1</Line>
+        <Line>Bit4</Line>
       </GenBeanModules>
     </GenFiles>
     <SignalListFile>Documentation\Ultrasonido_Fase1_SIGNALS.txt</SignalListFile>
     <DestinationCompiler>MetrowerksHCS08CC</DestinationCompiler>
-    <ProjectModificationStamp>7</ProjectModificationStamp>
+    <ProjectModificationStamp>24</ProjectModificationStamp>
   </Options>
   <CpuID_2>
     <Generated>false</Generated>
@@ -142,8 +147,8 @@
     <GenComponentVersion>01.003</GenComponentVersion>
     <GenDriverVersion>01.40</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
-    <HeaderAge>1279478026</HeaderAge>
-    <CodeAge>1279478026</CodeAge>
+    <HeaderAge>1279539609</HeaderAge>
+    <CodeAge>1279542950</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>20</GenNumMethods>
     <SetHighSpeed>false</SetHighSpeed>
@@ -451,8 +456,8 @@
     <GenComponentVersion>02.161</GenComponentVersion>
     <GenDriverVersion>01.23</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
-    <HeaderAge>1279478026</HeaderAge>
-    <CodeAge>1279478026</CodeAge>
+    <HeaderAge>1279542950</HeaderAge>
+    <CodeAge>1279542950</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>14</GenNumMethods>
     <Enable>true</Enable>
@@ -515,43 +520,43 @@
       <MethodPos4>HWEnDi</MethodPos4>
       <MethodType>internal_method_declaration</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>112</LineBeg>
-      <LineEnd>124</LineEnd>
+      <LineBeg>111</LineBeg>
+      <LineEnd>123</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos5>HWEnDi</MethodPos5>
       <MethodType>internal_method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>128</LineBeg>
-      <LineEnd>156</LineEnd>
+      <LineBeg>127</LineBeg>
+      <LineEnd>149</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos6>Enable</MethodPos6>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>157</LineBeg>
-      <LineEnd>179</LineEnd>
+      <LineBeg>150</LineBeg>
+      <LineEnd>172</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos7>Disable</MethodPos7>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>180</LineBeg>
-      <LineEnd>202</LineEnd>
+      <LineBeg>173</LineBeg>
+      <LineEnd>195</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos8>Init</MethodPos8>
       <MethodType>internal_method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>203</LineBeg>
-      <LineEnd>227</LineEnd>
+      <LineBeg>196</LineBeg>
+      <LineEnd>220</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos9>Interrupt</MethodPos9>
       <MethodType>internal_method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>228</LineBeg>
-      <LineEnd>247</LineEnd>
+      <LineBeg>221</LineBeg>
+      <LineEnd>239</LineEnd>
     </MethodPos>
     <GenExtraFilesCount>0</GenExtraFilesCount>
   </ComponentID_12>
@@ -819,8 +824,8 @@
     <GenComponentVersion>02.086</GenComponentVersion>
     <GenDriverVersion>03.27</GenDriverVersion>
     <GenEventModule />
-    <HeaderAge>1279478026</HeaderAge>
-    <CodeAge>1279478026</CodeAge>
+    <HeaderAge>1279503119</HeaderAge>
+    <CodeAge>1279503119</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>9</GenNumMethods>
     <GetDir>false</GetDir>
@@ -901,8 +906,8 @@
     <GenComponentVersion>02.161</GenComponentVersion>
     <GenDriverVersion>01.23</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
-    <HeaderAge>1279478026</HeaderAge>
-    <CodeAge>1279478026</CodeAge>
+    <HeaderAge>1279542400</HeaderAge>
+    <CodeAge>1279542400</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>14</GenNumMethods>
     <Enable>false</Enable>
@@ -976,8 +981,8 @@
     <GenComponentVersion>02.086</GenComponentVersion>
     <GenDriverVersion>03.27</GenDriverVersion>
     <GenEventModule />
-    <HeaderAge>1279478026</HeaderAge>
-    <CodeAge>1279478026</CodeAge>
+    <HeaderAge>1279539307</HeaderAge>
+    <CodeAge>1279539307</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>9</GenNumMethods>
     <GetDir>false</GetDir>
@@ -1072,8 +1077,8 @@
     <GenComponentVersion>02.223</GenComponentVersion>
     <GenDriverVersion>01.30</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
-    <HeaderAge>1279478026</HeaderAge>
-    <CodeAge>1279478026</CodeAge>
+    <HeaderAge>1279542950</HeaderAge>
+    <CodeAge>1279542950</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>8</GenNumMethods>
     <Enable>false</Enable>
@@ -1105,57 +1110,57 @@
       <MethodPos0>Reset</MethodPos0>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>139</LineBeg>
-      <LineEnd>155</LineEnd>
+      <LineBeg>137</LineBeg>
+      <LineEnd>153</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos1>GetCaptureValue</MethodPos1>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>156</LineBeg>
-      <LineEnd>180</LineEnd>
+      <LineBeg>154</LineBeg>
+      <LineEnd>176</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos2>Init</MethodPos2>
       <MethodType>internal_method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>181</LineBeg>
-      <LineEnd>193</LineEnd>
+      <LineBeg>177</LineBeg>
+      <LineEnd>189</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos3>Interrupt</MethodPos3>
       <MethodType>internal_method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>194</LineBeg>
-      <LineEnd>205</LineEnd>
+      <LineBeg>190</LineBeg>
+      <LineEnd>201</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos4>Reset</MethodPos4>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>118</LineBeg>
-      <LineEnd>137</LineEnd>
+      <LineBeg>117</LineBeg>
+      <LineEnd>136</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos5>GetCaptureValue</MethodPos5>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>138</LineBeg>
-      <LineEnd>161</LineEnd>
+      <LineBeg>137</LineBeg>
+      <LineEnd>160</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos6>Init</MethodPos6>
       <MethodType>internal_method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>162</LineBeg>
-      <LineEnd>181</LineEnd>
+      <LineBeg>161</LineBeg>
+      <LineEnd>189</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos7>Interrupt</MethodPos7>
       <MethodType>internal_method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>182</LineBeg>
-      <LineEnd>201</LineEnd>
+      <LineBeg>190</LineBeg>
+      <LineEnd>209</LineEnd>
     </MethodPos>
     <GenExtraFilesCount>0</GenExtraFilesCount>
   </ComponentID_15>
@@ -1165,8 +1170,219 @@
     <GenComponentVersion>02.086</GenComponentVersion>
     <GenDriverVersion>03.27</GenDriverVersion>
     <GenEventModule />
-    <HeaderAge>1279478026</HeaderAge>
-    <CodeAge>1279478026</CodeAge>
+    <HeaderAge>1279539852</HeaderAge>
+    <CodeAge>1279539852</CodeAge>
+    <AsemblAge>-1</AsemblAge>
+    <GenNumMethods>9</GenNumMethods>
+    <GetDir>false</GetDir>
+    <SetDir>false</SetDir>
+    <SetInput>false</SetInput>
+    <SetOutput>false</SetOutput>
+    <GetVal>true</GetVal>
+    <PutVal>true</PutVal>
+    <ClrVal>true</ClrVal>
+    <SetVal>true</SetVal>
+    <NegVal>true</NegVal>
+    <GenNumEvents>0</GenNumEvents>
+    <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
+    <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
+    <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
+    <GenMethodPos>10</GenMethodPos>
+    <MethodPos>
+      <MethodPos0>GetVal</MethodPos0>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>102</LineBeg>
+      <LineEnd>122</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos1>PutVal</MethodPos1>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>123</LineBeg>
+      <LineEnd>137</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos2>ClrVal</MethodPos2>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>138</LineBeg>
+      <LineEnd>150</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos3>SetVal</MethodPos3>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>151</LineBeg>
+      <LineEnd>163</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos4>NegVal</MethodPos4>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>164</LineBeg>
+      <LineEnd>176</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos5>GetVal</MethodPos5>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>100</LineBeg>
+      <LineEnd>122</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos6>PutVal</MethodPos6>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>123</LineBeg>
+      <LineEnd>144</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos7>ClrVal</MethodPos7>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>145</LineBeg>
+      <LineEnd>159</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos8>SetVal</MethodPos8>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>160</LineBeg>
+      <LineEnd>174</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos9>NegVal</MethodPos9>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>175</LineBeg>
+      <LineEnd>189</LineEnd>
+    </MethodPos>
+    <GenExtraFilesCount>0</GenExtraFilesCount>
+  </ComponentID_16>
+  <ComponentID_23>
+    <Generated>true</Generated>
+    <GenCompName>AD1</GenCompName>
+    <GenComponentVersion>01.699</GenComponentVersion>
+    <GenDriverVersion>01.30</GenDriverVersion>
+    <GenEventModule>Events</GenEventModule>
+    <HeaderAge>1279538962</HeaderAge>
+    <CodeAge>1279538962</CodeAge>
+    <AsemblAge>-1</AsemblAge>
+    <GenNumMethods>19</GenNumMethods>
+    <Enable>false</Enable>
+    <Disable>false</Disable>
+    <EnableEvent>false</EnableEvent>
+    <DisableEvent>false</DisableEvent>
+    <Start>false</Start>
+    <Stop>false</Stop>
+    <Measure>true</Measure>
+    <MeasureChan>false</MeasureChan>
+    <EnableIntChanTrigger>false</EnableIntChanTrigger>
+    <GetValue>false</GetValue>
+    <GetChanValue>false</GetChanValue>
+    <GetValue8>false</GetValue8>
+    <GetChanValue8>false</GetChanValue8>
+    <GetValue16>true</GetValue16>
+    <GetChanValue16>false</GetChanValue16>
+    <EnableAsynchroClock>false</EnableAsynchroClock>
+    <DisableAsynchroClock>false</DisableAsynchroClock>
+    <EnableAutoCompare>false</EnableAutoCompare>
+    <DisableAutoCompare>false</DisableAutoCompare>
+    <GenNumEvents>3</GenNumEvents>
+    <BeforeNewSpeed_Selected>0</BeforeNewSpeed_Selected>
+    <BeforeNewSpeed_Name>AD1_BeforeNewSpeed</BeforeNewSpeed_Name>
+    <BeforeNewSpeed_Priority>interrupts disabled</BeforeNewSpeed_Priority>
+    <AfterNewSpeed_Selected>0</AfterNewSpeed_Selected>
+    <AfterNewSpeed_Name>AD1_AfterNewSpeed</AfterNewSpeed_Name>
+    <AfterNewSpeed_Priority>interrupts disabled</AfterNewSpeed_Priority>
+    <OnEnd_Selected>3</OnEnd_Selected>
+    <OnEnd_Name>AD1_OnEnd</OnEnd_Name>
+    <OnEnd_Priority>same as interrupt</OnEnd_Priority>
+    <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
+    <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
+    <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
+    <GenMethodPos>10</GenMethodPos>
+    <MethodPos>
+      <MethodPos0>Interrupt</MethodPos0>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>103</LineBeg>
+      <LineEnd>114</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos1>HWEnDi</MethodPos1>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>115</LineBeg>
+      <LineEnd>127</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos2>Measure</MethodPos2>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>129</LineBeg>
+      <LineEnd>163</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos3>GetValue16</MethodPos3>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>164</LineBeg>
+      <LineEnd>193</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos4>Init</MethodPos4>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>194</LineBeg>
+      <LineEnd>206</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos5>Interrupt</MethodPos5>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>114</LineBeg>
+      <LineEnd>134</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos6>HWEnDi</MethodPos6>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>135</LineBeg>
+      <LineEnd>153</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos7>Measure</MethodPos7>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>154</LineBeg>
+      <LineEnd>200</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos8>GetValue16</MethodPos8>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>201</LineBeg>
+      <LineEnd>237</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos9>Init</MethodPos9>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>238</LineBeg>
+      <LineEnd>260</LineEnd>
+    </MethodPos>
+    <GenExtraFilesCount>0</GenExtraFilesCount>
+  </ComponentID_23>
+  <ComponentID_24>
+    <Generated>true</Generated>
+    <GenCompName>Bit4</GenCompName>
+    <GenComponentVersion>02.086</GenComponentVersion>
+    <GenDriverVersion>03.27</GenDriverVersion>
+    <GenEventModule />
+    <HeaderAge>1279539609</HeaderAge>
+    <CodeAge>1279539609</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>9</GenNumMethods>
     <GetDir>false</GetDir>
@@ -1177,91 +1393,105 @@
     <PutVal>true</PutVal>
     <ClrVal>true</ClrVal>
     <SetVal>true</SetVal>
-    <NegVal>false</NegVal>
+    <NegVal>true</NegVal>
     <GenNumEvents>0</GenNumEvents>
     <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
     <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
     <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-    <GenMethodPos>10</GenMethodPos>
+    <GenMethodPos>12</GenMethodPos>
     <MethodPos>
       <MethodPos0>GetVal</MethodPos0>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>101</LineBeg>
-      <LineEnd>120</LineEnd>
+      <LineBeg>102</LineBeg>
+      <LineEnd>121</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos1>PutVal</MethodPos1>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>121</LineBeg>
-      <LineEnd>142</LineEnd>
+      <LineBeg>122</LineBeg>
+      <LineEnd>143</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos2>ClrVal</MethodPos2>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>143</LineBeg>
-      <LineEnd>163</LineEnd>
+      <LineBeg>144</LineBeg>
+      <LineEnd>164</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos3>SetVal</MethodPos3>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>164</LineBeg>
-      <LineEnd>184</LineEnd>
+      <LineBeg>165</LineBeg>
+      <LineEnd>185</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos4>SetDir</MethodPos4>
+      <MethodPos4>NegVal</MethodPos4>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>185</LineBeg>
-      <LineEnd>198</LineEnd>
+      <LineBeg>186</LineBeg>
+      <LineEnd>206</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos5>GetVal</MethodPos5>
+      <MethodPos5>SetDir</MethodPos5>
       <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>99</LineBeg>
-      <LineEnd>120</LineEnd>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>207</LineBeg>
+      <LineEnd>220</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos6>PutVal</MethodPos6>
+      <MethodPos6>GetVal</MethodPos6>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>121</LineBeg>
-      <LineEnd>151</LineEnd>
+      <LineBeg>100</LineBeg>
+      <LineEnd>121</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos7>ClrVal</MethodPos7>
+      <MethodPos7>PutVal</MethodPos7>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>152</LineBeg>
-      <LineEnd>173</LineEnd>
+      <LineBeg>122</LineBeg>
+      <LineEnd>152</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos8>SetVal</MethodPos8>
+      <MethodPos8>ClrVal</MethodPos8>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>174</LineBeg>
-      <LineEnd>195</LineEnd>
+      <LineBeg>153</LineBeg>
+      <LineEnd>174</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos9>SetDir</MethodPos9>
+      <MethodPos9>SetVal</MethodPos9>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>196</LineBeg>
-      <LineEnd>217</LineEnd>
+      <LineBeg>175</LineBeg>
+      <LineEnd>196</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos10>NegVal</MethodPos10>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>197</LineBeg>
+      <LineEnd>218</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos11>SetDir</MethodPos11>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>219</LineBeg>
+      <LineEnd>240</LineEnd>
     </MethodPos>
     <GenExtraFilesCount>0</GenExtraFilesCount>
-  </ComponentID_16>
+  </ComponentID_24>
   <UsedSrcFiles>
     <SrcFile0>Drivers\Common\CheckRegBits8_Rst.prg=1116866294</SrcFile0>
     <SrcFile1>Drivers\Common\PE_MisraRuleToDocumentation.prg=1116866294</SrcFile1>
     <SrcFile2>Drivers\HCS08\MC9S08_MemProtect.prg=1116866294</SrcFile2>
     <SrcFile3>Drivers\Common\SetReg16_Rst.prg=1116866294</SrcFile3>
-    <SrcFile4>Drivers\Common\CaptureSettings.inc=1116866294</SrcFile4>
-    <SrcFile5>Drivers\Common\PE_TypesSettings.inc=1116866294</SrcFile5>
+    <SrcFile4>Drivers\Common\PE_TypesSettings.inc=1116866294</SrcFile4>
+    <SrcFile5>Drivers\Common\CaptureSettings.inc=1116866294</SrcFile5>
     <SrcFile6>Drivers\HCS08\InitPin.prg=1116866294</SrcFile6>
     <SrcFile7>Drivers\HCS08\MC9S08_DefineRegsAndBitsAccess.prg=1116866294</SrcFile7>
     <SrcFile8>Drivers\Common\PE_MisraRuleToDocumentation_HCS08.prg=1146382935</SrcFile8>
@@ -1278,15 +1508,15 @@
     <SrcFile19>Drivers\Common\AsynchroSerialRecvBlock.inc=1116866294</SrcFile19>
     <SrcFile20>Drivers\HCS08\IO_Map.drv=1116866294</SrcFile20>
     <SrcFile21>Drivers\Common\GeneralSetDir.inc=1116866294</SrcFile21>
-    <SrcFile22>Drivers\HCS08\MC9S08_Constants.prg=1116866294</SrcFile22>
-    <SrcFile23>Drivers\HCS08\PE_Error.drv=1146382935</SrcFile23>
-    <SrcFile24>Drivers\Common\GeneralInternalGlobal.inc=1116866294</SrcFile24>
-    <SrcFile25>Drivers\Common\PE_MisraEnableRules.prg=1116866294</SrcFile25>
-    <SrcFile26>Drivers\Common\AsynchroSerialOnFreeTxBuf.inc=1116866294</SrcFile26>
-    <SrcFile27>Drivers\Common\CommonRegInitialization_Flash.prg=1116866294</SrcFile27>
-    <SrcFile28>Drivers\Common\GeneralInternalDescription.prg=1116866294</SrcFile28>
-    <SrcFile29>Drivers\Common\CommonInitializationSequenceNames.inc=1116866294</SrcFile29>
-    <SrcFile30>Drivers\Common\InitReg8Enable.prg=1116866294</SrcFile30>
+    <SrcFile22>Drivers\Common\ADCMeasure.inc=1146382935</SrcFile22>
+    <SrcFile23>Drivers\HCS08\MC9S08_Constants.prg=1116866294</SrcFile23>
+    <SrcFile24>Drivers\HCS08\PE_Error.drv=1146382935</SrcFile24>
+    <SrcFile25>Drivers\Common\GeneralInternalGlobal.inc=1116866294</SrcFile25>
+    <SrcFile26>Drivers\Common\PE_MisraEnableRules.prg=1116866294</SrcFile26>
+    <SrcFile27>Drivers\Common\AsynchroSerialOnFreeTxBuf.inc=1116866294</SrcFile27>
+    <SrcFile28>Drivers\Common\CommonRegInitialization_Flash.prg=1116866294</SrcFile28>
+    <SrcFile29>Drivers\Common\GeneralInternalDescription.prg=1116866294</SrcFile29>
+    <SrcFile30>Drivers\Common\CommonInitializationSequenceNames.inc=1116866294</SrcFile30>
     <SrcFile31>Drivers\HCS08\Init_PORT_HCS08.prg=1127381294</SrcFile31>
     <SrcFile32>Drivers\Common\CommonRegInit_WriteOnce.prg=1116866294</SrcFile32>
     <SrcFile33>Drivers\Common\GeneralParameters.inc=1116866294</SrcFile33>
@@ -1307,100 +1537,107 @@
     <SrcFile48>Drivers\HC08\Common_HCx08\MC9x08_LinkerPRM.prg=1122284138</SrcFile48>
     <SrcFile49>Drivers\Common\SetReg8_Rst.prg=1116866294</SrcFile49>
     <SrcFile50>Drivers\Common\OneBitIOAbstract.inc=1116866294</SrcFile50>
-    <SrcFile51>Drivers\Common\EBGNSupport\StringLib.prg=1146382935</SrcFile51>
-    <SrcFile52>Drivers\HCS08\MC9S08_LowLevelInit.prg=1116866294</SrcFile52>
-    <SrcFile53>Drivers\Common\GeneralDamage.inc=1116866294</SrcFile53>
-    <SrcFile54>Drivers\HCS08\MC9S08_DefineCommonSymbols.prg=1116866294</SrcFile54>
-    <SrcFile55>Drivers\HCS08\PE_Types.drv=1121555243</SrcFile55>
-    <SrcFile56>Drivers\Common\CommonInitialization_WriteOnce.prg=1116866294</SrcFile56>
-    <SrcFile57>Drivers\Common\OneBitIOClrVal.inc=1116866294</SrcFile57>
-    <SrcFile58>Drivers\Common\CaptureAbstract.inc=1116866294</SrcFile58>
-    <SrcFile59>Drivers\HCS08\MC9S08.drv=1146382935</SrcFile59>
-    <SrcFile60>Drivers\AsynchroSerial.src=1122284138</SrcFile60>
-    <SrcFile61>Drivers\Common\PE_MisraDisableRules.prg=1116866294</SrcFile61>
-    <SrcFile62>Drivers\Common\HeaderGeneral.c=1181763784</SrcFile62>
-    <SrcFile63>Drivers\Common\SetRegBits8_Rst.prg=1116866294</SrcFile63>
-    <SrcFile64>Drivers\Common\DefineISR.prg=1120303303</SrcFile64>
-    <SrcFile65>Drivers\Common\UsedPin.inc=1116866294</SrcFile65>
-    <SrcFile66>Drivers\HCS08\MC9S08_EntryPointCode.prg=1116866294</SrcFile66>
-    <SrcFile67>Drivers\Common\GenReg16BitsInitInfo.prg=1116866294</SrcFile67>
-    <SrcFile68>Drivers\HCS08\MC9S08_InterruptVectorTableROM.prg=1116866294</SrcFile68>
-    <SrcFile69>Drivers\Common\PE_ConstSettings.inc=1116866294</SrcFile69>
-    <SrcFile70>Drivers\Common\AsynchroSerialRecvChar.inc=1116866294</SrcFile70>
-    <SrcFile71>Drivers\Common\OneBitIOSetVal.inc=1116866294</SrcFile71>
-    <SrcFile72>Drivers\HCS08\MC9S08QE128_80h.prg=1116866294</SrcFile72>
-    <SrcFile73>Drivers\HCS08\PE_Const.drv=1116866294</SrcFile73>
-    <SrcFile74>Drivers\Common\PE_ErrorAbstract.inc=1116866294</SrcFile74>
-    <SrcFile75>Drivers\Common\AsynchroSerialAbstract.inc=1116866294</SrcFile75>
-    <SrcFile76>Drivers\Common\InitReg8.prg=1116866294</SrcFile76>
-    <SrcFile77>Drivers\Common\CommonInitialization.prg=1116866294</SrcFile77>
-    <SrcFile78>Drivers\Common\GeneralEvent.inc=1116866294</SrcFile78>
-    <SrcFile79>Drivers\HCS08\MC9S08_ICS_V3.prg=1116866294</SrcFile79>
-    <SrcFile80>Drivers\HCS08\CreateDataSection.prg=1116866294</SrcFile80>
-    <SrcFile81>Drivers\Capture.src=1127381294</SrcFile81>
-    <SrcFile82>Drivers\Common\CommonRegInitialization.prg=1116866294</SrcFile82>
-    <SrcFile83>Drivers\Common\CaptureOnCapture.inc=1116866294</SrcFile83>
-    <SrcFile84>Drivers\Common\SetReg8.prg=1127381294</SrcFile84>
-    <SrcFile85>Drivers\HCS08\TimerSubroutines.prg=1116866294</SrcFile85>
-    <SrcFile86>Drivers\Common\OneBitIOGetVal.inc=1116866294</SrcFile86>
-    <SrcFile87>Drivers\Common\AsynchroSerialGetCharsInTxBuf.inc=1116866294</SrcFile87>
-    <SrcFile88>Drivers\HC08\Common_HCx08\CommonSubroutines.prg=1116866294</SrcFile88>
-    <SrcFile89>Drivers\HCS08\TimerInt.drv=1128496915</SrcFile89>
-    <SrcFile90>Drivers\Common\CaptureReset.inc=1116866294</SrcFile90>
-    <SrcFile91>Drivers\Common\Header.end=1116866294</SrcFile91>
-    <SrcFile92>Drivers\Common\OneBitIOPutVal.inc=1116866294</SrcFile92>
-    <SrcFile93>Drivers\Common\AsynchroSerialGetCharsInRxBuf.inc=1116866294</SrcFile93>
-    <SrcFile94>Drivers\HCS08\MC9S08_SharedInterruptVectors.prg=1116866294</SrcFile94>
-    <SrcFile95>Drivers\Common\CommonRegInit.prg=1116866294</SrcFile95>
-    <SrcFile96>Drivers\Common\SetReg16.prg=1127381294</SrcFile96>
-    <SrcFile97>Drivers\Common\AsynchroSerialClearTxBuf.inc=1116866294</SrcFile97>
-    <SrcFile98>Drivers\Common\Header.doxy=1119171771</SrcFile98>
-    <SrcFile99>Drivers\HCS08\TimerSubroutines_PeriodicInt.prg=1179222922</SrcFile99>
-    <SrcFile100>Drivers\Common\PE_TypesAbstract.inc=1116866294</SrcFile100>
-    <SrcFile101>Drivers\Common\AsynchroSerialOnError.inc=1116866294</SrcFile101>
-    <SrcFile102>Drivers\HC08\Common_HCx08\MC9x08_WhileSet.prg=1116866294</SrcFile102>
-    <SrcFile103>Drivers\Common\IO_MapAbstract.inc=1116866294</SrcFile103>
-    <SrcFile104>Drivers\Common\ToolChain_Settings.prg=1181763784</SrcFile104>
-    <SrcFile105>Drivers\Common\MC9S08Abstract.inc=1116866294</SrcFile105>
-    <SrcFile106>Drivers\Common\DataHeader.inc=1116866294</SrcFile106>
-    <SrcFile107>Drivers\Common\MC9S08DisableInt.inc=1116866294</SrcFile107>
-    <SrcFile108>Drivers\HC08\Common_HCx08\MC9x08_LinkerPRM_subroutines.prg=1116866294</SrcFile108>
-    <SrcFile109>Drivers\Common\AsynchroSerialSendBlock.inc=1116866294</SrcFile109>
-    <SrcFile110>Drivers\HC08\Common_HCx08\MC9x08_WhileNotSet.prg=1116866294</SrcFile110>
-    <SrcFile111>Drivers\Common\TimerIntOnInterrupt.inc=1116866294</SrcFile111>
-    <SrcFile112>Drivers\Common\BufIndxInc.prg=1116866294</SrcFile112>
-    <SrcFile113>Drivers\Common\GeneralInternal.inc=1116866294</SrcFile113>
-    <SrcFile114>Drivers\Common\MC9S08EnableInt.inc=1116866294</SrcFile114>
-    <SrcFile115>Drivers\HCS08\InternalPeripherals_IO.prg=1116866294</SrcFile115>
-    <SrcFile116>Drivers\Common\Header.c=1181763784</SrcFile116>
-    <SrcFile117>Drivers\Common\Header.h=1181763784</SrcFile117>
-    <SrcFile118>Drivers\Common\InitReg8Speed.prg=1116866294</SrcFile118>
-    <SrcFile119>Drivers\Common\OneBitIOSettings.inc=1116866294</SrcFile119>
-    <SrcFile120>Drivers\Common\AsynchroSerialOnTxChar.inc=1116866294</SrcFile120>
-    <SrcFile121>Drivers\HC08\Common_HCx08\MC9x08_InitTrimCode.prg=1116866294</SrcFile121>
-    <SrcFile122>Drivers\Common\CommonEnabling.prg=1116866294</SrcFile122>
-    <SrcFile123>Drivers\HCS08\AsynchroSerial.drv=1161914620</SrcFile123>
-    <SrcFile124>Drivers\HCS08\Capture.drv=1116866294</SrcFile124>
-    <SrcFile125>Drivers\Common\Doxy_CollectRegInitInfo.prg=1181763784</SrcFile125>
-    <SrcFile126>Drivers\Common\SetRegBits8.prg=1127381294</SrcFile126>
-    <SrcFile127>Drivers\Common\InitReg8Block.prg=1116866294</SrcFile127>
-    <SrcFile128>Drivers\Common\OneBitIONegVal.inc=1116866294</SrcFile128>
-    <SrcFile129>Drivers\Common\DeclareISR.prg=1146382935</SrcFile129>
-    <SrcFile130>Drivers\Common\ErrorDefinitions.inc=1116866294</SrcFile130>
-    <SrcFile131>Drivers\HCS08\CreateCodeSection.prg=1116866294</SrcFile131>
-    <SrcFile132>Drivers\Common\IO_MapSettings.inc=1116866294</SrcFile132>
-    <SrcFile133>Drivers\HC08\Common_HCx08\MC9x08_WhileNotValue.prg=1116866294</SrcFile133>
-    <SrcFile134>Drivers\Common\PE_ConstAbstract.inc=1116866294</SrcFile134>
-    <SrcFile135>Drivers\Common\Header.C=1181763784</SrcFile135>
-    <SrcFile136>Drivers\Common\TimerIntAbstract.inc=1116866294</SrcFile136>
-    <SrcFile137>Drivers\Common\GeneralMethod.inc=1116866294</SrcFile137>
-    <SrcFile138>Drivers\Common\GeneralReturnNothing.inc=1116866294</SrcFile138>
-    <SrcFile139>Drivers\Common\PE_MisraRuleToErrorCode.prg=1127381294</SrcFile139>
-    <SrcFile140>Drivers\Common\UsedBaudModes.inc=1116866294</SrcFile140>
-    <SrcFile141>Drivers\Common\CommonInitialization_FLASH.prg=1116866294</SrcFile141>
-    <SrcFile142>Drivers\Common\HeaderCopyright.inc=1146382935</SrcFile142>
-    <SrcFile143>Drivers\HCS08\CreateIntSection.prg=1116866294</SrcFile143>
-    <SrcFile144>Drivers\Common\OneBitIOSetDir.inc=1116866294</SrcFile144>
-    <SrcFile145>Drivers\Common\UsedExtPin.inc=1116866294</SrcFile145>
+    <SrcFile51>Drivers\ADC.src=1122284138</SrcFile51>
+    <SrcFile52>Drivers\HCS08\ADC.drv=1116866294</SrcFile52>
+    <SrcFile53>Drivers\Common\EBGNSupport\StringLib.prg=1146382935</SrcFile53>
+    <SrcFile54>Drivers\HCS08\MC9S08_LowLevelInit.prg=1116866294</SrcFile54>
+    <SrcFile55>Drivers\Common\GeneralDamage.inc=1116866294</SrcFile55>
+    <SrcFile56>Drivers\Common\ADCGetValue16.inc=1146382935</SrcFile56>
+    <SrcFile57>Drivers\HCS08\MC9S08_DefineCommonSymbols.prg=1116866294</SrcFile57>
+    <SrcFile58>Drivers\HCS08\PE_Types.drv=1121555243</SrcFile58>
+    <SrcFile59>Drivers\Common\CommonInitialization_WriteOnce.prg=1116866294</SrcFile59>
+    <SrcFile60>Drivers\Common\OneBitIOClrVal.inc=1116866294</SrcFile60>
+    <SrcFile61>Drivers\Common\CaptureAbstract.inc=1116866294</SrcFile61>
+    <SrcFile62>Drivers\HCS08\MC9S08.drv=1146382935</SrcFile62>
+    <SrcFile63>Drivers\AsynchroSerial.src=1122284138</SrcFile63>
+    <SrcFile64>Drivers\Common\PE_MisraDisableRules.prg=1116866294</SrcFile64>
+    <SrcFile65>Drivers\Common\HeaderGeneral.c=1181763784</SrcFile65>
+    <SrcFile66>Drivers\Common\SetRegBits8_Rst.prg=1116866294</SrcFile66>
+    <SrcFile67>Drivers\Common\DefineISR.prg=1120303303</SrcFile67>
+    <SrcFile68>Drivers\Common\UsedPin.inc=1116866294</SrcFile68>
+    <SrcFile69>Drivers\HCS08\MC9S08_EntryPointCode.prg=1116866294</SrcFile69>
+    <SrcFile70>Drivers\Common\GenReg16BitsInitInfo.prg=1116866294</SrcFile70>
+    <SrcFile71>Drivers\HCS08\MC9S08_InterruptVectorTableROM.prg=1116866294</SrcFile71>
+    <SrcFile72>Drivers\Common\PE_ConstSettings.inc=1116866294</SrcFile72>
+    <SrcFile73>Drivers\Common\AsynchroSerialRecvChar.inc=1116866294</SrcFile73>
+    <SrcFile74>Drivers\Common\OneBitIOSetVal.inc=1116866294</SrcFile74>
+    <SrcFile75>Drivers\HCS08\MC9S08QE128_80h.prg=1116866294</SrcFile75>
+    <SrcFile76>Drivers\HCS08\PE_Const.drv=1116866294</SrcFile76>
+    <SrcFile77>Drivers\Common\PE_ErrorAbstract.inc=1116866294</SrcFile77>
+    <SrcFile78>Drivers\Common\AsynchroSerialAbstract.inc=1116866294</SrcFile78>
+    <SrcFile79>Drivers\Common\InitReg8.prg=1116866294</SrcFile79>
+    <SrcFile80>Drivers\Common\CommonInitialization.prg=1116866294</SrcFile80>
+    <SrcFile81>Drivers\Common\GeneralEvent.inc=1116866294</SrcFile81>
+    <SrcFile82>Drivers\HCS08\MC9S08_ICS_V3.prg=1116866294</SrcFile82>
+    <SrcFile83>Drivers\HCS08\CreateDataSection.prg=1116866294</SrcFile83>
+    <SrcFile84>Drivers\Capture.src=1127381294</SrcFile84>
+    <SrcFile85>Drivers\Common\CommonRegInitialization.prg=1116866294</SrcFile85>
+    <SrcFile86>Drivers\Common\CaptureOnCapture.inc=1116866294</SrcFile86>
+    <SrcFile87>Drivers\Common\SetReg8.prg=1127381294</SrcFile87>
+    <SrcFile88>Drivers\HCS08\TimerSubroutines.prg=1116866294</SrcFile88>
+    <SrcFile89>Drivers\Common\OneBitIOGetVal.inc=1116866294</SrcFile89>
+    <SrcFile90>Drivers\Common\AsynchroSerialGetCharsInTxBuf.inc=1116866294</SrcFile90>
+    <SrcFile91>Drivers\HC08\Common_HCx08\CommonSubroutines.prg=1116866294</SrcFile91>
+    <SrcFile92>Drivers\HCS08\TimerInt.drv=1128496915</SrcFile92>
+    <SrcFile93>Drivers\Common\CaptureReset.inc=1116866294</SrcFile93>
+    <SrcFile94>Drivers\Common\Header.end=1116866294</SrcFile94>
+    <SrcFile95>Drivers\Common\OneBitIOPutVal.inc=1116866294</SrcFile95>
+    <SrcFile96>Drivers\Common\AsynchroSerialGetCharsInRxBuf.inc=1116866294</SrcFile96>
+    <SrcFile97>Drivers\Common\ADCSettings.inc=1151164690</SrcFile97>
+    <SrcFile98>Drivers\HCS08\MC9S08_SharedInterruptVectors.prg=1116866294</SrcFile98>
+    <SrcFile99>Drivers\Common\CommonRegInit.prg=1116866294</SrcFile99>
+    <SrcFile100>Drivers\Common\SetReg16.prg=1127381294</SrcFile100>
+    <SrcFile101>Drivers\Common\AsynchroSerialClearTxBuf.inc=1116866294</SrcFile101>
+    <SrcFile102>Drivers\Common\Header.doxy=1119171771</SrcFile102>
+    <SrcFile103>Drivers\HCS08\TimerSubroutines_PeriodicInt.prg=1179222922</SrcFile103>
+    <SrcFile104>Drivers\Common\PE_TypesAbstract.inc=1116866294</SrcFile104>
+    <SrcFile105>Drivers\Common\AsynchroSerialOnError.inc=1116866294</SrcFile105>
+    <SrcFile106>Drivers\HC08\Common_HCx08\MC9x08_WhileSet.prg=1116866294</SrcFile106>
+    <SrcFile107>Drivers\Common\IO_MapAbstract.inc=1116866294</SrcFile107>
+    <SrcFile108>Drivers\Common\ToolChain_Settings.prg=1181763784</SrcFile108>
+    <SrcFile109>Drivers\Common\MC9S08Abstract.inc=1116866294</SrcFile109>
+    <SrcFile110>Drivers\Common\DataHeader.inc=1116866294</SrcFile110>
+    <SrcFile111>Drivers\Common\MC9S08DisableInt.inc=1116866294</SrcFile111>
+    <SrcFile112>Drivers\HC08\Common_HCx08\MC9x08_LinkerPRM_subroutines.prg=1116866294</SrcFile112>
+    <SrcFile113>Drivers\Common\AsynchroSerialSendBlock.inc=1116866294</SrcFile113>
+    <SrcFile114>Drivers\HC08\Common_HCx08\MC9x08_WhileNotSet.prg=1116866294</SrcFile114>
+    <SrcFile115>Drivers\Common\TimerIntOnInterrupt.inc=1116866294</SrcFile115>
+    <SrcFile116>Drivers\Common\BufIndxInc.prg=1116866294</SrcFile116>
+    <SrcFile117>Drivers\Common\GeneralInternal.inc=1116866294</SrcFile117>
+    <SrcFile118>Drivers\Common\ADCAbstract.inc=1116866294</SrcFile118>
+    <SrcFile119>Drivers\HCS08\ADC_shared.drv=1116866294</SrcFile119>
+    <SrcFile120>Drivers\Common\MC9S08EnableInt.inc=1116866294</SrcFile120>
+    <SrcFile121>Drivers\HCS08\InternalPeripherals_IO.prg=1116866294</SrcFile121>
+    <SrcFile122>Drivers\Common\Header.c=1181763784</SrcFile122>
+    <SrcFile123>Drivers\Common\Header.h=1181763784</SrcFile123>
+    <SrcFile124>Drivers\Common\InitReg8Speed.prg=1116866294</SrcFile124>
+    <SrcFile125>Drivers\Common\OneBitIOSettings.inc=1116866294</SrcFile125>
+    <SrcFile126>Drivers\Common\AsynchroSerialOnTxChar.inc=1116866294</SrcFile126>
+    <SrcFile127>Drivers\HC08\Common_HCx08\MC9x08_InitTrimCode.prg=1116866294</SrcFile127>
+    <SrcFile128>Drivers\Common\CommonEnabling.prg=1116866294</SrcFile128>
+    <SrcFile129>Drivers\HCS08\AsynchroSerial.drv=1161914620</SrcFile129>
+    <SrcFile130>Drivers\HCS08\Capture.drv=1116866294</SrcFile130>
+    <SrcFile131>Drivers\Common\Doxy_CollectRegInitInfo.prg=1181763784</SrcFile131>
+    <SrcFile132>Drivers\Common\SetRegBits8.prg=1127381294</SrcFile132>
+    <SrcFile133>Drivers\Common\InitReg8Block.prg=1116866294</SrcFile133>
+    <SrcFile134>Drivers\Common\OneBitIONegVal.inc=1116866294</SrcFile134>
+    <SrcFile135>Drivers\Common\DeclareISR.prg=1146382935</SrcFile135>
+    <SrcFile136>Drivers\Common\ErrorDefinitions.inc=1116866294</SrcFile136>
+    <SrcFile137>Drivers\Common\ADCOnEnd.inc=1116866294</SrcFile137>
+    <SrcFile138>Drivers\HCS08\CreateCodeSection.prg=1116866294</SrcFile138>
+    <SrcFile139>Drivers\Common\IO_MapSettings.inc=1116866294</SrcFile139>
+    <SrcFile140>Drivers\HC08\Common_HCx08\MC9x08_WhileNotValue.prg=1116866294</SrcFile140>
+    <SrcFile141>Drivers\Common\PE_ConstAbstract.inc=1116866294</SrcFile141>
+    <SrcFile142>Drivers\Common\Header.C=1181763784</SrcFile142>
+    <SrcFile143>Drivers\Common\TimerIntAbstract.inc=1116866294</SrcFile143>
+    <SrcFile144>Drivers\Common\GeneralMethod.inc=1116866294</SrcFile144>
+    <SrcFile145>Drivers\Common\GeneralReturnNothing.inc=1116866294</SrcFile145>
+    <SrcFile146>Drivers\Common\PE_MisraRuleToErrorCode.prg=1127381294</SrcFile146>
+    <SrcFile147>Drivers\Common\UsedBaudModes.inc=1116866294</SrcFile147>
+    <SrcFile148>Drivers\Common\CommonInitialization_FLASH.prg=1116866294</SrcFile148>
+    <SrcFile149>Drivers\Common\HeaderCopyright.inc=1146382935</SrcFile149>
+    <SrcFile150>Drivers\HCS08\CreateIntSection.prg=1116866294</SrcFile150>
+    <SrcFile151>Drivers\Common\OneBitIOSetDir.inc=1116866294</SrcFile151>
+    <SrcFile152>Drivers\Common\UsedExtPin.inc=1116866294</SrcFile152>
   </UsedSrcFiles>
 </GenerationInfo_G_C>
