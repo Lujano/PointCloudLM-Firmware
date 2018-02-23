@@ -22,7 +22,7 @@
       <File Name="Generated_Code/AS2.c" FileDate="2018-02-03, 09:08:20" FileAge="1517665100000" FileType="45637" CompNumb="9" />
       <File Name="Generated_Code/Bit4.c" FileDate="2018-02-04, 07:12:50" FileAge="1517744570039" FileType="45637" CompNumb="24" />
       <File Name="Generated_Code/IO_Map.c" FileDate="2018-02-03, 09:08:20" FileAge="1517665100000" FileType="45637" />
-      <File Name="Documentation/Ultrasonido_Fase1_SIGNALS.txt" FileDate="2018-02-23, 03:21:44" FileAge="1519372304976" FileType="3072" />
+      <File Name="Documentation/Ultrasonido_Fase1_SIGNALS.txt" FileDate="2018-02-23, 03:52:13" FileAge="1519374133598" FileType="3072" />
       <File Name="Generated_Code/AD1.h" FileDate="2018-02-23, 02:24:10" FileAge="1519368850693" FileType="45637" CompNumb="23" />
       <File Name="Generated_Code/TI2.h" FileDate="2018-02-04, 08:36:01" FileAge="1517749561588" FileType="45637" CompNumb="13" />
       <File Name="Generated_Code/AD1.c" FileDate="2018-02-23, 02:24:10" FileAge="1519368850755" FileType="45637" CompNumb="23" />
@@ -47,5 +47,5 @@
       <File Name="Generated_Code/PE_Error.h" FileDate="2018-02-03, 09:08:20" FileAge="1517665100000" FileType="45637" />
     </GeneratedByPE>
   </GeneratedFilesList>
-  <CodeGenReference>42</CodeGenReference>
+  <CodeGenReference>44</CodeGenReference>
 </CodeGenerationInfo>
