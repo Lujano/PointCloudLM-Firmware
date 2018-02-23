@@ -88,7 +88,7 @@ void main(void)
   			
 		
 			
-  			servo_send (0, i);
+  			servo_send (1, i);
   			estado = ESPERAR;
   			
   			break;

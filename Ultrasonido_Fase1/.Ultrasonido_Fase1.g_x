@@ -10,13 +10,13 @@
   </ToolchainSettings>
   <GeneratedFilesList>
     <GeneratedByPE>
-      <File Name="Generated_Code/TI1.c" FileDate="2018-02-04, 08:53:12" FileAge="1517750592243" FileType="45637" CompNumb="12" />
+      <File Name="Generated_Code/TI1.c" FileDate="2018-02-19, 15:08:42" FileAge="1519069122667" FileType="45637" CompNumb="12" />
       <File Name="Generated_Code/Bit3.c" FileDate="2018-02-04, 07:20:24" FileAge="1517745024520" FileType="45637" CompNumb="16" />
       <File Name="Generated_Code/Cpu.h" FileDate="2018-02-04, 07:12:50" FileAge="1517744570087" FileType="45637" CompNumb="4" />
-      <File Name="Documentation/Ultrasonido_Fase1_SIGNALS.txt" FileDate="2018-02-04, 08:53:12" FileAge="1517750592288" FileType="3072" />
+      <File Name="Documentation/Ultrasonido_Fase1_SIGNALS.txt" FileDate="2018-02-19, 15:08:43" FileAge="1519069123035" FileType="3072" />
       <File Name="Generated_Code/PE_Types.h" FileDate="2018-02-03, 09:08:20" FileAge="1517665100000" FileType="45637" />
-      <File Name="Generated_Code/Vectors.c" FileDate="2018-02-04, 08:53:12" FileAge="1517750592263" FileType="45637" CompNumb="4" />
-      <File Name="Generated_Code/Cpu.c" FileDate="2018-02-04, 08:53:12" FileAge="1517750592263" FileType="45637" CompNumb="4" />
+      <File Name="Generated_Code/Vectors.c" FileDate="2018-02-19, 15:08:42" FileAge="1519069122830" FileType="45637" CompNumb="4" />
+      <File Name="Generated_Code/Cpu.c" FileDate="2018-02-19, 15:08:42" FileAge="1519069122790" FileType="45637" CompNumb="4" />
       <File Name="Generated_Code/AS2.h" FileDate="2018-02-03, 09:08:20" FileAge="1517665100000" FileType="45637" CompNumb="9" />
       <File Name="Generated_Code/IO_Map.h" FileDate="2018-02-03, 09:08:20" FileAge="1517665100000" FileType="45637" />
       <File Name="Generated_Code/AS2.c" FileDate="2018-02-03, 09:08:20" FileAge="1517665100000" FileType="45637" CompNumb="9" />
@@ -24,28 +24,28 @@
       <File Name="Sources/Events.h" FileDate="2018-02-04, 07:18:37" FileAge="1517744917729" FileType="131328" />
       <File Name="Generated_Code/Bit2.h" FileDate="2018-02-04, 07:03:22" FileAge="1517744002642" FileType="45637" CompNumb="14" />
       <File Name="Generated_Code/AD1.h" FileDate="2018-02-04, 06:56:36" FileAge="1517743596224" FileType="45637" CompNumb="23" />
-      <File Name="Generated_Code/Cap1.h" FileDate="2018-02-04, 08:53:12" FileAge="1517750592243" FileType="45637" CompNumb="15" />
+      <File Name="Generated_Code/Cap1.h" FileDate="2018-02-19, 15:08:42" FileAge="1519069122726" FileType="45637" CompNumb="15" />
       <File Name="Documentation/Ultrasonido_Fase1.txt" FileDate="2018-02-04, 07:20:24" FileAge="1517745024638" FileType="3072" />
       <File Name="Generated_Code/TI2.h" FileDate="2018-02-04, 08:36:01" FileAge="1517749561588" FileType="45637" CompNumb="13" />
-      <File Name="Sources/Events.c" FileDate="2018-02-04, 08:39:18" FileAge="1517749758571" FileType="131328" />
-      <File Name="Generated_Code/Bit2.c" FileDate="2018-02-04, 07:03:22" FileAge="1517744002643" FileType="45637" CompNumb="14" />
       <File Name="Generated_Code/Bit4.h" FileDate="2018-02-04, 07:12:50" FileAge="1517744570044" FileType="45637" CompNumb="24" />
-      <File Name="Generated_Code/Cap1.c" FileDate="2018-02-04, 08:53:12" FileAge="1517750592253" FileType="45637" CompNumb="15" />
+      <File Name="Generated_Code/Bit2.c" FileDate="2018-02-04, 07:03:22" FileAge="1517744002643" FileType="45637" CompNumb="14" />
+      <File Name="Sources/Events.c" FileDate="2018-02-04, 08:39:18" FileAge="1517749758571" FileType="131328" />
       <File Name="Generated_Code/AD1.c" FileDate="2018-02-04, 06:56:36" FileAge="1517743596222" FileType="45637" CompNumb="23" />
+      <File Name="Generated_Code/Cap1.c" FileDate="2018-02-19, 15:08:42" FileAge="1519069122759" FileType="45637" CompNumb="15" />
       <File Name="Generated_Code/TI2.c" FileDate="2018-02-04, 08:36:01" FileAge="1517749561603" FileType="45637" CompNumb="13" />
       <File Name="Generated_Code/Bit4.c" FileDate="2018-02-04, 07:12:50" FileAge="1517744570039" FileType="45637" CompNumb="24" />
-      <File Name="Documentation/Ultrasonido_Fase1_Settings.xml" FileDate="2018-02-04, 08:53:12" FileAge="1517750592415" FileType="3072" />
-      <File Name="Project_Settings/Linker_Files/ProcessorExpert.prm" FileDate="2018-02-03, 09:08:20" FileAge="1517665100000" FileType="8" CompNumb="4" />
+      <File Name="Documentation/Ultrasonido_Fase1_Settings.xml" FileDate="2018-02-19, 15:08:43" FileAge="1519069123360" FileType="3072" />
       <File Name="Generated_Code/AS1.h" FileDate="2018-02-03, 09:08:20" FileAge="1517665100000" FileType="45637" CompNumb="8" />
-      <File Name="Sources/main.c" FileDate="2018-02-04, 08:47:58" FileAge="1517750278768" FileType="128" />
+      <File Name="Project_Settings/Linker_Files/ProcessorExpert.prm" FileDate="2018-02-03, 09:08:20" FileAge="1517665100000" FileType="8" CompNumb="4" />
+      <File Name="Sources/main.c" FileDate="2018-02-10, 10:44:56" FileAge="1518275696305" FileType="128" />
       <File Name="Generated_Code/AS1.c" FileDate="2018-02-03, 09:08:20" FileAge="1517665100000" FileType="45637" CompNumb="8" />
       <File Name="Generated_Code/PE_Const.h" FileDate="2018-02-03, 09:08:20" FileAge="1517665100000" FileType="45637" />
       <File Name="Generated_Code/Bit1.h" FileDate="2018-02-03, 21:24:30" FileAge="1517709270469" FileType="45637" CompNumb="10" />
       <File Name="Generated_Code/PE_Error.h" FileDate="2018-02-03, 09:08:20" FileAge="1517665100000" FileType="45637" />
-      <File Name="Generated_Code/TI1.h" FileDate="2018-02-04, 08:53:12" FileAge="1517750592236" FileType="45637" CompNumb="12" />
-      <File Name="Generated_Code/Bit1.c" FileDate="2018-02-03, 21:24:30" FileAge="1517709270477" FileType="45637" CompNumb="10" />
+      <File Name="Generated_Code/TI1.h" FileDate="2018-02-19, 15:08:42" FileAge="1519069122588" FileType="45637" CompNumb="12" />
       <File Name="Generated_Code/Bit3.h" FileDate="2018-02-04, 07:20:24" FileAge="1517745024520" FileType="45637" CompNumb="16" />
+      <File Name="Generated_Code/Bit1.c" FileDate="2018-02-03, 21:24:30" FileAge="1517709270477" FileType="45637" CompNumb="10" />
     </GeneratedByPE>
   </GeneratedFilesList>
-  <CodeGenReference>38</CodeGenReference>
+  <CodeGenReference>39</CodeGenReference>
 </CodeGenerationInfo>
