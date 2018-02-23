@@ -6,7 +6,7 @@
 **     Component   : Capture
 **     Version     : Component 02.223, Driver 01.30, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-02-19, 15:08, # CodeGen: 38
+**     Date/Time   : 2018-02-23, 02:24, # CodeGen: 40
 **     Abstract    :
 **         This component "Capture" simply implements the capture function
 **         of timer. The counter counts the same way as in free run mode. On
@@ -18,7 +18,7 @@
 **
 **         Timer
 **             Timer                   : TPM1
-**             Counter shared          : Yes
+**             Counter shared          : No
 **
 **         High speed mode
 **             Prescaler               : divide-by-16
@@ -36,7 +36,7 @@
 **              Events                 : Enabled
 **
 **         Timer registers
-**              Capture                : TPM1C2V   [$004C]
+**              Capture                : TPM1C1V   [$0049]
 **              Counter                : TPM1CNT   [$0041]
 **              Mode                   : TPM1SC    [$0040]
 **              Run                    : TPM1SC    [$0040]
@@ -46,12 +46,12 @@
 **             ----------------------------------------------------
 **                Number (on package)  |    Name
 **             ----------------------------------------------------
-**                       48            |  PTA6_TPM1CH2_ADP8
+**                       22            |  PTB5_TPM1CH1_SS1
 **             ----------------------------------------------------
 **
-**         Port name                   : PTA
-**         Bit number (in port)        : 6
-**         Bit mask of the port        : $0040
+**         Port name                   : PTB
+**         Bit number (in port)        : 5
+**         Bit mask of the port        : $0020
 **
 **         Signal edge/level           : both
 **         Priority                    : 
@@ -134,11 +134,9 @@
 #endif
 
 
-extern volatile word Cap1_CntrState;   /* Content of counter */
-
 
 #define Cap1_Reset() \
-  (Cap1_CntrState = TPM1CNT , (byte)ERR_OK)
+  (TPM1CNTH = 0U , (byte)ERR_OK)
 /*
 ** ===================================================================
 **     Method      :  Cap1_Reset (component Capture)
@@ -156,9 +154,7 @@ extern volatile word Cap1_CntrState;   /* Content of counter */
 
 #define Cap1_GetCaptureValue(Value) \
   /*lint -save  -e926 -e927 -e928 -e929 Disable MISRA rule (11.4) checking. */\
-  (((*(Cap1_TCapturedValue*)(Value) = TPM1C2V), \
-  (*(Cap1_TCapturedValue*)(Value) -= Cap1_CntrState)), \
-  ERR_OK) \
+  (*(Cap1_TCapturedValue*)(Value) = TPM1C1V , (byte)ERR_OK) \
   /*lint -restore Enable MISRA rule (11.4) checking. */
 /*
 ** ===================================================================

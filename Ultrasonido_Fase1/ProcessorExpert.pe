@@ -3,8 +3,8 @@
   <Header>
     <Name>Ultrasonido_Fase1</Name>
     <SavedBy>Luis Lujano</SavedBy>
-    <ModificationStamp>25</ModificationStamp>
-    <Date>2018-02-19</Date>
+    <ModificationStamp>27</ModificationStamp>
+    <Date>2018-02-23</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.9.2.RT6_b1446-0504</PEversion>
   </Header>
@@ -29,7 +29,7 @@
     <UseExistingModules>true</UseExistingModules>
     <RenamePeripheries>false</RenamePeripheries>
     <Autodependency>true</Autodependency>
-    <ProjectCompNumb>28</ProjectCompNumb>
+    <ProjectCompNumb>31</ProjectCompNumb>
     <DelUnusedPreviouslyGenFiles>true</DelUnusedPreviouslyGenFiles>
     <GeneratedCodeFrozen>false</GeneratedCodeFrozen>
     <AssignInitComponentNameToPrph>true</AssignInitComponentNameToPrph>
@@ -9828,12 +9828,12 @@
         <ItemSymbol>_Cmp</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>TPM11</Value>
+        <Value>TPM22</Value>
         <SharedPrphMode>false</SharedPrphMode>
       </ItemState>
       <ItemState>
         <ItemSymbol>Tmr</ItemSymbol>
-        <Value>TPM1</Value>
+        <Value>TPM2</Value>
         <SharedPrphMode>false</SharedPrphMode>
       </ItemState>
       <ItemState>
@@ -9844,7 +9844,7 @@
       </ItemState>
       <ItemState>
         <ItemSymbol>CmpInt</ItemSymbol>
-        <Value>Vtpm1ch1</Value>
+        <Value>Vtpm2ch2</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>CmpInitPriority</ItemSymbol>
@@ -13031,7 +13031,7 @@
         <ItemSymbol>Cap</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>TPM12</Value>
+        <Value>TPM11</Value>
         <SharedPrphMode>false</SharedPrphMode>
       </ItemState>
       <ItemState>
@@ -13057,7 +13057,7 @@
         <ItemSymbol>Ext</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>PTA6_TPM1CH2_ADP8</Value>
+        <Value>PTB5_TPM1CH1_SS1</Value>
         <SharedPrphMode>false</SharedPrphMode>
       </ItemState>
       <ItemState>
@@ -13184,7 +13184,7 @@
       </ItemState>
       <ItemState>
         <ItemSymbol>CapInt</ItemSymbol>
-        <Value>Vtpm1ch2</Value>
+        <Value>Vtpm1ch1</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>CapPrior</ItemSymbol>
@@ -14181,14 +14181,14 @@
       </ItemState>
       <ItemState>
         <ItemSymbol>PortAD0</ItemSymbol>
-        <Value>PTB</Value>
+        <Value>PTA</Value>
         <SharedPrphMode>false</SharedPrphMode>
       </ItemState>
       <ItemState>
         <ItemSymbol>AD0</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>PTB2_KBI1P6_SPSCK1_ADP6</Value>
+        <Value>PTA7_TPM2CH2_ADP9</Value>
         <SharedPrphMode>false</SharedPrphMode>
       </ItemState>
       <ItemState>

@@ -6,7 +6,7 @@
 **     Component   : Capture
 **     Version     : Component 02.223, Driver 01.30, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-02-19, 15:08, # CodeGen: 38
+**     Date/Time   : 2018-02-23, 02:24, # CodeGen: 40
 **     Abstract    :
 **         This component "Capture" simply implements the capture function
 **         of timer. The counter counts the same way as in free run mode. On
@@ -18,7 +18,7 @@
 **
 **         Timer
 **             Timer                   : TPM1
-**             Counter shared          : Yes
+**             Counter shared          : No
 **
 **         High speed mode
 **             Prescaler               : divide-by-16
@@ -36,7 +36,7 @@
 **              Events                 : Enabled
 **
 **         Timer registers
-**              Capture                : TPM1C2V   [$004C]
+**              Capture                : TPM1C1V   [$0049]
 **              Counter                : TPM1CNT   [$0041]
 **              Mode                   : TPM1SC    [$0040]
 **              Run                    : TPM1SC    [$0040]
@@ -46,12 +46,12 @@
 **             ----------------------------------------------------
 **                Number (on package)  |    Name
 **             ----------------------------------------------------
-**                       48            |  PTA6_TPM1CH2_ADP8
+**                       22            |  PTB5_TPM1CH1_SS1
 **             ----------------------------------------------------
 **
-**         Port name                   : PTA
-**         Bit number (in port)        : 6
-**         Bit mask of the port        : $0040
+**         Port name                   : PTB
+**         Bit number (in port)        : 5
+**         Bit mask of the port        : $0020
 **
 **         Signal edge/level           : both
 **         Priority                    : 
@@ -113,7 +113,6 @@
 #include "Cap1.h"
 
 
-volatile word Cap1_CntrState;          /* Content of counter */
 
 
 /*
@@ -173,11 +172,20 @@ byte Cap1_GetCaptureValue(Cap1_TCapturedValue *Value)
 */
 void Cap1_Init(void)
 {
-  /* TPM1C2V: BIT15=0,BIT14=0,BIT13=0,BIT12=0,BIT11=0,BIT10=0,BIT9=0,BIT8=0,BIT7=0,BIT6=0,BIT5=0,BIT4=0,BIT3=0,BIT2=0,BIT1=0,BIT0=0 */
-  setReg16(TPM1C2V, 0x00U);            /* Clear capture register */ 
-  Cap1_CntrState = 0x00U;              /* Clear variable */
-  /* TPM1C2SC: CH2F=0,CH2IE=1,MS2B=0,MS2A=0,ELS2B=1,ELS2A=1,??=0,??=0 */
-  setReg8(TPM1C2SC, 0x4CU);            /* Enable both interrupt and capture function */ 
+  /* TPM1SC: TOF=0,TOIE=0,CPWMS=0,CLKSB=0,CLKSA=0,PS2=0,PS1=0,PS0=0 */
+  setReg8(TPM1SC, 0x00U);              /* Stop HW */ 
+  /* TPM1MOD: BIT15=0,BIT14=0,BIT13=0,BIT12=0,BIT11=0,BIT10=0,BIT9=0,BIT8=0,BIT7=0,BIT6=0,BIT5=0,BIT4=0,BIT3=0,BIT2=0,BIT1=0,BIT0=0 */
+  setReg16(TPM1MOD, 0x00U);            /* Disable modulo register */ 
+  /* TPM1CNTH: BIT15=0,BIT14=0,BIT13=0,BIT12=0,BIT11=0,BIT10=0,BIT9=0,BIT8=0 */
+  setReg8(TPM1CNTH, 0x00U);            /* Reset counter */ 
+  /* TPM1C1V: BIT15=0,BIT14=0,BIT13=0,BIT12=0,BIT11=0,BIT10=0,BIT9=0,BIT8=0,BIT7=0,BIT6=0,BIT5=0,BIT4=0,BIT3=0,BIT2=0,BIT1=0,BIT0=0 */
+  setReg16(TPM1C1V, 0x00U);            /* Clear capture register */ 
+  /* TPM1SC: PS2=1,PS1=0,PS0=0 */
+  clrSetReg8Bits(TPM1SC, 0x03U, 0x04U); /* Set prescaler register */ 
+  /* TPM1C1SC: CH1F=0,CH1IE=1,MS1B=0,MS1A=0,ELS1B=1,ELS1A=1,??=0,??=0 */
+  setReg8(TPM1C1SC, 0x4CU);            /* Enable both interrupt and capture function */ 
+  /* TPM1SC: CLKSB=0,CLKSA=1 */
+  clrSetReg8Bits(TPM1SC, 0x10U, 0x08U); /* Run counter */ 
 }
 
 
@@ -193,9 +201,9 @@ void Cap1_Init(void)
 */
 ISR(Cap1_Interrupt)
 {
-  (void)TPM1C2SC;                      /* Dummy read to reset interrupt request flag */
-  /* TPM1C2SC: CH2F=0 */
-  clrReg8Bits(TPM1C2SC, 0x80U);        /* Reset interrupt request flag */ 
+  (void)TPM1C1SC;                      /* Dummy read to reset interrupt request flag */
+  /* TPM1C1SC: CH1F=0 */
+  clrReg8Bits(TPM1C1SC, 0x80U);        /* Reset interrupt request flag */ 
   Cap1_OnCapture();                    /* Invoke user event */
 }
 

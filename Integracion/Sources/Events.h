@@ -1,11 +1,11 @@
 /* ###################################################################
 **     Filename    : Events.h
-**     Project     : Mata
+**     Project     : Integracion
 **     Processor   : MC9S08QE128CLK
 **     Component   : Events
 **     Version     : Driver 01.02
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-01-17, 15:01, # CodeGen: 0
+**     Date/Time   : 2018-02-03, 08:14, # CodeGen: 0
 **     Abstract    :
 **         This is user's event module.
 **         Put your event handler code here.
@@ -35,35 +35,114 @@
 #include "PE_Const.h"
 #include "IO_Map.h"
 #include "AS1.h"
-#include "Bit1.h"
 #include "TI1.h"
+#include "AS2.h"
+#include "Bit1.h"
+#include "TI2.h"
 #include "Bit2.h"
-#include "AD1.h"
+#include "Cap1.h"
 #include "Bit3.h"
+#include "AD1.h"
 #include "Bit4.h"
 #include "Bit5.h"
 #include "Bit6.h"
+#include "Bit7.h"
 
 
+#define ESPERAR  2
+#define MEDIR  3
+#define ENVIAR 4
 
-#define ESPERAR 0
-#define MEDIR  1
-#define ENVIAR 2
+typedef enum {
+  ECHO_IDLE, /* device not used */
+  ECHO_TRIGGERED, /* started trigger pulse */
+  ECHO_MEDIR, /* measuring echo pulse */
+  ECHO_OVERFLOW, /* measurement took too long */
+  ECHO_TERMINADO /* measurement finished */
+} US_EchoState;
 
+typedef enum {
+  TRIGGER_BAJO, /* started trigger pulse */
+  TRIGGER_ALTO, /* measuring echo pulse */
+  TRIGGER_TERMINADO /* measurement finished */
+} US_TrigerState;
+
+extern unsigned char estado_trigger;
+extern unsigned char estado_echo;
 extern unsigned char estado;
+extern unsigned int medicion;
 
-
-void TI1_OnInterrupt(void);
+void AS2_OnError(void);
 /*
 ** ===================================================================
-**     Event       :  TI1_OnInterrupt (module Events)
+**     Event       :  AS2_OnError (module Events)
 **
-**     Component   :  TI1 [TimerInt]
+**     Component   :  AS2 [AsynchroSerial]
 **     Description :
-**         When a timer interrupt occurs this event is called (only
-**         when the component is enabled - <Enable> and the events are
-**         enabled - <EnableEvent>). This event is enabled only if a
-**         <interrupt service/event> is enabled.
+**         This event is called when a channel error (not the error
+**         returned by a given method) occurs. The errors can be read
+**         using <GetError> method.
+**         The event is available only when the <Interrupt
+**         service/event> property is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void AS2_OnRxChar(void);
+/*
+** ===================================================================
+**     Event       :  AS2_OnRxChar (module Events)
+**
+**     Component   :  AS2 [AsynchroSerial]
+**     Description :
+**         This event is called after a correct character is received.
+**         The event is available only when the <Interrupt
+**         service/event> property is enabled and either the <Receiver>
+**         property is enabled or the <SCI output mode> property (if
+**         supported) is set to Single-wire mode.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void AS2_OnTxChar(void);
+/*
+** ===================================================================
+**     Event       :  AS2_OnTxChar (module Events)
+**
+**     Component   :  AS2 [AsynchroSerial]
+**     Description :
+**         This event is called after a character is transmitted.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void AS2_OnFullRxBuf(void);
+/*
+** ===================================================================
+**     Event       :  AS2_OnFullRxBuf (module Events)
+**
+**     Component   :  AS2 [AsynchroSerial]
+**     Description :
+**         This event is called when the input buffer is full;
+**         i.e. after reception of the last character 
+**         that was successfully placed into input buffer.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void AS2_OnFreeTxBuf(void);
+/*
+** ===================================================================
+**     Event       :  AS2_OnFreeTxBuf (module Events)
+**
+**     Component   :  AS2 [AsynchroSerial]
+**     Description :
+**         This event is called after the last character in output
+**         buffer is transmitted.
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================
@@ -140,6 +219,54 @@ void AS1_OnFreeTxBuf(void);
 **     Description :
 **         This event is called after the last character in output
 **         buffer is transmitted.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void TI1_OnInterrupt(void);
+/*
+** ===================================================================
+**     Event       :  TI1_OnInterrupt (module Events)
+**
+**     Component   :  TI1 [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void Cap1_OnCapture(void);
+/*
+** ===================================================================
+**     Event       :  Cap1_OnCapture (module Events)
+**
+**     Component   :  Cap1 [Capture]
+**     Description :
+**         This event is called on capturing of Timer/Counter actual
+**         value (only when the component is enabled - <Enable> and the
+**         events are enabled - <EnableEvent>.This event is available
+**         only if a <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void TI2_OnInterrupt(void);
+/*
+** ===================================================================
+**     Event       :  TI2_OnInterrupt (module Events)
+**
+**     Component   :  TI2 [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================

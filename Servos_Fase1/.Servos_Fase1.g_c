@@ -1,7 +1,7 @@
 <GenerationInfo_G_C>
   <Options>
     <ProjectName>Servos_Fase1</ProjectName>
-    <ProjectDirectory>C:\Users\Luis Lujano\Documents\GitHub\PointCloud-Firmware\Servos\Servos_Fase1\</ProjectDirectory>
+    <ProjectDirectory>C:\Users\Luis Lujano\Documents\GitHub\PointCloud-Firmware\Servos_Fase1\</ProjectDirectory>
     <ProjectMainModuleName>main</ProjectMainModuleName>
     <DestEventsDirectory>Sources\</DestEventsDirectory>
     <DestDriversSubDirectory>..\Generated_Code\</DestDriversSubDirectory>
@@ -78,7 +78,7 @@
     </GenFiles>
     <SignalListFile>Documentation\Servos_Fase1_SIGNALS.txt</SignalListFile>
     <DestinationCompiler>MetrowerksHCS08CC</DestinationCompiler>
-    <ProjectModificationStamp>6</ProjectModificationStamp>
+    <ProjectModificationStamp>8</ProjectModificationStamp>
   </Options>
   <CpuID_2>
     <Generated>false</Generated>
@@ -701,8 +701,8 @@
     <GenComponentVersion>02.161</GenComponentVersion>
     <GenDriverVersion>01.23</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
-    <HeaderAge>1279478026</HeaderAge>
-    <CodeAge>1279478026</CodeAge>
+    <HeaderAge>1280774776</HeaderAge>
+    <CodeAge>1280774776</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>14</GenNumMethods>
     <Enable>false</Enable>
@@ -737,36 +737,36 @@
       <MethodPos0>Enable</MethodPos0>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>108</LineBeg>
-      <LineEnd>108</LineEnd>
+      <LineBeg>109</LineBeg>
+      <LineEnd>109</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos1>Interrupt</MethodPos1>
       <MethodType>internal_method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>109</LineBeg>
-      <LineEnd>120</LineEnd>
+      <LineBeg>110</LineBeg>
+      <LineEnd>121</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos2>Init</MethodPos2>
       <MethodType>internal_method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>121</LineBeg>
-      <LineEnd>133</LineEnd>
+      <LineBeg>122</LineBeg>
+      <LineEnd>134</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos3>Init</MethodPos3>
       <MethodType>internal_method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>111</LineBeg>
-      <LineEnd>131</LineEnd>
+      <LineBeg>112</LineBeg>
+      <LineEnd>132</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos4>Interrupt</MethodPos4>
       <MethodType>internal_method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>132</LineBeg>
-      <LineEnd>150</LineEnd>
+      <LineBeg>133</LineBeg>
+      <LineEnd>151</LineEnd>
     </MethodPos>
     <GenExtraFilesCount>0</GenExtraFilesCount>
   </ComponentID_10>
