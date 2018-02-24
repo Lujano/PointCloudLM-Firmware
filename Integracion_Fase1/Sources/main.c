@@ -49,8 +49,10 @@
 #include "PE_Const.h"
 #include "IO_Map.h"
 
-// Variables Echo
+// Variables Maquina de estados
 unsigned char estado = ESPERAR;
+
+// Variables Echo
 unsigned char estado_trigger = TRIGGER_TERMINADO;
 unsigned char estado_echo = ECHO_TERMINADO;
 unsigned int medicion = 0;
@@ -60,7 +62,6 @@ unsigned char CodError;
 unsigned int Enviados = 11;		// Esta variable no aporta nada más sino el número de elementos del arreglo a enviar.
 unsigned int error;
 bool primero = FALSE;
-unsigned int periodo;
 
 
 unsigned char Trama_PC[11]={0xf5, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};; 	// Esta es una primera trama que yo hice de ejemplo.
@@ -126,6 +127,7 @@ void main(void)
 			DIG3 = DIG3 >> 4;
 			DIG4 = Bit6_GetVal();
 			DIG4 = DIG4 >> 5;
+			
 			estado = ENVIAR;
 			break;
 	  			

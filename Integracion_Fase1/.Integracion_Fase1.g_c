@@ -97,7 +97,7 @@
     </GenFiles>
     <SignalListFile>Documentation\Integracion_Fase1_SIGNALS.txt</SignalListFile>
     <DestinationCompiler>MetrowerksHCS08CC</DestinationCompiler>
-    <ProjectModificationStamp>33</ProjectModificationStamp>
+    <ProjectModificationStamp>34</ProjectModificationStamp>
   </Options>
   <CpuID_2>
     <Generated>false</Generated>

@@ -22,7 +22,7 @@
       <File Name="Generated_Code/PE_Error.h" FileDate="2018-02-23, 03:48:01" FileAge="1519373881269" FileType="45637" />
       <File Name="Generated_Code/PE_Types.h" FileDate="2018-02-23, 03:48:01" FileAge="1519373881275" FileType="45637" />
       <File Name="Generated_Code/Bit5.c" FileDate="2018-02-23, 03:48:01" FileAge="1519373881304" FileType="45637" CompNumb="34" />
-      <File Name="Documentation/Integracion_Fase1_SIGNALS.txt" FileDate="2018-02-23, 04:04:34" FileAge="1519374874820" FileType="3072" />
+      <File Name="Documentation/Integracion_Fase1_SIGNALS.txt" FileDate="2018-02-24, 13:54:17" FileAge="1519496657756" FileType="3072" />
       <File Name="Documentation/Integracion_Fase1.txt" FileDate="2018-02-23, 03:48:01" FileAge="1519373881518" FileType="3072" />
       <File Name="Generated_Code/Bit4.h" FileDate="2018-02-23, 03:48:01" FileAge="1519373881322" FileType="45637" CompNumb="24" />
       <File Name="Generated_Code/Bit4.c" FileDate="2018-02-23, 03:48:01" FileAge="1519373881317" FileType="45637" CompNumb="24" />
@@ -48,10 +48,10 @@
       <File Name="Generated_Code/AS2.h" FileDate="2018-02-23, 03:48:01" FileAge="1519373881405" FileType="45637" CompNumb="9" />
       <File Name="Generated_Code/AD1.c" FileDate="2018-02-23, 03:48:01" FileAge="1519373881363" FileType="45637" CompNumb="23" />
       <File Name="Generated_Code/IO_Map.h" FileDate="2018-02-23, 03:48:01" FileAge="1519373881258" FileType="45637" />
-      <File Name="Generated_Code/Bit7.h" FileDate="2018-02-23, 03:48:01" FileAge="1519373881287" FileType="45637" CompNumb="36" />
       <File Name="Generated_Code/AS2.c" FileDate="2018-02-23, 03:48:01" FileAge="1519373881399" FileType="45637" CompNumb="9" />
+      <File Name="Generated_Code/Bit7.h" FileDate="2018-02-23, 03:48:01" FileAge="1519373881287" FileType="45637" CompNumb="36" />
       <File Name="Generated_Code/IO_Map.c" FileDate="2018-02-23, 03:48:01" FileAge="1519373881250" FileType="45637" />
     </GeneratedByPE>
   </GeneratedFilesList>
-  <CodeGenReference>54</CodeGenReference>
+  <CodeGenReference>55</CodeGenReference>
 </CodeGenerationInfo>
