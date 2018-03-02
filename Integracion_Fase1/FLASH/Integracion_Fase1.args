@@ -19,8 +19,9 @@
 "$(ProjDirPath)/FLASH/Generated_Code/Bit7_c.obj"
 "$(ProjDirPath)/FLASH/Generated_Code/Cap1_c.obj"
 "$(ProjDirPath)/FLASH/Generated_Code/Cpu_c.obj"
+"$(ProjDirPath)/FLASH/Generated_Code/FC161_c.obj"
 "$(ProjDirPath)/FLASH/Generated_Code/IO_Map_c.obj"
+"$(ProjDirPath)/FLASH/Generated_Code/PE_Timer_c.obj"
 "$(ProjDirPath)/FLASH/Generated_Code/TI1_c.obj"
-"$(ProjDirPath)/FLASH/Generated_Code/TI2_c.obj"
 "$(ProjDirPath)/FLASH/Generated_Code/Vectors_c.obj"
 "$(MCUToolsBaseDirEnv)/lib/hc08c/lib/ansifs.lib" )

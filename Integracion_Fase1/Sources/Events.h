@@ -34,11 +34,11 @@
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
+#include "PE_Timer.h"
 #include "AS1.h"
 #include "TI1.h"
 #include "AS2.h"
 #include "Bit1.h"
-#include "TI2.h"
 #include "Bit2.h"
 #include "Cap1.h"
 #include "Bit3.h"
@@ -47,11 +47,13 @@
 #include "Bit5.h"
 #include "Bit6.h"
 #include "Bit7.h"
+#include "FC161.h"
 
 
 #define ESPERAR  2
 #define MEDIR  3
 #define ENVIAR 4
+#define MOTOR 5
 
 typedef enum {
   ECHO_IDLE, /* device not used */
@@ -251,38 +253,6 @@ void Cap1_OnCapture(void);
 **         value (only when the component is enabled - <Enable> and the
 **         events are enabled - <EnableEvent>.This event is available
 **         only if a <interrupt service/event> is enabled.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-
-void TI2_OnInterrupt(void);
-/*
-** ===================================================================
-**     Event       :  TI2_OnInterrupt (module Events)
-**
-**     Component   :  TI2 [TimerInt]
-**     Description :
-**         When a timer interrupt occurs this event is called (only
-**         when the component is enabled - <Enable> and the events are
-**         enabled - <EnableEvent>). This event is enabled only if a
-**         <interrupt service/event> is enabled.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-
-void AD1_OnEnd(void);
-/*
-** ===================================================================
-**     Event       :  AD1_OnEnd (module Events)
-**
-**     Component   :  AD1 [ADC]
-**     Description :
-**         This event is called after the measurement (which consists
-**         of <1 or more conversions>) is/are finished.
-**         The event is available only when the <Interrupt
-**         service/event> property is enabled.
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================

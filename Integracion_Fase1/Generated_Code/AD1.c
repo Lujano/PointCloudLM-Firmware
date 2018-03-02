@@ -6,7 +6,7 @@
 **     Component   : ADC
 **     Version     : Component 01.699, Driver 01.30, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-02-23, 03:47, # CodeGen: 48
+**     Date/Time   : 2018-02-28, 14:16, # CodeGen: 75
 **     Abstract    :
 **         This device "ADC" implements an A/D converter,
 **         its control methods and interrupt/event handling procedure.
@@ -14,15 +14,13 @@
 **          Component name                                 : AD1
 **          A/D converter                                  : ADC
 **          Sharing                                        : Disabled
-**          Interrupt service/event                        : Enabled
-**            A/D interrupt                                : Vadc
-**            A/D interrupt priority                       : medium priority
+**          Interrupt service/event                        : Disabled
 **          A/D channels                                   : 1
 **            Channel0                                     : 
 **              A/D channel (pin)                          : PTA7_TPM2CH2_ADP9
 **              A/D channel (pin) signal                   : 
 **          A/D resolution                                 : 12 bits
-**          Conversion time                                : 10.967255 µs
+**          Conversion time                                : 23 µs
 **          Low-power mode                                 : Disabled
 **          Sample time                                    : short
 **          Internal trigger                               : Disabled
@@ -39,6 +37,8 @@
 **          Get value directly                             : yes
 **          Wait for result                                : yes
 **     Contents    :
+**         Enable     - byte AD1_Enable(void);
+**         Disable    - byte AD1_Disable(void);
 **         Measure    - byte AD1_Measure(bool WaitForResult);
 **         GetValue16 - byte AD1_GetValue16(word *Values);
 **
@@ -88,21 +88,41 @@
 
 /* MODULE AD1. */
 
-#include "Events.h"
 #include "AD1.h"
 
 #pragma MESSAGE DISABLE C5703          /* Disable warning C5703 "Parameter is not referenced" */
 
 
 
+static void SaveValue(void);
+/*
+** ===================================================================
+**     Method      :  SaveValue (component ADC)
+**
+**     Description :
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
+*/
+static void AD1_MainMeasure(void);
+/*
+** ===================================================================
+**     Method      :  MainMeasure (component ADC)
+**
+**     Description :
+**         The method performs the conversion of the input channels in 
+**         the polling mode.
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
+*/
 #define STOP            0x00U          /* STOP state           */
 #define MEASURE         0x01U          /* MESURE state         */
 #define CONTINUOUS      0x02U          /* CONTINUOS state      */
 #define SINGLE          0x03U          /* SINGLE state         */
 
 
-static const  byte Channels = 0x49U;   /* Content for the device control register */
+static const  byte Channels = 0x09U;   /* Content for the device control register */
 
+static bool EnUser;                    /* Enable/Disable device */
 static volatile bool OutFlg;           /* Measurement finish flag */
 static volatile byte ModeFlg;          /* Current state of device */
 
@@ -110,29 +130,48 @@ volatile word AD1_OutV;                /* Sum of measured values */
 
 
 
+bool WaitForRes;                       /* Wait for result flag */
 
 
 /*
 ** ===================================================================
-**     Method      :  AD1_Interrupt (component ADC)
+**     Method      :  SaveValue (component ADC)
 **
 **     Description :
-**         The method services the interrupt of the selected peripheral(s)
-**         and eventually invokes event(s) of the component.
 **         This method is internal. It is used by Processor Expert only.
 ** ===================================================================
 */
-ISR(AD1_Interrupt)
+static void SaveValue(void)
 {
   /*lint -save  -e926 -e927 -e928 -e929 Disable MISRA rule (11.4) checking. */
-  ((TWREG volatile*)(&AD1_OutV))->b.high = ADCRH; /* Save measured value */
-  ((TWREG volatile*)(&AD1_OutV))->b.low = ADCRL; /* Save measured value */
+  ((TWREG*)(&AD1_OutV))->b.high = ADCRH; /* Save measured value */
+  ((TWREG*)(&AD1_OutV))->b.low = ADCRL; /* Save measured value */
   /*lint -restore Enable MISRA rule (11.4) checking. */
   OutFlg = TRUE;                       /* Measured values are available */
-  AD1_OnEnd();                         /* Invoke user event */
   ModeFlg = STOP;                      /* Set the device to the stop mode */
 }
 
+/*
+** ===================================================================
+**     Method      :  MainMeasure (component ADC)
+**
+**     Description :
+**         The method performs the conversion of the input channels in 
+**         the polling mode.
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
+*/
+static void AD1_MainMeasure(void)
+{
+
+  ADCSC1 = Channels;                   /* Start measurement of next channel */
+  if (!WaitForRes) {                   /* If doesn't wait for result */
+    return;                            /* then return */
+  }
+  while (ADCSC1_COCO == 0U) {}         /* Wait for AD conversion complete */
+  OutFlg = TRUE;                       /* Measured values are available */
+  SaveValue();
+}
 /*
 ** ===================================================================
 **     Method      :  AD1_HWEnDi (component ADC)
@@ -146,10 +185,67 @@ ISR(AD1_Interrupt)
 */
 void AD1_HWEnDi(void)
 {
-  if (ModeFlg) {                       /* Start or stop measurement? */
-    OutFlg = FALSE;                    /* Output value isn't available */
-    ADCSC1 = Channels;                 /* If yes then start the conversion */
+  if (EnUser) {                        /* Enable device? */
+    if (ModeFlg) {                     /* Start or stop measurement? */
+      OutFlg = FALSE;                  /* Output value isn't available */
+      AD1_MainMeasure();
+    }
   }
+  else {
+    ADCSC1 = 0x1FU;                    /* Disable the device */
+  }
+}
+
+/*
+** ===================================================================
+**     Method      :  AD1_Enable (component ADC)
+*/
+/*!
+**     @brief
+**         Enables A/D converter component. [Events] may be generated
+**         ([DisableEvent]/[EnableEvent]). If possible, this method
+**         switches on A/D converter device, voltage reference, etc.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active speed mode
+*/
+/* ===================================================================*/
+byte AD1_Enable(void)
+{
+  if (EnUser) {                        /* Is the device enabled by user? */
+    return ERR_OK;                     /* If yes then set the flag "device enabled" */
+  }
+  EnUser = TRUE;                       /* Set the flag "device enabled" */
+  AD1_HWEnDi();                        /* Enable the device */
+  return ERR_OK;                       /* OK */
+}
+
+/*
+** ===================================================================
+**     Method      :  AD1_Disable (component ADC)
+*/
+/*!
+**     @brief
+**         Disables A/D converter component. No [events] will be
+**         generated. If possible, this method switches off A/D
+**         converter device, voltage reference, etc.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active speed mode
+*/
+/* ===================================================================*/
+byte AD1_Disable(void)
+{
+  if (!EnUser) {                       /* Is the device disabled by user? */
+    return ERR_OK;                     /* If yes then OK */
+  }
+  EnUser = FALSE;                      /* If yes then set the flag "device disabled" */
+  AD1_HWEnDi();                        /* Enable the device */
+  return ERR_OK;                       /* OK */
 }
 
 /*
@@ -188,14 +284,15 @@ void AD1_HWEnDi(void)
 #pragma MESSAGE DISABLE C5703 /* WARNING C5703: Parameter declared but not referenced */
 byte AD1_Measure(bool WaitForResult)
 {
+  if (!EnUser) {                       /* Is the device disabled by user? */
+    return ERR_DISABLED;               /* If yes then error */
+  }
   if (ModeFlg != STOP) {               /* Is the device in different mode than "stop"? */
     return ERR_BUSY;                   /* If yes then error */
   }
   ModeFlg = MEASURE;                   /* Set state of device to the measure mode */
+  WaitForRes = WaitForResult;          /* Save Wait for result flag */
   AD1_HWEnDi();                        /* Enable the device */
-  if (WaitForResult) {                 /* Is WaitForResult TRUE? */
-    while (ModeFlg == MEASURE) {}      /* If yes then wait for end of measurement */
-  }
   return ERR_OK;                       /* OK */
 }
 
@@ -230,7 +327,12 @@ byte AD1_Measure(bool WaitForResult)
 byte AD1_GetValue16(word *Values)
 {
   if (OutFlg == 0U) {                  /* Is output flag set? */
-    return ERR_NOTAVAIL;               /* If no then error */
+    if (ADCSC1_COCO) {
+      SaveValue();                     /* Save measured value, finish measuring */
+    }
+    else {
+      return ERR_NOTAVAIL;             /* If no then error */
+    }
   }
   *Values = (word)((AD1_OutV) << 4);   /* Save measured values to the output buffer */
   return ERR_OK;                       /* OK */
@@ -253,10 +355,12 @@ void AD1_Init(void)
   setReg8(ADCSC1, 0x1FU);              /* Disable the module */ 
   /* ADCSC2: ADACT=0,ADTRG=0,ACFE=0,ACFGT=0,??=0,??=0,??=0,??=0 */
   setReg8(ADCSC2, 0x00U);              /* Disable HW trigger and autocompare */ 
+  EnUser = TRUE;                       /* Enable device */
   OutFlg = FALSE;                      /* No measured value */
   ModeFlg = STOP;                      /* Device isn't running */
-  /* ADCCFG: ADLPC=0,ADIV1=1,ADIV0=1,ADLSMP=0,MODE1=0,MODE0=1,ADICLK1=0,ADICLK0=0 */
-  setReg8(ADCCFG, 0x64U);              /* Set prescaler bits */ 
+  /* ADCCFG: ADLPC=0,ADIV1=1,ADIV0=1,ADLSMP=0,MODE1=0,MODE0=1,ADICLK1=0,ADICLK0=1 */
+  setReg8(ADCCFG, 0x65U);              /* Set prescaler bits */ 
+  AD1_HWEnDi();                        /* Enable/disable device according to the status flags */
 }
 
 

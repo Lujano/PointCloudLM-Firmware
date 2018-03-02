@@ -6,7 +6,7 @@
 **     Component   : ADC
 **     Version     : Component 01.699, Driver 01.30, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-02-23, 03:47, # CodeGen: 48
+**     Date/Time   : 2018-02-28, 14:16, # CodeGen: 75
 **     Abstract    :
 **         This device "ADC" implements an A/D converter,
 **         its control methods and interrupt/event handling procedure.
@@ -14,15 +14,13 @@
 **          Component name                                 : AD1
 **          A/D converter                                  : ADC
 **          Sharing                                        : Disabled
-**          Interrupt service/event                        : Enabled
-**            A/D interrupt                                : Vadc
-**            A/D interrupt priority                       : medium priority
+**          Interrupt service/event                        : Disabled
 **          A/D channels                                   : 1
 **            Channel0                                     : 
 **              A/D channel (pin)                          : PTA7_TPM2CH2_ADP9
 **              A/D channel (pin) signal                   : 
 **          A/D resolution                                 : 12 bits
-**          Conversion time                                : 10.967255 µs
+**          Conversion time                                : 23 µs
 **          Low-power mode                                 : Disabled
 **          Sample time                                    : short
 **          Internal trigger                               : Disabled
@@ -39,6 +37,8 @@
 **          Get value directly                             : yes
 **          Wait for result                                : yes
 **     Contents    :
+**         Enable     - byte AD1_Enable(void);
+**         Disable    - byte AD1_Disable(void);
 **         Measure    - byte AD1_Measure(bool WaitForResult);
 **         GetValue16 - byte AD1_GetValue16(word *Values);
 **
@@ -93,6 +93,7 @@
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
+#include "PE_Timer.h"
 
 /* MODULE AD1. */
 
@@ -100,18 +101,6 @@
 
 
 
-
-__interrupt void AD1_Interrupt(void);
-/*
-** ===================================================================
-**     Method      :  AD1_Interrupt (component ADC)
-**
-**     Description :
-**         The method services the interrupt of the selected peripheral(s)
-**         and eventually invokes event(s) of the component.
-**         This method is internal. It is used by Processor Expert only.
-** ===================================================================
-*/
 
 void AD1_HWEnDi(void);
 /*
@@ -126,6 +115,42 @@ void AD1_HWEnDi(void);
 ** ===================================================================
 */
 
+
+byte AD1_Enable(void);
+/*
+** ===================================================================
+**     Method      :  AD1_Enable (component ADC)
+*/
+/*!
+**     @brief
+**         Enables A/D converter component. [Events] may be generated
+**         ([DisableEvent]/[EnableEvent]). If possible, this method
+**         switches on A/D converter device, voltage reference, etc.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active speed mode
+*/
+/* ===================================================================*/
+
+byte AD1_Disable(void);
+/*
+** ===================================================================
+**     Method      :  AD1_Disable (component ADC)
+*/
+/*!
+**     @brief
+**         Disables A/D converter component. No [events] will be
+**         generated. If possible, this method switches off A/D
+**         converter device, voltage reference, etc.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active speed mode
+*/
+/* ===================================================================*/
 
 byte AD1_Measure(bool WaitForResult);
 /*

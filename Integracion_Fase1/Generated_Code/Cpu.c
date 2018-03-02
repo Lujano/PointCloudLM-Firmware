@@ -7,7 +7,7 @@
 **     Version     : Component 01.003, Driver 01.40, CPU db: 3.00.067
 **     Datasheet   : MC9S08QE128RM Rev. 2 6/2007
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-02-23, 03:47, # CodeGen: 48
+**     Date/Time   : 2018-02-28, 14:16, # CodeGen: 75
 **     Abstract    :
 **         This component "MC9S08QE128_80" contains initialization 
 **         of the CPU and provides basic methods and events for 
@@ -69,9 +69,7 @@
 #include "AS1.h"
 #include "TI1.h"
 #include "AS2.h"
-#include "TI2.h"
 #include "Bit2.h"
-#include "AD1.h"
 #include "Cap1.h"
 #include "Bit1.h"
 #include "Bit3.h"
@@ -79,10 +77,13 @@
 #include "Bit5.h"
 #include "Bit6.h"
 #include "Bit7.h"
+#include "FC161.h"
+#include "AD1.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
+#include "PE_Timer.h"
 #include "Events.h"
 #include "Cpu.h"
 
@@ -232,8 +233,6 @@ void PE_low_level_init(void)
   clrSetReg8Bits(PTEPE, 0x40U, 0x80U);  
   /* PTEDD: PTEDD7=1,PTEDD6=1 */
   setReg8Bits(PTEDD, 0xC0U);            
-  /* APCTL2: ADPC9=1 */
-  setReg8Bits(APCTL2, 0x02U);           
   /* PTBPE: PTBPE5=0 */
   clrReg8Bits(PTBPE, 0x20U);            
   /* PTFD: PTFD1=0 */
@@ -250,6 +249,8 @@ void PE_low_level_init(void)
   clrReg8Bits(PTDPE, 0x0CU);            
   /* PTDDD: PTDDD3=0,PTDDD2=0 */
   clrReg8Bits(PTDDD, 0x0CU);            
+  /* APCTL2: ADPC9=1 */
+  setReg8Bits(APCTL2, 0x02U);           
   /* PTASE: PTASE7=0,PTASE6=0,PTASE4=0,PTASE3=0,PTASE2=0,PTASE1=0,PTASE0=0 */
   clrReg8Bits(PTASE, 0xDFU);            
   /* PTBSE: PTBSE7=0,PTBSE6=0,PTBSE5=0,PTBSE4=0,PTBSE3=0,PTBSE2=0,PTBSE1=0,PTBSE0=0 */
@@ -293,11 +294,7 @@ void PE_low_level_init(void)
   TI1_Init();
   /* ### Asynchro serial "AS2" init code ... */
   AS2_Init();
-  /* ### TimerInt "TI2" init code ... */
-  TI2_Init();
   /* ### BitIO "Bit2" init code ... */
-  /* ###  "AD1" init code ... */
-  AD1_Init();
   /* ### Timer capture encapsulation "Cap1" init code ... */
   Cap1_Init();
   /* ### BitIO "Bit1" init code ... */
@@ -307,6 +304,10 @@ void PE_low_level_init(void)
   /* ### BitIO "Bit6" init code ... */
   /* ### BitIO "Bit7" init code ... */
   Shadow_PTE &= 0xBFU;                 /* Initialize pin shadow variable bit */
+  /* ### Free running 8-bit counter "FC161" init code ... */
+  FC161_Init();
+  /* ###  "AD1" init code ... */
+  AD1_Init();
   CCR_lock = (byte)0;
   __EI();                              /* Enable interrupts */
 }

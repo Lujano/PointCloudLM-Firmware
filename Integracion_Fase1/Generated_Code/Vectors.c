@@ -5,7 +5,7 @@
 **     Processor   : MC9S08QE128CLK
 **     Version     : Component 01.003, Driver 01.40, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-02-23, 03:47, # CodeGen: 48
+**     Date/Time   : 2018-02-26, 17:03, # CodeGen: 72
 **     Abstract    :
 **         This component "MC9S08QE128_80" contains initialization 
 **         of the CPU and provides basic methods and events for 
@@ -62,9 +62,7 @@
 #include "AS1.h"
 #include "TI1.h"
 #include "AS2.h"
-#include "TI2.h"
 #include "Bit2.h"
-#include "AD1.h"
 #include "Cap1.h"
 #include "Bit1.h"
 #include "Bit3.h"
@@ -72,6 +70,8 @@
 #include "Bit5.h"
 #include "Bit6.h"
 #include "Bit7.h"
+#include "FC161.h"
+#include "AD1.h"
 
 /*lint -save  -e950 Disable MISRA rule (1.1) checking. */
 static void (* near const _vect[])(void) @0xFFC0 = { /* Interrupt vector table */
@@ -80,15 +80,15 @@ static void (* near const _vect[])(void) @0xFFC0 = { /* Interrupt vector table *
          Cpu_Interrupt,                /* Int.no. 30 Vtpm3ch5 (at FFC2)              Unassigned */
          Cpu_Interrupt,                /* Int.no. 29 Vtpm3ch4 (at FFC4)              Unassigned */
          Cpu_Interrupt,                /* Int.no. 28 Vtpm3ch3 (at FFC6)              Unassigned */
-         Cpu_Interrupt,                /* Int.no. 27 Vtpm3ch2 (at FFC8)              Unassigned */
+         FC161_Interrupt,              /* Int.no. 27 Vtpm3ch2 (at FFC8)              Used */
          Cpu_Interrupt,                /* Int.no. 26 Vtpm3ch1 (at FFCA)              Unassigned */
          Cpu_Interrupt,                /* Int.no. 25 Vtpm3ch0 (at FFCC)              Unassigned */
-         TI2_Interrupt,                /* Int.no. 24 Vrtc (at FFCE)                  Used */
+         Cpu_Interrupt,                /* Int.no. 24 Vrtc (at FFCE)                  Unassigned */
          AS2_InterruptTx,              /* Int.no. 23 Vsci2tx (at FFD0)               Used */
          AS2_InterruptRx,              /* Int.no. 22 Vsci2rx (at FFD2)               Used */
          AS2_InterruptError,           /* Int.no. 21 Vsci2err (at FFD4)              Used */
          Cpu_Interrupt,                /* Int.no. 20 Vacmpx (at FFD6)                Unassigned */
-         AD1_Interrupt,                /* Int.no. 19 Vadc (at FFD8)                  Used */
+         Cpu_Interrupt,                /* Int.no. 19 Vadc (at FFD8)                  Unassigned */
          Cpu_Interrupt,                /* Int.no. 18 Vkeyboard (at FFDA)             Unassigned */
          Cpu_Interrupt,                /* Int.no. 17 Viicx (at FFDC)                 Unassigned */
          AS1_InterruptTx,              /* Int.no. 16 Vsci1tx (at FFDE)               Used */
