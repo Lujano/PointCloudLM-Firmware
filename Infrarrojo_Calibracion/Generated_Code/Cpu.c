@@ -7,7 +7,7 @@
 **     Version     : Component 01.003, Driver 01.40, CPU db: 3.00.067
 **     Datasheet   : MC9S08QE128RM Rev. 2 6/2007
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-03-04, 00:07, # CodeGen: 14
+**     Date/Time   : 2018-03-04, 16:24, # CodeGen: 16
 **     Abstract    :
 **         This component "MC9S08QE128_80" contains initialization 
 **         of the CPU and provides basic methods and events for 
@@ -311,6 +311,9 @@ void PE_low_level_init(void)
   TI2_Init();
   /* ### Asynchro serial "AS2" init code ... */
   AS2_Init();
+  /* Common peripheral initialization - ENABLE */
+  /* TPM2SC: CLKSB=0,CLKSA=1 */
+  clrSetReg8Bits(TPM2SC, 0x10U, 0x08U); 
   CCR_lock = (byte)0;
   __EI();                              /* Enable interrupts */
 }

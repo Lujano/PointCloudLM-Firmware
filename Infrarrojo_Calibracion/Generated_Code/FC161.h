@@ -6,7 +6,7 @@
 **     Component   : FreeCntr16
 **     Version     : Component 02.078, Driver 01.22, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-03-03, 21:30, # CodeGen: 1
+**     Date/Time   : 2018-03-04, 16:24, # CodeGen: 16
 **     Abstract    :
 **         This device "FreeCntr16" implements 16-bit Free Running Counter
 **     Settings    :
@@ -15,14 +15,15 @@
 **         Counter shared              : No
 **
 **         High speed mode
-**             Prescaler               : divide-by-128
-**             Clock                   : 131072 Hz
+**             Prescaler               : divide-by-1
+**             Clock                   : 16777216 Hz
 **           Resolution of timer
-**             Xtal ticks              : 16384
-**             microseconds            : 499992
-**             milliseconds            : 500
-**             seconds (real)          : 0.499992370605
-**             Hz                      : 2
+**             Xtal ticks              : 16
+**             microseconds            : 500
+**             milliseconds            : 1
+**             seconds (real)          : 0.000500023365
+**             Hz                      : 2000
+**             kHz                     : 2
 **
 **         Initialization:
 **              Timer                  : Enabled

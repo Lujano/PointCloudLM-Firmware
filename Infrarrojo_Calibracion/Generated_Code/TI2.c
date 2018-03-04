@@ -6,7 +6,7 @@
 **     Component   : TimerInt
 **     Version     : Component 02.161, Driver 01.23, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-03-03, 23:22, # CodeGen: 12
+**     Date/Time   : 2018-03-04, 16:24, # CodeGen: 16
 **     Abstract    :
 **         This component "TimerInt" implements a periodic interrupt.
 **         When the component and its events are enabled, the "OnInterrupt"
@@ -15,19 +15,19 @@
 **         The source of periodic interrupt can be timer compare or reload
 **         register or timer-overflow interrupt (of free running counter).
 **     Settings    :
-**         Timer name                  : RTC (8-bit)
-**         Compare name                : RTCmod
-**         Counter shared              : No
+**         Timer name                  : TPM2 (16-bit)
+**         Compare name                : TPM20
+**         Counter shared              : Yes
 **
 **         High speed mode
-**             Prescaler               : divide-by-1
-**             Clock                   : 8192 Hz
+**             Prescaler               : divide-by-2
+**             Clock                   : 8388608 Hz
 **           Initial period/frequency
-**             Xtal ticks              : 1020
-**             microseconds            : 31128
-**             milliseconds            : 31
-**             seconds (real)          : 0.031127929688
-**             Hz                      : 32
+**             Xtal ticks              : 164
+**             microseconds            : 5000
+**             milliseconds            : 5
+**             seconds (real)          : 0.004999995232
+**             Hz                      : 200
 **
 **         Runtime setting             : none
 **
@@ -36,15 +36,16 @@
 **              Events                 : Enabled
 **
 **         Timer registers
-**              Counter                : RTCCNT    [$1831]
-**              Mode                   : RTCSC     [$1830]
-**              Run                    : RTCSC     [$1830]
-**              Prescaler              : RTCSC     [$1830]
+**              Counter                : TPM2CNT   [$0051]
+**              Mode                   : TPM2SC    [$0050]
+**              Run                    : TPM2SC    [$0050]
+**              Prescaler              : TPM2SC    [$0050]
 **
 **         Compare registers
-**              Compare                : RTCMOD    [$1832]
+**              Compare                : TPM2C0V   [$0056]
 **
 **         Flip-flop registers
+**              Mode                   : TPM2C0SC  [$0055]
 **     Contents    :
 **         No public methods
 **
@@ -103,7 +104,9 @@
 #pragma MESSAGE DISABLE C2705          /* WARNING C2705: Possible loss of data */
 #pragma MESSAGE DISABLE C5919          /* WARNING C5919: Conversion of floating to unsigned integral */
 #pragma MESSAGE DISABLE C5703          /* WARNING C5703: Parameter X declared in function F but not referenced */
+#pragma MESSAGE DISABLE C4002          /* Disable warning C4002 "Result not used" */
 
+static word CmpVal;                    /* Value added to compare register in ISR */
 /*** Internal macros and method prototypes ***/
 
 /*
@@ -116,8 +119,8 @@
 **         This method is internal. It is used by Processor Expert only.
 ** ===================================================================
 */
-#define TI2_SetCV(_Val) \
-  (RTCMOD = (byte)(_Val))
+#define TI2_SetCV(_Val) ( \
+  ((TPM2C0V = (word)(TPM2CNT + (_Val)),((CmpVal = (_Val))))))
 
 
 /*** End of internal method prototypes ***/
@@ -135,12 +138,11 @@
 */
 void TI2_Init(void)
 {
-  /* RTCSC: RTIF=0,RTCLKS=0,RTIE=0,RTCPS=0 */
-  setReg8(RTCSC, 0x00U);               /* Stop HW */ 
-  TI2_SetCV(0xFEU);                    /* Initialize appropriate value to the compare/modulo/reload register */
-  RTCMOD = RTCMOD;                     /* Reset HW counter */
-  /* RTCSC: RTIF=1,RTCLKS=2,RTIE=1,RTCPS=0x0A */
-  setReg8(RTCSC, 0xDAU);               /* Run RTC (select clock source, set frequency and enable interrupt) */ 
+  /* TPM2C0SC: CH0F=0,CH0IE=0,MS0B=0,MS0A=1,ELS0B=0,ELS0A=0,??=0,??=0 */
+  setReg8(TPM2C0SC, 0x10U);            /* Set output compare mode and disable compare interrupt */ 
+  TI2_SetCV(0xA3D7U);                  /* Initialize appropriate value to the compare/modulo/reload register */
+  /* TPM2C0SC: CH0IE=1 */
+  setReg8Bits(TPM2C0SC, 0x40U);        /* Enable Compare interrupt */ 
 }
 
 
@@ -156,8 +158,9 @@ void TI2_Init(void)
 */
 ISR(TI2_Interrupt)
 {
-  /* RTCSC: RTIF=1 */
-  setReg8Bits(RTCSC, 0x80U);           /* Reset real-time counter request flag */ 
+  /* TPM2C0SC: CH0F=0 */
+  clrReg8Bits(TPM2C0SC, 0x80U);        /* Reset compare interrupt request flag */ 
+  TPM2C0V += CmpVal;                   /* Set new value to the compare register */
   TI2_OnInterrupt();                   /* Invoke user event */
 }
 

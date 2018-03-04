@@ -3,7 +3,7 @@
   <Header>
     <Name>Infrarrojo_Calibracion</Name>
     <SavedBy>Luis Lujano</SavedBy>
-    <ModificationStamp>63</ModificationStamp>
+    <ModificationStamp>65</ModificationStamp>
     <Date>2018-03-04</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.9.2.RT6_b1446-0504</PEversion>
@@ -29,7 +29,7 @@
     <UseExistingModules>true</UseExistingModules>
     <RenamePeripheries>false</RenamePeripheries>
     <Autodependency>true</Autodependency>
-    <ProjectCompNumb>67</ProjectCompNumb>
+    <ProjectCompNumb>70</ProjectCompNumb>
     <DelUnusedPreviouslyGenFiles>true</DelUnusedPreviouslyGenFiles>
     <GeneratedCodeFrozen>false</GeneratedCodeFrozen>
     <AssignInitComponentNameToPrph>true</AssignInitComponentNameToPrph>
@@ -8596,7 +8596,7 @@
         <ItemSymbol>_BdRate</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>38400 baud</Value>
+        <Value>115200 baud</Value>
         <RuntimeSetting>0</RuntimeSetting>
         <ReqDevPrescHigh>-1</ReqDevPrescHigh>
         <ReqDevPrescLow>-1</ReqDevPrescLow>
@@ -8622,7 +8622,7 @@
         <ReqSrcClkPrescSpeedMode5>-1</ReqSrcClkPrescSpeedMode5>
         <ReqSrcClkPrescSpeedMode6>-1</ReqSrcClkPrescSpeedMode6>
         <ReqSrcClkPrescSpeedMode7>-1</ReqSrcClkPrescSpeedMode7>
-        <InitValue>38400 baud</InitValue>
+        <InitValue>115200 baud</InitValue>
         <Precision>1.5</Precision>
         <PrecInProc>true</PrecInProc>
         <LowLimit />
@@ -13057,7 +13057,7 @@
         <ItemSymbol>_Tmg</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>500 ms</Value>
+        <Value>500 µs</Value>
         <RuntimeSetting>0</RuntimeSetting>
         <ReqDevPrescHigh>-1</ReqDevPrescHigh>
         <ReqDevPrescLow>-1</ReqDevPrescLow>
@@ -13083,13 +13083,13 @@
         <ReqSrcClkPrescSpeedMode5>-1</ReqSrcClkPrescSpeedMode5>
         <ReqSrcClkPrescSpeedMode6>-1</ReqSrcClkPrescSpeedMode6>
         <ReqSrcClkPrescSpeedMode7>-1</ReqSrcClkPrescSpeedMode7>
-        <InitValue>500 ms</InitValue>
+        <InitValue>500 us</InitValue>
         <Precision>5.0</Precision>
         <PrecInProc>true</PrecInProc>
         <LowLimit />
         <HighLimit />
         <List lines_count="0" />
-        <UnitText>ms</UnitText>
+        <UnitText>us</UnitText>
         <MinCounterTicks>0</MinCounterTicks>
       </ItemState>
       <ItemState>
@@ -15568,12 +15568,12 @@
         <ItemSymbol>_Cmp</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>RTCmod</Value>
+        <Value>TPM20</Value>
         <SharedPrphMode>false</SharedPrphMode>
       </ItemState>
       <ItemState>
         <ItemSymbol>Tmr</ItemSymbol>
-        <Value>RTC</Value>
+        <Value>TPM2</Value>
         <SharedPrphMode>false</SharedPrphMode>
       </ItemState>
       <ItemState>
@@ -15584,7 +15584,7 @@
       </ItemState>
       <ItemState>
         <ItemSymbol>CmpInt</ItemSymbol>
-        <Value>Vrtc</Value>
+        <Value>Vtpm2ch0</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>CmpInitPriority</ItemSymbol>
@@ -15650,7 +15650,7 @@
         <ItemSymbol>_Tmg</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>31.25 ms</Value>
+        <Value>5 ms</Value>
         <RuntimeSetting>0</RuntimeSetting>
         <ReqDevPrescHigh>-1</ReqDevPrescHigh>
         <ReqDevPrescLow>-1</ReqDevPrescLow>
@@ -15676,7 +15676,7 @@
         <ReqSrcClkPrescSpeedMode5>-1</ReqSrcClkPrescSpeedMode5>
         <ReqSrcClkPrescSpeedMode6>-1</ReqSrcClkPrescSpeedMode6>
         <ReqSrcClkPrescSpeedMode7>-1</ReqSrcClkPrescSpeedMode7>
-        <InitValue>31.25 ms</InitValue>
+        <InitValue>5 ms</InitValue>
         <Precision>5.0</Precision>
         <PrecInProc>true</PrecInProc>
         <LowLimit />

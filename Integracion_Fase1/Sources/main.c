@@ -122,7 +122,7 @@ void main(void)
   			if (dir == 0){
   				
   				if(step1 > phi_180){
-  				  	step1 = step1-4; // Comienza en phi_0 (mayor) y disminuye hasta phi_180
+  				  	step1 = step1-1; // Comienza en phi_0 (mayor) y disminuye hasta phi_180
   				 }
 				if (step1 <= phi_180){ // Dio la vuelta
 					dir = 1; // Cambiar de direccion
@@ -132,7 +132,7 @@ void main(void)
   			}
   			else{
   				 if(step1 < phi_0){
-					step1 = step1+4; // Comienza en phi_180 (menor) y aumenta hasta phi_0
+					step1 = step1+1; // Comienza en phi_180 (menor) y aumenta hasta phi_0
 				 }
 				if (step1 >= phi_0){ // Dio la vuelta
 					step1 = phi_0;
@@ -144,7 +144,7 @@ void main(void)
   			
   			
   			servo_send(1, step1);
-  			delay_ms(250);
+  			delay_ms(100);
   			
   			if(reset_band == 1){
   			  				estado = ESPERAR;
@@ -155,7 +155,7 @@ void main(void)
   			
   			if(band == 1){
 				if (step2 < theta_0){ // Comienza en theta_90(menor)
-					step2 = step2+4;
+					step2 = step2+1;
 				}
 				band = 0; // Reiniciar
 				if(step2 >= theta_0){
@@ -172,12 +172,14 @@ void main(void)
   			
   			
   		case MEDIR:
-  			estado_echo = ECHO_TRIGGERED;
-  			trigger();
-  			while(estado_echo!= ECHO_TERMINADO){
-  				
-  				
-  			}
+  			Bit2_NegVal();
+			 estado_echo = ECHO_TRIGGERED;
+			 trigger();
+			 delay_ms(35);
+			 if(estado_echo!= ECHO_TERMINADO){
+			 estado_echo= ECHO_TERMINADO;
+			 medicion = 0;
+			 }
   			CodError = AD1_Enable();
   			// Otras mediciones
   			CodError = AD1_Measure(TRUE);

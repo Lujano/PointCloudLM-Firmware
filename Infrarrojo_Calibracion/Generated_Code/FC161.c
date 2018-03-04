@@ -6,7 +6,7 @@
 **     Component   : FreeCntr16
 **     Version     : Component 02.078, Driver 01.22, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-03-03, 21:30, # CodeGen: 1
+**     Date/Time   : 2018-03-04, 16:24, # CodeGen: 16
 **     Abstract    :
 **         This device "FreeCntr16" implements 16-bit Free Running Counter
 **     Settings    :
@@ -15,14 +15,15 @@
 **         Counter shared              : No
 **
 **         High speed mode
-**             Prescaler               : divide-by-128
-**             Clock                   : 131072 Hz
+**             Prescaler               : divide-by-1
+**             Clock                   : 16777216 Hz
 **           Resolution of timer
-**             Xtal ticks              : 16384
-**             microseconds            : 499992
-**             milliseconds            : 500
-**             seconds (real)          : 0.499992370605
-**             Hz                      : 2
+**             Xtal ticks              : 16
+**             microseconds            : 500
+**             milliseconds            : 1
+**             seconds (real)          : 0.000500023365
+**             Hz                      : 2000
+**             kHz                     : 2
 **
 **         Initialization:
 **              Timer                  : Enabled
@@ -194,8 +195,8 @@ byte FC161_GetTimeUS(word *Time)
   if (LOvf) {                          /* Testing counter overflow */
     return ERR_OVERFLOW;               /* If yes then error */
   }
-  PE_Timer_LngMul((dword)LTicks, 0x07A1185FUL, &RtVal); /* Multiply timer ticks and High speed CPU mode coefficient */
-  if (PE_Timer_LngHi1(RtVal[0], RtVal[1], Time)) { /* Get result value into word variable */
+  PE_Timer_LngMul((dword)LTicks, 0x01F405FBUL, &RtVal); /* Multiply timer ticks and High speed CPU mode coefficient */
+  if (PE_Timer_LngHi2(RtVal[0], RtVal[1], Time)) { /* Get result value into word variable */
     return ERR_MATH;                   /* Overflow, value too big */
   } else {
     return ERR_OK;                     /* OK: Value calculated */
@@ -229,8 +230,8 @@ byte FC161_GetTimeMS(word *Time)
   if (LOvf) {                          /* Testing counter overflow */
     return ERR_OVERFLOW;               /* If yes then error */
   }
-  PE_Timer_LngMul((dword)LTicks, 0x01F3FE0CUL, &RtVal); /* Multiply timer ticks and High speed CPU mode coefficient */
-  if (PE_Timer_LngHi2(RtVal[0], RtVal[1], Time)) { /* Get result value into word variable */
+  PE_Timer_LngMul((dword)LTicks, 0x80018800UL, &RtVal); /* Multiply timer ticks and High speed CPU mode coefficient */
+  if (PE_Timer_LngHi4(RtVal[0], RtVal[1], Time)) { /* Get result value into word variable */
     return ERR_MATH;                   /* Overflow, value too big */
   } else {
     return ERR_OK;                     /* OK: Value calculated */
@@ -256,11 +257,11 @@ void FC161_Init(void)
   setReg8(TPM3C2SC, 0x50U);            /* Set output compare mode and enable compare interrupt */ 
   TTicks = 0U;                         /* Counter of timer ticks */
   TOvf = FALSE;                        /* Counter overflow flag */
-  FC161_SetCV(0xFFFEU);                /* Initialize appropriate value to the compare/modulo/reload register */
+  FC161_SetCV(0x20C4U);                /* Initialize appropriate value to the compare/modulo/reload register */
   /* TPM3CNTH: BIT15=0,BIT14=0,BIT13=0,BIT12=0,BIT11=0,BIT10=0,BIT9=0,BIT8=0 */
   setReg8(TPM3CNTH, 0x00U);            /* Reset HW Counter */ 
-  /* TPM3SC: TOF=0,TOIE=0,CPWMS=0,CLKSB=0,CLKSA=1,PS2=1,PS1=1,PS0=1 */
-  setReg8(TPM3SC, 0x0FU);              /* Set prescaler and run counter */ 
+  /* TPM3SC: TOF=0,TOIE=0,CPWMS=0,CLKSB=0,CLKSA=1,PS2=0,PS1=0,PS0=0 */
+  setReg8(TPM3SC, 0x08U);              /* Set prescaler and run counter */ 
 }
 
 /*

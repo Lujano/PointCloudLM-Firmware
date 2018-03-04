@@ -6,7 +6,7 @@
 **     Component   : AsynchroSerial
 **     Version     : Component 02.611, Driver 01.33, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-03-03, 22:27, # CodeGen: 6
+**     Date/Time   : 2018-03-04, 16:24, # CodeGen: 17
 **     Abstract    :
 **         This component "AsynchroSerial" implements an asynchronous serial
 **         communication. The component supports different settings of
@@ -18,7 +18,7 @@
 **         Serial channel              : SCI1
 **
 **         Protocol
-**             Init baud rate          : 38400baud
+**             Init baud rate          : 115200baud
 **             Width                   : 8 bits
 **             Stop bits               : 1
 **             Parity                  : none
