@@ -13,6 +13,7 @@
 *.project
 *.g_c
 *.g_x
-*ReferencedRSESystems
-*.cwGeneratedFileSetLog
 *.xml
+.xml
+ReferencedRSESystems
+*.cwGeneratedFileSetLog
