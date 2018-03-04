@@ -6,7 +6,7 @@
 **     Component   : Capture
 **     Version     : Component 02.223, Driver 01.30, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-03-04, 08:27, # CodeGen: 2
+**     Date/Time   : 2018-03-04, 10:14, # CodeGen: 9
 **     Abstract    :
 **         This component "Capture" simply implements the capture function
 **         of timer. The counter counts the same way as in free run mode. On
@@ -18,7 +18,7 @@
 **
 **         Timer
 **             Timer                   : TPM1
-**             Counter shared          : No
+**             Counter shared          : Yes
 **
 **         High speed mode
 **             Prescaler               : divide-by-16
@@ -134,9 +134,11 @@
 #endif
 
 
+extern volatile word Cap1_CntrState;   /* Content of counter */
+
 
 #define Cap1_Reset() \
-  (TPM1CNTH = 0U , (byte)ERR_OK)
+  (Cap1_CntrState = TPM1CNT , (byte)ERR_OK)
 /*
 ** ===================================================================
 **     Method      :  Cap1_Reset (component Capture)
@@ -154,7 +156,9 @@
 
 #define Cap1_GetCaptureValue(Value) \
   /*lint -save  -e926 -e927 -e928 -e929 Disable MISRA rule (11.4) checking. */\
-  (*(Cap1_TCapturedValue*)(Value) = TPM1C1V , (byte)ERR_OK) \
+  (((*(Cap1_TCapturedValue*)(Value) = TPM1C1V), \
+  (*(Cap1_TCapturedValue*)(Value) -= Cap1_CntrState)), \
+  ERR_OK) \
   /*lint -restore Enable MISRA rule (11.4) checking. */
 /*
 ** ===================================================================

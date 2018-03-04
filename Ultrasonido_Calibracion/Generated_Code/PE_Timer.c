@@ -6,7 +6,7 @@
 **     Component   : PE_Timer
 **     Version     : Driver 01.04
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-03-04, 08:27, # CodeGen: 2
+**     Date/Time   : 2018-03-04, 10:53, # CodeGen: 14
 **     Abstract    :
 **         This module "PE_Timer" implements internal methods and definitions
 **         used by components working with timers.
@@ -127,33 +127,6 @@ void PE_Timer_LngMul(dword va1, dword va2, dlong *var)
 
 /*
 ** ===================================================================
-**     Method      :  PE_Timer_LngHi1 (component PE_Timer)
-**
-**     Description :
-**         The method transfers 64 bit result to 16 bit ratio value and 
-**         returns overflow flag.
-**         This method is internal. It is used by Processor Expert only.
-** ===================================================================
-*/
-bool PE_Timer_LngHi1(dword High, dword Low, word *Out)
-{
-  if ((High == 0x00U) && ((Low >> 0x18UL) == 0x00U)) {
-    if ((Low & 0x80UL) != 0x00UL) {
-      if ((Low >> 0x08UL) < 0xFFFFUL) {
-        *Out = (word)(((word)(Low >> 0x08UL)) + 1U);
-        return FALSE;
-      }
-    } else {
-      *Out = (word)(Low >> 0x08UL);
-      return FALSE;
-    }
-  }
-  *Out = (word)(Low >> 0x08UL);
-  return TRUE;
-}
-
-/*
-** ===================================================================
 **     Method      :  PE_Timer_LngHi2 (component PE_Timer)
 **
 **     Description :
@@ -176,6 +149,33 @@ bool PE_Timer_LngHi2(dword High, dword Low, word *Out)
     }
   }
   *Out = (word)(Low >> 0x10UL);
+  return TRUE;
+}
+
+/*
+** ===================================================================
+**     Method      :  PE_Timer_LngHi4 (component PE_Timer)
+**
+**     Description :
+**         The method transfers 64 bit result to 16 bit ratio value and 
+**         returns overflow flag.
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
+*/
+bool PE_Timer_LngHi4(dword High, dword Low, word *Out)
+{
+  if ((High >> 0x10UL) == 0x00U) {
+    if ((Low & 0x80000000UL) != 0x00UL) {
+      if (High < 0xFFFFUL) {
+        *Out = (word)(((word)High) + 1U);
+        return FALSE;
+      }
+    } else {
+      *Out = (word)High;
+      return FALSE;
+    }
+  }
+  *Out = (word)High;
   return TRUE;
 }
 

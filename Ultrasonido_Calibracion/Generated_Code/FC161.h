@@ -6,7 +6,7 @@
 **     Component   : FreeCntr16
 **     Version     : Component 02.078, Driver 01.22, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-03-04, 08:27, # CodeGen: 2
+**     Date/Time   : 2018-03-04, 10:53, # CodeGen: 14
 **     Abstract    :
 **         This device "FreeCntr16" implements 16-bit Free Running Counter
 **     Settings    :
@@ -15,14 +15,15 @@
 **         Counter shared              : No
 **
 **         High speed mode
-**             Prescaler               : divide-by-128
-**             Clock                   : 131072 Hz
+**             Prescaler               : divide-by-1
+**             Clock                   : 16777216 Hz
 **           Resolution of timer
-**             Xtal ticks              : 16384
-**             microseconds            : 499992
-**             milliseconds            : 500
-**             seconds (real)          : 0.499992370605
-**             Hz                      : 2
+**             Xtal ticks              : 16
+**             microseconds            : 500
+**             milliseconds            : 1
+**             seconds (real)          : 0.000500023365
+**             Hz                      : 2000
+**             kHz                     : 2
 **
 **         Initialization:
 **              Timer                  : Enabled
@@ -36,6 +37,8 @@
 **         Compare registers
 **              Compare                : TPM3C2V   [$006C]
 **     Contents    :
+**         Enable    - byte FC161_Enable(void);
+**         Disable   - byte FC161_Disable(void);
 **         Reset     - byte FC161_Reset(void);
 **         GetTimeUS - byte FC161_GetTimeUS(word *Time);
 **         GetTimeMS - byte FC161_GetTimeMS(word *Time);
@@ -94,6 +97,40 @@
 #include "IO_Map.h"
 #include "PE_Timer.h"
 #include "Cpu.h"
+
+byte FC161_Enable(void);
+/*
+** ===================================================================
+**     Method      :  FC161_Enable (component FreeCntr16)
+*/
+/*!
+**     @brief
+**         This method enables the component - the internal clocks are
+**         counted.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active speed mode
+*/
+/* ===================================================================*/
+
+byte FC161_Disable(void);
+/*
+** ===================================================================
+**     Method      :  FC161_Disable (component FreeCntr16)
+*/
+/*!
+**     @brief
+**         This method disables the component - the internal clocks are
+**         not counted.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active speed mode
+*/
+/* ===================================================================*/
 
 byte FC161_Reset(void);
 /*

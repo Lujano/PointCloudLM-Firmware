@@ -60,12 +60,12 @@ unsigned int medicion = 0;
 
 // Variables COMM
 unsigned char CodError;
-unsigned int Enviados = 3;		// Esta variable no aporta nada más sino el número de elementos del arreglo a enviar.
+unsigned int Enviados = 5;		// Esta variable no aporta nada más sino el número de elementos del arreglo a enviar.
 unsigned int error;
 bool primero = FALSE;
 
 
-unsigned char Trama_PC[3]={0xf1, 0x00, 0x00}; 	// Esta es una primera trama que yo hice de ejemplo.
+unsigned char Trama_PC[5]={0xf2, 0x00, 0x00, 0x00, 0x00}; 
 // Variable ADC
 unsigned int ADC16;
 
@@ -88,6 +88,7 @@ unsigned char mTrama[3]={0xFF,0x00,0x00};
 unsigned int EnviadosM = 3;	
 unsigned char band = 0; // bandera de direccion cambiada
 unsigned char reset_band = 0;
+unsigned int time=0;
 
 
 void trigger(void);
@@ -129,8 +130,14 @@ void main(void)
   			//CodError = AD1_Enable();
   			
   			// Otras mediciones
-  			CodError = AD1_Measure(TRUE);
-			CodError = AD1_GetValue16(&ADC16);
+  			 Bit2_NegVal();
+  			 estado_echo = ECHO_TRIGGERED;
+  			 trigger();
+  			 delay_ms(40);
+  			 if(estado_echo!= ECHO_TERMINADO){
+  			 estado_echo= ECHO_TERMINADO;
+  			 medicion = 0;
+  			 }
 			//CodError = AD1_Disable();
 			
 			estado = ENVIAR;
@@ -140,10 +147,12 @@ void main(void)
   			
   			//PROTOCOLO DE COMUNICACION 0,D1,D2,A12,A11,A10,A9,A8 0,A7,A6,A5,A4,A3,A2,A1
 			//CANAL 1
-			Trama_PC[1] =  ((ADC16 >> 11) & (0x1F));
-			Trama_PC[2] = (ADC16 >> 4) & (0x7F);
+			Trama_PC[1] = (medicion >> 15) & 0x01; // bit mas significativo upper
+			Trama_PC[2] = (medicion >> 8) & 0x7F;  // bits restantes upper
+			Trama_PC[3] = (medicion >> 7) & 0x01;  // bit mas significativo lower
+			Trama_PC[4] = (medicion) & 0x7F;  // bits restantes lower
 
-			CodError = AS1_SendBlock(Trama_PC,3,&Enviados); //El arreglo con la medición está en iADC.u8 (notar que es un apuntador)
+			CodError = AS1_SendBlock(Trama_PC,5,&Enviados); //El arreglo con la medición está en iADC.u8 (notar que es un apuntador)
 			estado = ESPERAR;
 			break;
   			
@@ -172,8 +181,8 @@ void trigger(void){
 void init(void){
 	Bit1_ClrVal();
 	Bit7_ClrVal();
-	step1 = phi_0-96;
-	step2 = theta_90;
+	step1 = phi_0-96; // Posicion media(90º)
+	step2 = theta_90; // Posicion media (90º)
 	servo_send(1,step1);
 	delay_ms(400);
 	servo_send(2, step2);
@@ -188,14 +197,13 @@ void servo_send (unsigned char motor, unsigned char posicion){
 }
 
 void delay_ms (unsigned int time_delay){
-	
-	unsigned int time;
+	CodError=FC161_Enable();
 	CodError = FC161_Reset(); // Resetear contador
 	CodError = FC161_GetTimeMS(&time);
 	while(time_delay> time){
 		CodError = FC161_GetTimeMS(&time);
 	}
-	
+	CodError = FC161_Disable();
 	
 }
 /* END main */

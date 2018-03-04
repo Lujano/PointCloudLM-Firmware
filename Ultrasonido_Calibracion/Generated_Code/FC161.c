@@ -6,7 +6,7 @@
 **     Component   : FreeCntr16
 **     Version     : Component 02.078, Driver 01.22, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-03-04, 08:27, # CodeGen: 2
+**     Date/Time   : 2018-03-04, 10:53, # CodeGen: 14
 **     Abstract    :
 **         This device "FreeCntr16" implements 16-bit Free Running Counter
 **     Settings    :
@@ -15,14 +15,15 @@
 **         Counter shared              : No
 **
 **         High speed mode
-**             Prescaler               : divide-by-128
-**             Clock                   : 131072 Hz
+**             Prescaler               : divide-by-1
+**             Clock                   : 16777216 Hz
 **           Resolution of timer
-**             Xtal ticks              : 16384
-**             microseconds            : 499992
-**             milliseconds            : 500
-**             seconds (real)          : 0.499992370605
-**             Hz                      : 2
+**             Xtal ticks              : 16
+**             microseconds            : 500
+**             milliseconds            : 1
+**             seconds (real)          : 0.000500023365
+**             Hz                      : 2000
+**             kHz                     : 2
 **
 **         Initialization:
 **              Timer                  : Enabled
@@ -36,6 +37,8 @@
 **         Compare registers
 **              Compare                : TPM3C2V   [$006C]
 **     Contents    :
+**         Enable    - byte FC161_Enable(void);
+**         Disable   - byte FC161_Disable(void);
 **         Reset     - byte FC161_Reset(void);
 **         GetTimeUS - byte FC161_GetTimeUS(word *Time);
 **         GetTimeMS - byte FC161_GetTimeMS(word *Time);
@@ -91,6 +94,7 @@
 #pragma MESSAGE DISABLE C4002          /* Disable warning C4002 "Result not used" */
 
 
+static bool EnUser;                    /* Enable/Disable device by user */
 static word TTicks;                    /* Counter of timer ticks */
 static word LTicks;                    /* Working copy of variable TTicks */
 static bool TOvf;                      /* Counter overflow flag */
@@ -122,6 +126,18 @@ static bool LOvf;                      /* Working copy of variable TOvf */
 ** ===================================================================
 */
 static void LoadTicks(void);
+/*
+** ===================================================================
+**     Method      :  HWEnDi (component FreeCntr16)
+**
+**     Description :
+**         Enables or disables the peripheral(s) associated with the 
+**         component. The method is called automatically as a part of the 
+**         Enable and Disable methods and several internal methods.
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
+*/
+static void HWEnDi(void);
 
 /*** End of Internal methods declarations ***/
 
@@ -141,6 +157,77 @@ static void LoadTicks(void)
   LTicks = TTicks;                     /* Loading actual number of timer ticks */
   LOvf = TOvf;                         /* Loading actual state of "overflow flag" */
   ExitCritical();                      /* Restore the PS register */
+}
+
+/*
+** ===================================================================
+**     Method      :  HWEnDi (component FreeCntr16)
+**
+**     Description :
+**         Enables or disables the peripheral(s) associated with the 
+**         component. The method is called automatically as a part of the 
+**         Enable and Disable methods and several internal methods.
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
+*/
+static void HWEnDi(void)
+{
+  if (EnUser) {
+    TPM3SC |= 0x08U;                   /* Run counter (set CLKSB:CLKSA) */
+  } else {
+    /* TPM3SC: CLKSB=0,CLKSA=0 */
+    clrReg8Bits(TPM3SC, 0x18U);        /* Stop counter (CLKSB:CLKSA = 00) */ 
+    /* TPM3CNTH: BIT15=0,BIT14=0,BIT13=0,BIT12=0,BIT11=0,BIT10=0,BIT9=0,BIT8=0 */
+    setReg8(TPM3CNTH, 0x00U);          /* Clear counter register - any write clears complete counter */ 
+  }
+}
+
+/*
+** ===================================================================
+**     Method      :  FC161_Enable (component FreeCntr16)
+*/
+/*!
+**     @brief
+**         This method enables the component - the internal clocks are
+**         counted.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active speed mode
+*/
+/* ===================================================================*/
+byte FC161_Enable(void)
+{
+  if (!EnUser) {                       /* Is the device disabled by user? */
+    EnUser = TRUE;                     /* If yes then set the flag "device enabled" */
+    HWEnDi();                          /* Enable the device */
+  }
+  return ERR_OK;                       /* OK */
+}
+
+/*
+** ===================================================================
+**     Method      :  FC161_Disable (component FreeCntr16)
+*/
+/*!
+**     @brief
+**         This method disables the component - the internal clocks are
+**         not counted.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active speed mode
+*/
+/* ===================================================================*/
+byte FC161_Disable(void)
+{
+  if (EnUser) {                        /* Is the device enabled by user? */
+    EnUser = FALSE;                    /* If yes then set the flag "device disabled" */
+    HWEnDi();                          /* Disable the device */
+  }
+  return ERR_OK;                       /* OK */
 }
 
 /*
@@ -194,8 +281,8 @@ byte FC161_GetTimeUS(word *Time)
   if (LOvf) {                          /* Testing counter overflow */
     return ERR_OVERFLOW;               /* If yes then error */
   }
-  PE_Timer_LngMul((dword)LTicks, 0x07A1185FUL, &RtVal); /* Multiply timer ticks and High speed CPU mode coefficient */
-  if (PE_Timer_LngHi1(RtVal[0], RtVal[1], Time)) { /* Get result value into word variable */
+  PE_Timer_LngMul((dword)LTicks, 0x01F405FBUL, &RtVal); /* Multiply timer ticks and High speed CPU mode coefficient */
+  if (PE_Timer_LngHi2(RtVal[0], RtVal[1], Time)) { /* Get result value into word variable */
     return ERR_MATH;                   /* Overflow, value too big */
   } else {
     return ERR_OK;                     /* OK: Value calculated */
@@ -229,8 +316,8 @@ byte FC161_GetTimeMS(word *Time)
   if (LOvf) {                          /* Testing counter overflow */
     return ERR_OVERFLOW;               /* If yes then error */
   }
-  PE_Timer_LngMul((dword)LTicks, 0x01F3FE0CUL, &RtVal); /* Multiply timer ticks and High speed CPU mode coefficient */
-  if (PE_Timer_LngHi2(RtVal[0], RtVal[1], Time)) { /* Get result value into word variable */
+  PE_Timer_LngMul((dword)LTicks, 0x80018800UL, &RtVal); /* Multiply timer ticks and High speed CPU mode coefficient */
+  if (PE_Timer_LngHi4(RtVal[0], RtVal[1], Time)) { /* Get result value into word variable */
     return ERR_MATH;                   /* Overflow, value too big */
   } else {
     return ERR_OK;                     /* OK: Value calculated */
@@ -254,13 +341,14 @@ void FC161_Init(void)
   setReg8(TPM3SC, 0x00U);              /* Stop HW; disable overflow interrupt and set prescaler to 0 */ 
   /* TPM3C2SC: CH2F=0,CH2IE=1,MS2B=0,MS2A=1,ELS2B=0,ELS2A=0,??=0,??=0 */
   setReg8(TPM3C2SC, 0x50U);            /* Set output compare mode and enable compare interrupt */ 
+  EnUser = TRUE;                       /* Enable device */
   TTicks = 0U;                         /* Counter of timer ticks */
   TOvf = FALSE;                        /* Counter overflow flag */
-  FC161_SetCV(0xFFFEU);                /* Initialize appropriate value to the compare/modulo/reload register */
+  FC161_SetCV(0x20C4U);                /* Initialize appropriate value to the compare/modulo/reload register */
+  clrSetReg8Bits(TPM3SC, 0x07U, 0x00U); /* Set prescaler */
   /* TPM3CNTH: BIT15=0,BIT14=0,BIT13=0,BIT12=0,BIT11=0,BIT10=0,BIT9=0,BIT8=0 */
   setReg8(TPM3CNTH, 0x00U);            /* Reset HW Counter */ 
-  /* TPM3SC: TOF=0,TOIE=0,CPWMS=0,CLKSB=0,CLKSA=1,PS2=1,PS1=1,PS0=1 */
-  setReg8(TPM3SC, 0x0FU);              /* Set prescaler and run counter */ 
+  HWEnDi();
 }
 
 /*

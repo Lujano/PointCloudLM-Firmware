@@ -7,7 +7,7 @@
 **     Version     : Component 01.003, Driver 01.40, CPU db: 3.00.067
 **     Datasheet   : MC9S08QE128RM Rev. 2 6/2007
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-03-04, 08:27, # CodeGen: 2
+**     Date/Time   : 2018-03-04, 10:14, # CodeGen: 9
 **     Abstract    :
 **         This component "MC9S08QE128_80" contains initialization 
 **         of the CPU and provides basic methods and events for 
@@ -67,9 +67,9 @@
 #pragma MESSAGE DISABLE C4002 /* WARNING C4002: Result not used is ignored */
 
 #include "AS1.h"
+#include "Cap1.h"
 #include "TI1.h"
 #include "Bit2.h"
-#include "Cap1.h"
 #include "Bit1.h"
 #include "Bit3.h"
 #include "Bit4.h"
@@ -224,14 +224,14 @@ void PE_low_level_init(void)
   clrSetReg8Bits(PTBDD, 0x21U, 0x02U);  
   /* PTBD: PTBD1=1 */
   setReg8Bits(PTBD, 0x02U);             
+  /* PTBPE: PTBPE5=0 */
+  clrReg8Bits(PTBPE, 0x20U);            
   /* PTED: PTED7=0,PTED6=0 */
   clrReg8Bits(PTED, 0xC0U);             
   /* PTEPE: PTEPE7=1,PTEPE6=0 */
   clrSetReg8Bits(PTEPE, 0x40U, 0x80U);  
   /* PTEDD: PTEDD7=1,PTEDD6=1 */
   setReg8Bits(PTEDD, 0xC0U);            
-  /* PTBPE: PTBPE5=0 */
-  clrReg8Bits(PTBPE, 0x20U);            
   /* PTFD: PTFD1=0 */
   clrReg8Bits(PTFD, 0x02U);             
   /* PTFPE: PTFPE1=1 */
@@ -291,11 +291,11 @@ void PE_low_level_init(void)
   /* ### Shared modules init code ... */
   /* ### Asynchro serial "AS1" init code ... */
   AS1_Init();
+  /* ### Timer capture encapsulation "Cap1" init code ... */
+  Cap1_Init();
   /* ### TimerInt "TI1" init code ... */
   TI1_Init();
   /* ### BitIO "Bit2" init code ... */
-  /* ### Timer capture encapsulation "Cap1" init code ... */
-  Cap1_Init();
   /* ### BitIO "Bit1" init code ... */
   /* ### BitIO "Bit3" init code ... */
   /* ### BitIO "Bit4" init code ... */
@@ -311,6 +311,9 @@ void PE_low_level_init(void)
   TI2_Init();
   /* ### Asynchro serial "AS2" init code ... */
   AS2_Init();
+  /* Common peripheral initialization - ENABLE */
+  /* TPM1SC: CLKSB=0,CLKSA=1 */
+  clrSetReg8Bits(TPM1SC, 0x10U, 0x08U); 
   CCR_lock = (byte)0;
   __EI();                              /* Enable interrupts */
 }
