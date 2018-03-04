@@ -18,7 +18,7 @@
 ** @version 01.12
 ** @brief
 **         Main module.
-**         This module contains user's application code.
+**         This module con tains user's application code.
 */         
 /*!
 **  @addtogroup main_module main module documentation

@@ -17,12 +17,12 @@
       <File Name="Generated_Code/Bit6.c" FileDate="2018-03-03, 05:23:03" FileAge="1520070783860" FileType="45637" CompNumb="35" />
       <File Name="Generated_Code/Vectors.c" FileDate="2018-03-03, 05:13:32" FileAge="1520070212364" FileType="45637" CompNumb="4" />
       <File Name="Generated_Code/PE_Const.h" FileDate="2018-03-03, 05:23:03" FileAge="1520070783782" FileType="45637" />
-      <File Name="Sources/main.c" FileDate="2018-03-03, 05:13:32" FileAge="1520070212373" FileType="128" />
+      <File Name="Sources/main.c" FileDate="2018-03-03, 10:31:47" FileAge="1520089307258" FileType="128" />
       <File Name="Generated_Code/Bit5.h" FileDate="2018-03-03, 05:23:03" FileAge="1520070783868" FileType="45637" CompNumb="34" />
       <File Name="Generated_Code/PE_Error.h" FileDate="2018-03-03, 05:23:03" FileAge="1520070783786" FileType="45637" />
       <File Name="Generated_Code/PE_Types.h" FileDate="2018-03-03, 05:23:03" FileAge="1520070783790" FileType="45637" />
       <File Name="Generated_Code/Bit5.c" FileDate="2018-03-03, 05:23:03" FileAge="1520070783866" FileType="45637" CompNumb="34" />
-      <File Name="Documentation/Integracion_Fase1_SIGNALS.txt" FileDate="2018-03-03, 05:23:54" FileAge="1520070834483" FileType="3072" />
+      <File Name="Documentation/Integracion_Fase1_SIGNALS.txt" FileDate="2018-03-03, 10:34:49" FileAge="1520089489135" FileType="3072" />
       <File Name="Documentation/Integracion_Fase1.txt" FileDate="2018-03-03, 05:23:04" FileAge="1520070784213" FileType="3072" />
       <File Name="Generated_Code/Bit4.h" FileDate="2018-03-03, 05:23:03" FileAge="1520070783872" FileType="45637" CompNumb="24" />
       <File Name="Generated_Code/Bit4.c" FileDate="2018-03-03, 05:23:03" FileAge="1520070783870" FileType="45637" CompNumb="24" />
@@ -46,14 +46,14 @@
       <File Name="Generated_Code/FC161.c" FileDate="2018-03-03, 05:13:32" FileAge="1520070212362" FileType="45637" CompNumb="47" />
       <File Name="Generated_Code/PE_Timer.h" FileDate="2018-03-03, 05:13:32" FileAge="1520070212363" FileType="45637" />
       <File Name="Generated_Code/AD1.h" FileDate="2018-03-03, 05:13:32" FileAge="1520070212357" FileType="45637" CompNumb="52" />
-      <File Name="Generated_Code/PE_Timer.c" FileDate="2018-03-03, 05:13:32" FileAge="1520070212363" FileType="45637" />
       <File Name="Generated_Code/AS2.h" FileDate="2018-03-03, 05:23:03" FileAge="1520070783934" FileType="45637" CompNumb="9" />
+      <File Name="Generated_Code/PE_Timer.c" FileDate="2018-03-03, 05:13:32" FileAge="1520070212363" FileType="45637" />
       <File Name="Generated_Code/AD1.c" FileDate="2018-03-03, 05:13:32" FileAge="1520070212357" FileType="45637" CompNumb="52" />
       <File Name="Generated_Code/IO_Map.h" FileDate="2018-03-03, 05:23:03" FileAge="1520070783778" FileType="45637" />
-      <File Name="Generated_Code/AS2.c" FileDate="2018-03-03, 05:23:03" FileAge="1520070783932" FileType="45637" CompNumb="9" />
       <File Name="Generated_Code/Bit7.h" FileDate="2018-03-03, 05:23:03" FileAge="1520070783858" FileType="45637" CompNumb="36" />
+      <File Name="Generated_Code/AS2.c" FileDate="2018-03-03, 05:23:03" FileAge="1520070783932" FileType="45637" CompNumb="9" />
       <File Name="Generated_Code/IO_Map.c" FileDate="2018-03-03, 05:23:03" FileAge="1520070783770" FileType="45637" />
     </GeneratedByPE>
   </GeneratedFilesList>
-  <CodeGenReference>78</CodeGenReference>
+  <CodeGenReference>79</CodeGenReference>
 </CodeGenerationInfo>
