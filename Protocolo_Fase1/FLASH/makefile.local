@@ -6,6 +6,6 @@
 
 export HC08ToolsEnv=$(CWInstallLocationEnv)/MCU/prog
 export GNU_Make_Install_DirEnv=$(CWInstallLocationEnv)/gnu/bin
-export ProjDirPath=C:/Users/Raynulfo/Documents/GitHub/PointCloud-Firmware/Protocolo_Fase1
-export CWInstallLocationEnv=C:/Freescale/CW MCU v10.7
+export ProjDirPath=C:/Users/Luis Lujano/Documents/GitHub/PointCloud-Firmware/Protocolo_Fase1
+export CWInstallLocationEnv=D:/Freescale/CW MCU v10.7
 export MCUToolsBaseDirEnv=$(CWInstallLocationEnv)/MCU
