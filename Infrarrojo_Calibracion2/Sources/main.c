@@ -60,15 +60,16 @@ unsigned int medicion = 0;
 
 // Variables COMM
 unsigned char CodError;
-unsigned int Enviados = 3;		// Esta variable no aporta nada más sino el número de elementos del arreglo a enviar.
+unsigned int Enviados = 5;		// Esta variable no aporta nada más sino el número de elementos del arreglo a enviar.
 unsigned int error;
 bool primero = FALSE;
 
 
-unsigned char Trama_PC[3]={0xf1, 0x00, 0x00}; 	// Esta es una primera trama que yo hice de ejemplo.
+unsigned char Trama_PC[5]={0xf2, 0x00, 0x00, 0x00, 0x00}; // Esta es una primera trama 
 // Variable ADC
 unsigned int ADC16;
-
+unsigned long MADC16;
+unsigned int i = 0;
 //Variables Bits Digitales
 unsigned int DIG1;
 unsigned int DIG2;
@@ -126,24 +127,35 @@ void main(void)
   			
   		case MEDIR:
   			
-  			//CodError = AD1_Enable();
-  			
+  			CodError = AD1_Enable();
   			// Otras mediciones
-  			CodError = AD1_Measure(TRUE);
-			CodError = AD1_GetValue16(&ADC16);
-			//CodError = AD1_Disable();
+  			ADC16 = 0;
+  			MADC16 = 0;
+  			estado = MEDIR_ADC;
 			
-			estado = ENVIAR;
+			
 			break;
 	  			
+  		case MEDIR_ADC:
+  			for (i = 0; i<24; i++){
+  				CodError = AD1_Measure(TRUE);
+  				CodError = AD1_GetValue16(&ADC16);
+  				MADC16= MADC16+(ADC16>>4);
+  				delay_ms(2);
+  			}
+  			CodError = AD1_Disable();
+  			estado = ENVIAR;
+  			
   		case ENVIAR:
   			
   			//PROTOCOLO DE COMUNICACION 0,D1,D2,A12,A11,A10,A9,A8 0,A7,A6,A5,A4,A3,A2,A1
 			//CANAL 1
-			Trama_PC[1] =  ((ADC16 >> 11) & (0x1F));
-			Trama_PC[2] = (ADC16 >> 4) & (0x7F);
+  			Trama_PC[1] = (MADC16 >> 15) & 0x01; // bit mas significativo upper
+			Trama_PC[2] = (MADC16 >> 8) & 0x7F;  // bits restantes upper
+			Trama_PC[3] = (MADC16 >> 7) & 0x01;  // bit mas significativo lower
+			Trama_PC[4] = (MADC16) & 0x7F;  // bits restantes lower
 
-			CodError = AS1_SendBlock(Trama_PC,3,&Enviados); //El arreglo con la medición está en iADC.u8 (notar que es un apuntador)
+			CodError = AS1_SendBlock(Trama_PC,5,&Enviados); 
 			estado = ESPERAR;
 			break;
   			

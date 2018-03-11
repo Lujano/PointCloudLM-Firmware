@@ -5,6 +5,6 @@ Para importar los projectos, cree un projecto en codewarrior bajo el mismo nombr
 y el archivo que se encuentran fuera de la carpeta "ProcessorExpert.pe"
 y luego hacer clean del proyecto
 
-Si se desea crear un proyecto y copiar la configuracion de otro, se realiza lo anterior pero se cambia el nombre a los .g_c y .g_x, al nombre del nuevo proyecto
+Si se desea crear un proyecto y copiar la configuracion de otro, se realiza lo anterior
 
 Realizar clean del proyecto

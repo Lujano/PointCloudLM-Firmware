@@ -6,7 +6,7 @@
 **     Component   : TimerInt
 **     Version     : Component 02.161, Driver 01.23, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-03-04, 16:24, # CodeGen: 16
+**     Date/Time   : 2018-03-10, 14:32, # CodeGen: 36
 **     Abstract    :
 **         This component "TimerInt" implements a periodic interrupt.
 **         When the component and its events are enabled, the "OnInterrupt"
@@ -20,14 +20,15 @@
 **         Counter shared              : Yes
 **
 **         High speed mode
-**             Prescaler               : divide-by-2
-**             Clock                   : 8388608 Hz
+**             Prescaler               : divide-by-1
+**             Clock                   : 16777216 Hz
 **           Initial period/frequency
-**             Xtal ticks              : 164
-**             microseconds            : 5000
-**             milliseconds            : 5
-**             seconds (real)          : 0.004999995232
-**             Hz                      : 200
+**             Xtal ticks              : 16
+**             microseconds            : 500
+**             milliseconds            : 1
+**             seconds (real)          : 0.000500023365
+**             Hz                      : 2000
+**             kHz                     : 2
 **
 **         Runtime setting             : none
 **
@@ -140,7 +141,7 @@ void TI2_Init(void)
 {
   /* TPM2C0SC: CH0F=0,CH0IE=0,MS0B=0,MS0A=1,ELS0B=0,ELS0A=0,??=0,??=0 */
   setReg8(TPM2C0SC, 0x10U);            /* Set output compare mode and disable compare interrupt */ 
-  TI2_SetCV(0xA3D7U);                  /* Initialize appropriate value to the compare/modulo/reload register */
+  TI2_SetCV(0x20C5U);                  /* Initialize appropriate value to the compare/modulo/reload register */
   /* TPM2C0SC: CH0IE=1 */
   setReg8Bits(TPM2C0SC, 0x40U);        /* Enable Compare interrupt */ 
 }
