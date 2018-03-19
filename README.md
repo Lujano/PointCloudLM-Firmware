@@ -31,7 +31,7 @@ MC9S08QE128, el cual se encarga del control en la elaboración de una nube de pu
  
  3. Ir a la carpeta contenedora del proyecto y eliminar los siguientes archivos:
  
- ![alt text](PointCloud-Firmware/AbrirProyectoCodeWarrior.jpg)
+ ![alt text](https://github.com/Lujano/PointCloud-Firmware/blob/master/AbrirProyectoCodeWarrior.jpg)
  
  4. Copiar los archivos descargados de Integracion_Fase1 y pegar dentro de la carpeta del proyecto.
  
