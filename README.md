@@ -30,9 +30,13 @@ MC9S08QE128, el cual se encarga del control en la elaboración de una nube de pu
  configuraciones:
  
  ![alt text](https://github.com/Lujano/PointCloud-Firmware/blob/master/ReadmePaso1.jpg)
+ 
  ![alt text](https://github.com/Lujano/PointCloud-Firmware/blob/master/ReadmePaso2.jpg)
+ 
  ![alt text](https://github.com/Lujano/PointCloud-Firmware/blob/master/ReadmePaso3.jpg)
+ 
  ![alt text](https://github.com/Lujano/PointCloud-Firmware/blob/master/ReadmePaso4.jpg)
+ 
  ![alt text](https://github.com/Lujano/PointCloud-Firmware/blob/master/ReadmePaso5.jpg)
  
  3. Ir a la carpeta contenedora del proyecto y eliminar los siguientes archivos:
