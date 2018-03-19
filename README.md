@@ -26,12 +26,18 @@ MC9S08QE128, el cual se encarga del control en la elaboración de una nube de pu
  
  a Integracion_Fase1
  
- 2. Crear un proyecto en Codewarrior ("Bareboard Project") cuyo nombre sea exactamente "Integracion_Fase1" y seleccionar el
- microcontrolador a utilizar ("MC9S08QE128") además de incluir el Processor Expert.
+ 2. Crear un proyecto en Codewarrior ("Bareboard Project") cuyo nombre sea exactamente "Integracion_Fase1" y verificar las siguientes
+ configuraciones:
+ 
+ ![alt text](https://github.com/Lujano/PointCloud-Firmware/blob/master/ReadmePaso1.jpg)
+ ![alt text](https://github.com/Lujano/PointCloud-Firmware/blob/master/ReadmePaso2.jpg)
+ ![alt text](https://github.com/Lujano/PointCloud-Firmware/blob/master/ReadmePaso3.jpg)
+ ![alt text](https://github.com/Lujano/PointCloud-Firmware/blob/master/ReadmePaso4.jpg)
+ ![alt text](https://github.com/Lujano/PointCloud-Firmware/blob/master/ReadmePaso5.jpg)
  
  3. Ir a la carpeta contenedora del proyecto y eliminar los siguientes archivos:
  
- ![alt text](https://github.com/Lujano/PointCloud-Firmware/blob/master/AbrirProyectoCodeWarrior.jpg)
+ ![alt text](https://github.com/Lujano/PointCloud-Firmware/blob/master/ReadmePaso6.jpg)
  
  4. Copiar los archivos descargados de Integracion_Fase1 y pegar dentro de la carpeta del proyecto.
  
