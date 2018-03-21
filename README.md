@@ -47,7 +47,7 @@ MC9S08QE128, el cual se encarga del control en la elaboración de una nube de pu
  
  El proyecto debe estar listo para su uso.
  
- ##Usos del proyecto
+ ## Usos del proyecto
  
   Entre los usos que puede tener esta sección del proyecto "Generación de nube de puntos haciendo uso de fusión sensorial" se pueden destacar los siguientes:
   
