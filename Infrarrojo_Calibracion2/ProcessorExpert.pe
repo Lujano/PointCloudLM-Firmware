@@ -2,9 +2,9 @@
 <PEproject>
   <Header>
     <Name>Infrarrojo_Calibracion2</Name>
-    <SavedBy>Luis Lujano</SavedBy>
-    <ModificationStamp>78</ModificationStamp>
-    <Date>2018-03-18</Date>
+    <SavedBy>Raynulfo</SavedBy>
+    <ModificationStamp>80</ModificationStamp>
+    <Date>2018-03-19</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.9.2.RT6_b1446-0504</PEversion>
   </Header>
@@ -29,7 +29,7 @@
     <UseExistingModules>true</UseExistingModules>
     <RenamePeripheries>false</RenamePeripheries>
     <Autodependency>true</Autodependency>
-    <ProjectCompNumb>79</ProjectCompNumb>
+    <ProjectCompNumb>82</ProjectCompNumb>
     <DelUnusedPreviouslyGenFiles>true</DelUnusedPreviouslyGenFiles>
     <GeneratedCodeFrozen>false</GeneratedCodeFrozen>
     <AssignInitComponentNameToPrph>true</AssignInitComponentNameToPrph>
@@ -13541,7 +13541,7 @@
         <ItemSymbol>AD0</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>PTA7_TPM2CH2_ADP9</Value>
+        <Value>PTA6_TPM1CH2_ADP8</Value>
         <SharedPrphMode>false</SharedPrphMode>
       </ItemState>
       <ItemState>
