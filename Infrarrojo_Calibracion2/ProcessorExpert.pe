@@ -2,9 +2,15 @@
 <PEproject>
   <Header>
     <Name>Infrarrojo_Calibracion2</Name>
+<<<<<<< HEAD
     <SavedBy>Raynulfo</SavedBy>
     <ModificationStamp>80</ModificationStamp>
     <Date>2018-03-19</Date>
+=======
+    <SavedBy>Luis Lujano</SavedBy>
+    <ModificationStamp>78</ModificationStamp>
+    <Date>2018-03-20</Date>
+>>>>>>> b579d27386f4a3705a193350298f97ee1643f601
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.9.2.RT6_b1446-0504</PEversion>
   </Header>
