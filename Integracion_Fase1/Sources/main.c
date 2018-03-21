@@ -144,7 +144,7 @@ void main(void)
   			
   			
   			servo_send(1, step1);
-  			delay_ms(100);
+  			delay_ms(150);
   			
   			if(reset_band == 1){
   			  				estado = ESPERAR;
@@ -163,7 +163,7 @@ void main(void)
 					reset_band = 1;
 				}
 				servo_send(2, step2);
-				delay_ms(100);
+				delay_ms(150);
 			}
   			
   			

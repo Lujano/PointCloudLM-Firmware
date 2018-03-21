@@ -68,7 +68,7 @@ bool primero = FALSE;
 unsigned char Trama_PC[5]={0xf2, 0x00, 0x00, 0x00, 0x00}; // Esta es una primera trama 
 // Variable ADC
 unsigned int ADC16;
-unsigned long MADC16;
+unsigned int MADC16;
 unsigned int i = 0;
 //Variables Bits Digitales
 unsigned int DIG1;
@@ -137,7 +137,7 @@ void main(void)
 			break;
 	  			
   		case MEDIR_ADC:
-  			for (i = 0; i<24; i++){
+  			for (i = 0; i<16; i++){
   				CodError = AD1_Measure(TRUE);
   				CodError = AD1_GetValue16(&ADC16);
   				MADC16= MADC16+(ADC16>>4);
