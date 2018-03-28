@@ -258,7 +258,7 @@ void init(void){
     phi_start = phi_0-75; // 70 grados
 	phi_end = phi_0-118;  // 110 grados
 	theta_start = theta_90; // 90 grados
-	theta_end = theta_90+40; // 80 grados
+	theta_end = theta_90+10; // 80 grados
 	
 	step1 = phi_start;
 	step2 = theta_start;
