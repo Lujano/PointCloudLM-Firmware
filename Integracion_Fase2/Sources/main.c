@@ -226,6 +226,7 @@ void main(void)
 			Trama_PC[12] = (step2) & 0x7F;  // bits restantes
 			CodError = AS1_SendBlock(Trama_PC,13,&Enviados); //El arreglo con la medición está en iADC.u8 (notar que es un apuntador)
 			
+			delay_ms(50); // Retraso de 50 ms para tomar la foto
 			estado = MOTOR;
 			break;
   			
@@ -258,7 +259,7 @@ void init(void){
     phi_start = phi_0-75; // 70 grados
 	phi_end = phi_0-118;  // 110 grados
 	theta_start = theta_90; // 90 grados
-	theta_end = theta_90+10; // 80 grados
+	theta_end = theta_90+40; // 80 grados
 	
 	step1 = phi_start;
 	step2 = theta_start;
