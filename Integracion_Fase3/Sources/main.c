@@ -50,7 +50,7 @@
 #include "IO_Map.h"
 
 // Variables Maquina de estados
-unsigned char estado = MOTOR ;
+unsigned char estado = ESPERAR ;
 
 // Variables Echo
 unsigned char estado_trigger = TRIGGER_TERMINADO;
@@ -62,9 +62,24 @@ unsigned char CodError;
 unsigned int Enviados = 13;		// Esta variable no aporta nada más sino el número de elementos del arreglo a enviar.
 unsigned int error;
 bool primero = FALSE;
-
+unsigned char anuncio;
+unsigned char anuncio2;
+unsigned char found_band;
+unsigned char n_canales;
+unsigned char command; // Comando enviado desde pc para cambiar estado del sistema
 
 unsigned char Trama_PC[13]={0xf6, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};; 	// Esta es una primera trama que yo hice de ejemplo.
+
+
+// Variables estado FREERUN
+
+// Variable estado POINTCLOUD
+
+unsigned char Buffer[4] = {0x00, 0x00, 0x00, 0x00};
+unsigned int Lectura_Buffer = 2;
+unsigned char Trama_end[3]={0xf1,0xf1,0xf1}; // Trama enviada cuando se termina el proceso de PointCloud
+unsigned int env_end = 3;
+
 // Variable ADC
 unsigned int ADC16;
 unsigned int MADC16;
@@ -76,8 +91,8 @@ unsigned int DIG3;
 unsigned int DIG4;
 
 // Variables Motores
-unsigned char step1 = 0;
-unsigned char step2 = 0;
+unsigned char step1 ;
+unsigned char step2 ;
 const unsigned char phi_0 = 228;
 const unsigned char phi_180 = 36;
 const unsigned char theta_0 = 245;
@@ -90,10 +105,10 @@ unsigned char band = 0; // bandera de direccion cambiada
 unsigned char reset_band = 0;
 
 // Control de motores
-unsigned char phi_start =0 ;
-unsigned char phi_end = 0;
-unsigned char theta_start = 0 ;
-unsigned char theta_end = 0 ;
+unsigned char phi_start;
+unsigned char phi_end ;
+unsigned char theta_start ;
+unsigned char theta_end ;
 
 
 
@@ -126,7 +141,46 @@ void main(void)
   			//servo_send(1, step1 );
   			//servo_send(2, step2);
   			break;
-  				
+  			
+  		case FREERUN:
+  			Lectura_Buffer = 2;
+  			CodError = AS1_RecvBlock(Buffer, 2, & Lectura_Buffer );
+  			step1 =  Buffer[0];
+  			step2 =  Buffer[1];
+  			//CodError = AS1_ClearRxBuf(); // Limpiar Buffer Rx de forma opcional
+  			servo_send(1, step1); // Mandar angulo phi al motor
+  			delay_ms(200);
+  			servo_send(2, step2); // Mandar angulo theta al motor
+  			estado = ESPERAR;
+  			break;
+  		
+  		case POINTCLOUD_START:
+  			Lectura_Buffer = 4;
+			CodError = AS1_RecvBlock(Buffer, 4, & Lectura_Buffer );
+			
+		    phi_start = Buffer[0]; 
+			phi_end = Buffer[1]; 
+			theta_start = Buffer[2]; 
+			theta_end = Buffer[3];
+			
+			//CodError = AS1_ClearRxBuf(); // Limpiar Buffer Rx de forma opcional
+			
+			step1 = phi_start;
+			step2 = theta_start;
+			servo_send(1,step1);
+			delay_ms(400);
+			servo_send(2, step2);
+			dir = 0;
+			if (estado != FREERUN ){
+				estado = MOTOR;
+			}
+  			break;
+  			
+  		case POINTCLOUD_END:
+  			CodError = AS1_SendBlock(Trama_end,3,&env_end);
+  		  	estado = ESPERAR;
+  		  	break;
+  			
   		case MOTOR:
   			if (dir == 0){ // direccion del crecimiento del angulo phi
   				
@@ -155,11 +209,15 @@ void main(void)
   			servo_send(1, step1); // Mandar angulo phi al motor
   			delay_ms(150);
   			
+  			
   			if(reset_band == 1){
-  			  				estado = ESPERAR;
+  			  				estado = POINTCLOUD_END;
   			 }
   			else {
-  				           estado = MEDIR;
+  				if (estado != FREERUN ){
+  					 	 estado = MEDIR;
+  							}
+  				          
   			}
   			
   			if(band == 1){
@@ -201,8 +259,10 @@ void main(void)
 			 medicion = 0;
 			 }
   			
-  		
-			estado = ENVIAR;
+			 if (estado != FREERUN ){
+				 	 	 	 estado = ENVIAR;
+			  }
+			
 			break;
 	  			
   		case ENVIAR:
@@ -224,11 +284,14 @@ void main(void)
 			Trama_PC[10] = (step1) & 0x7F;  // bits restantes
 			Trama_PC[11] = (step2 >> 7) & 0x01;  // bit mas significativo upper
 			Trama_PC[12] = (step2) & 0x7F;  // bits restantes
-			CodError = AS1_SendBlock(Trama_PC,13,&Enviados); //El arreglo con la medición está en iADC.u8 (notar que es un apuntador)
-			CodError = AS2_SendBlock(Trama_PC,13,&Enviados); //El arreglo con la medición está en iADC.u8 (notar que es un apuntador)
+			//CodError = AS1_SendBlock(Trama_PC,13,&Enviados); //El arreglo con la medición está en iADC.u8 (notar que es un apuntador)
+			//CodError = AS2_SendBlock(Trama_PC,13,&Enviados); //El arreglo con la medición está en iADC.u8 (notar que es un apuntador)
 			
 			delay_ms(50); // Retraso de 50 ms para tomar la foto
-			estado = MOTOR;
+			 if (estado != FREERUN ){
+				 estado = MOTOR;
+						  }
+			
 			break;
   			
   		default:
@@ -256,18 +319,19 @@ void trigger(void){
 void init(void){
 	Bit1_ClrVal();
 	Bit7_ClrVal();
-	
-    phi_start = phi_0-75; // 70 grados
+	found_band = 0; // Por default, para detectar el anuncio
+    phi_start = phi_0-75; // 90 grados
 	phi_end = phi_0-118;  // 110 grados
-	theta_start = theta_90; // 90 grados
+	theta_start = theta_90; // 45 grados
 	theta_end = theta_90+40; // 80 grados
 	
-	step1 = phi_start;
-	step2 = theta_start;
+	step1 = phi_0-97 ;
+	step2 =theta_90+57;
 	servo_send(1,step1);
 	delay_ms(400);
 	servo_send(2, step2);
 	dir = 0;
+	estado = ESPERAR;
 	
 };
 

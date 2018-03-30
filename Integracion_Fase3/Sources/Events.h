@@ -43,7 +43,6 @@
 #include "Cap1.h"
 #include "Bit3.h"
 #include "AD1.h"
-#include "Bit8.h"
 #include "Bit4.h"
 #include "Bit5.h"
 #include "Bit6.h"
@@ -55,6 +54,9 @@
 #define MEDIR  3
 #define ENVIAR 4
 #define MOTOR 5
+#define FREERUN 6
+#define POINTCLOUD_START 7
+#define POINTCLOUD_END 8
 
 typedef enum {
   ECHO_IDLE, /* device not used */
@@ -74,17 +76,14 @@ extern unsigned char estado_trigger;
 extern unsigned char estado_echo;
 extern unsigned char estado;
 extern unsigned int medicion;
-extern unsigned char rx_c;
+extern unsigned char anuncio;
+extern unsigned char anuncio2;
+extern unsigned char found_band;
+extern unsigned char n_canales;
+extern unsigned char command;
 extern unsigned char CodError;
-extern unsigned char found_band; 
 
-extern unsigned char Blq[2];
-extern unsigned int n_canales ;
-extern unsigned char Trama_PC2[3];
-extern unsigned int toenv ;
-extern unsigned char var;
-	 
-// Ultimas agregadas
+
 
 void AS2_OnError(void);
 /*

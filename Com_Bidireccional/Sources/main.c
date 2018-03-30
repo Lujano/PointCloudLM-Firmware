@@ -51,7 +51,7 @@
 #include "IO_Map.h"
 
 // Variables Maquina de estados
-unsigned char estado = MOTOR ;
+unsigned char estado = ESPERAR;
 
 // Variables Echo
 unsigned char estado_trigger = TRIGGER_TERMINADO;
@@ -63,10 +63,17 @@ unsigned char CodError;
 unsigned int Enviados = 11;		// Esta variable no aporta nada más sino el número de elementos del arreglo a enviar.
 unsigned int error;
 bool primero = FALSE;
+unsigned char rx_c = 0xff;
+unsigned char found_band = 0x00;;
 
 
-
-unsigned char Trama_PC[11]={0xf5, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};; 	// Esta es una primera trama que yo hice de ejemplo.
+unsigned char Blq[2]= {0x03, 0x04};
+unsigned int n_canales = 2;
+unsigned char Trama_PC2[3]={0xf1, 0x00, 0x00};
+unsigned int toenv = 3;
+unsigned char var;
+	 
+unsigned char Trama_PC[11]={0xf5, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}; 	// Esta es una primera trama que yo hice de ejemplo.
 // Variable ADC
 unsigned int ADC16;
 

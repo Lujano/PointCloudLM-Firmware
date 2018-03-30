@@ -88,17 +88,6 @@ void  AS2_OnError(void)
 */
 void  AS2_OnRxChar(void)
 {
-	 unsigned char rx_c;
-	 unsigned int n_canales = 0;
-	 unsigned char Trama_PC2[3]={0xf1, 0x00, 0x00};
-	 unsigned int Blq;
-	 unsigned char CodError;
-	 CodError =  AS1_RecvChar(&rx_c);
-	 if ((rx_c & 0xf0  ) == 0xf0) {
-		 n_canales = rx_c & 0x0f;
-		 CodError = AS1_RecvBlock(&Blq, n_canales, &n_canales);
-		 CodError = AS1_SendBlock(Trama_PC2,n_canales,&n_canales);
-	 }
 	
 }
 
@@ -190,7 +179,34 @@ void  AS1_OnError(void)
 */
 void  AS1_OnRxChar(void)
 {
-  Bit8_NegVal();
+	
+	// unsigned char CodError;
+
+
+ 
+ if (found_band == 0){
+	 CodError =  AS1_RecvChar( &rx_c );
+	 var = (rx_c) & 0xf0 ;
+	 if ( var == 0xf0) {
+		 found_band = 1;
+		 
+	 }
+ }
+ 
+ else if (found_band == 1){
+	 found_band = found_band+1;
+ }
+ else if (found_band == 2){
+ 
+ 	 CodError = AS1_RecvBlock(Blq, 2, &n_canales);
+ 	 Trama_PC2[1] = Blq[0];
+ 	Trama_PC2[2] = Blq[1] ; 
+    CodError = AS1_SendBlock(Trama_PC2, 3, &toenv);
+ 	found_band = 0;
+  }
+ 
+	 
+
 }
 
 /*
