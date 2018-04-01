@@ -149,7 +149,7 @@ void main(void)
   			step2 =  Buffer[1];
   			//CodError = AS1_ClearRxBuf(); // Limpiar Buffer Rx de forma opcional
   			servo_send(1, step1); // Mandar angulo phi al motor
-  			delay_ms(200);
+  			delay_ms(100);
   			servo_send(2, step2); // Mandar angulo theta al motor
   			estado = ESPERAR;
   			break;
