@@ -6,7 +6,7 @@
 **     Component   : BitIO
 **     Version     : Component 02.086, Driver 03.27, CPU db: 3.00.067
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2018-03-29, 23:43, # CodeGen: 1
+**     Date/Time   : 2018-03-31, 17:13, # CodeGen: 7
 **     Abstract    :
 **         This component "BitIO" implements an one-bit input/output.
 **         It uses one bit/pin of a port.
@@ -18,20 +18,20 @@
 **             ----------------------------------------------------
 **                Number (on package)  |    Name
 **             ----------------------------------------------------
-**                       52            |  PTF1_ADP11
+**                       48            |  PTA6_TPM1CH2_ADP8
 **             ----------------------------------------------------
 **
-**         Port name                   : PTF
+**         Port name                   : PTA
 **
-**         Bit number (in port)        : 1
-**         Bit mask of the port        : $0002
+**         Bit number (in port)        : 6
+**         Bit mask of the port        : $0040
 **
 **         Initial direction           : Output (direction cannot be changed)
 **         Initial output value        : 0
 **         Initial pull option         : up
 **
-**         Port data register          : PTFD      [$000A]
-**         Port control register       : PTFDD     [$000B]
+**         Port data register          : PTAD      [$0000]
+**         Port control register       : PTADD     [$0001]
 **
 **         Optimization for            : speed
 **     Contents    :
@@ -117,7 +117,7 @@
 ** ===================================================================
 */
 #define Bit1_GetVal() ( \
-    (bool)((getReg8(PTFD) & 0x02U))    /* Return port data */ \
+    (bool)((getReg8(PTAD) & 0x40U))    /* Return port data */ \
   )
 
 /*
@@ -145,7 +145,7 @@ void Bit1_PutVal(bool Val);
 ** ===================================================================
 */
 #define Bit1_ClrVal() ( \
-    (void)clrReg8Bits(PTFD, 0x02U)     /* PTFD1=0x00U */ \
+    (void)clrReg8Bits(PTAD, 0x40U)     /* PTAD6=0x00U */ \
   )
 
 /*
@@ -158,7 +158,7 @@ void Bit1_PutVal(bool Val);
 ** ===================================================================
 */
 #define Bit1_SetVal() ( \
-    (void)setReg8Bits(PTFD, 0x02U)     /* PTFD1=0x01U */ \
+    (void)setReg8Bits(PTAD, 0x40U)     /* PTAD6=0x01U */ \
   )
 
 
