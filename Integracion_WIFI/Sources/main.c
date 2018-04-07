@@ -93,6 +93,9 @@ unsigned int DIG4;
 // Variables Motores
 unsigned char step1 ;
 unsigned char step2 ;
+unsigned char last_step1;
+unsigned char last_step2;
+
 const unsigned char phi_0 = 228;
 const unsigned char phi_180 = 36;
 const unsigned char theta_0 = 245;
@@ -148,9 +151,17 @@ void main(void)
   			step1 =  Buffer[0];
   			step2 =  Buffer[1];
   			//CodError = AS1_ClearRxBuf(); // Limpiar Buffer Rx de forma opcional
-  			servo_send(1, step1); // Mandar angulo phi al motor
-  			delay_ms(100);
-  			servo_send(2, step2); // Mandar angulo theta al motor
+  			if (last_step1 != step1){
+  				servo_send(1, step1);
+  			}
+  			 // Mandar angulo phi al motor
+  			if(last_step2 != step2){
+  				delay_ms(20);
+  				servo_send(2, step2); 
+  			}
+  			// Mandar angulo theta al motor
+  			last_step1 = step1;
+  			last_step2 = step2;
   			estado = ESPERAR;
   			break;
   		
@@ -327,6 +338,8 @@ void init(void){
 	
 	step1 = phi_0-97 ;
 	step2 =theta_90+57;
+	last_step1 = step1;
+	last_step2 = step2;
 	servo_send(1,step1);
 	delay_ms(400);
 	servo_send(2, step2);
