@@ -116,8 +116,18 @@ void  AS2_OnRxChar(void)
 			 n_canales = anuncio & 0x0f ; // Numero de canales a leer
 			 found_band = found_band+1 ; // es un commando y se lee el siguiente byte
 		 }
+		 else if (command == 3){
+		     estado = MOTOR;
+		     found_band = 0;
+		     command = 0;
+		     anuncio = 0;
+		     anuncio2 = 0;
+		 }
 		 else{
 			 found_band = 0; // No es un commando
+			 command = 0;
+			 anuncio = 0;
+			 anuncio2 = 0;
 		 }
 		 	
 	  }
@@ -126,18 +136,15 @@ void  AS2_OnRxChar(void)
 			 found_band = 0; // Se termino la lectura del Bloque
 			 if (command == 2){
 				 estado = POINTCLOUD_START;
-				 n_canales = 0;
-				 command = 0;
-				 anuncio = 0;
-				 anuncio2 = 0;
 			 }
 			 else if (command == 1){
 				 estado = FREERUN;
-				 command = 0;
-				 anuncio = 0;
-				 anuncio2 = 0;
-				 n_canales = 0;
+				
 			 }
+			 command = 0;
+			 anuncio = 0;
+			 anuncio2 = 0;
+			 n_canales = 0;
 			 
 		 }
 		 else {found_band = found_band+1;} // se lee el siguiente byte

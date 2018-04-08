@@ -57,6 +57,8 @@
 #define FREERUN 6
 #define POINTCLOUD_START 7
 #define POINTCLOUD_END 8
+#define RESET 9
+
 
 typedef enum {
   ECHO_IDLE, /* device not used */

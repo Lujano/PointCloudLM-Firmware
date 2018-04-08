@@ -77,7 +77,7 @@ unsigned char Trama_PC[13]={0xf6, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
 unsigned char Buffer[4] = {0x00, 0x00, 0x00, 0x00};
 unsigned int Lectura_Buffer = 2;
-unsigned char Trama_end[3]={0xf1,0xf1,0xf1}; // Trama enviada cuando se termina el proceso de PointCloud
+unsigned char Trama_end[3]={0xf1,0x00,0x00}; // Trama enviada cuando se termina el proceso de PointCloud
 unsigned int env_end = 3;
 
 // Variable ADC
@@ -117,7 +117,7 @@ unsigned char theta_end ;
 
 
 void trigger(void);
-void init(void);
+void reset(void);
 void servo_send (unsigned char motor, unsigned char posicion);
 void delay_ms (unsigned int time_delay  );
 /* User includes (#include below this line is not maintained by Processor Expert) */
@@ -131,7 +131,7 @@ void main(void)
   PE_low_level_init();
   /*** End of Processor Expert internal initialization.                    ***/
 
-  init();
+  reset();
   /* Write your code here */
     
   /* For example: for(;;) { } */
@@ -189,7 +189,9 @@ void main(void)
   			
   		case POINTCLOUD_END:
   			CodError = AS2_SendBlock(Trama_end,3,&env_end);
-  		  	estado = ESPERAR;
+  			dir = 0;
+  			estado = ESPERAR;
+  		  	
   		  	break;
   			
   		case MOTOR:
@@ -198,22 +200,27 @@ void main(void)
   				if(step1 > phi_end){
   				  	step1 = step1-1; // Comienza en phi_start (mayor) y disminuye hasta phi_180
   				 }
-				if (step1 <= phi_end){ // Dio la vuelta
+  				else {
+  					if (step1 <= phi_end){ // Dio la vuelta
+  				
 					dir = 1; // Cambiar de direccion
 					step1 = phi_end;
 					band = 1;
 				}
+  				}
   			}
   			else{
   				 if(step1 < phi_start){
 					step1 = step1+1; // Comienza en phi_180 (menor) y aumenta hasta phi_0
 				 }
-				if (step1 >= phi_start){ // Dio la vuelta
+  				 else {
+  					if (step1 >= phi_start){ // Dio la vuelta
 					step1 = phi_start;
 					dir = 0; // Cambiar de direccion
 					step1 = phi_start;
 					band = 1;
 				}
+  					 }
   			}
   			
   			
@@ -232,13 +239,16 @@ void main(void)
   			}
   			
   			if(band == 1){
-				if (step2 < theta_end){ // Comienza en theta_90(menor)
-					step2 = step2+1;
+				if (step2 > theta_end){ // Comienza en theta_0(menor)
+					step2 = step2-1;
+					band = 0; // Reiniciar
 				}
-				band = 0; // Reiniciar
-				if(step2 >= theta_end){
+				
+		    else { 
+					if (step2 <= theta_end) {
 					step2 = theta_end;
 					reset_band = 1;
+				}
 				}
 				servo_send(2, step2);
 				delay_ms(150);
@@ -297,10 +307,8 @@ void main(void)
 			Trama_PC[12] = (step2) & 0x7F;  // bits restantes
 			//CodError = AS1_SendBlock(Trama_PC,13,&Enviados); //El arreglo con la medición está en iADC.u8 (notar que es un apuntador)
 			CodError = AS2_SendBlock(Trama_PC,13,&Enviados); //El arreglo con la medición está en iADC.u8 (notar que es un apuntador)
-			
-			delay_ms(50); // Retraso de 50 ms para tomar la foto
 			 if (estado != FREERUN ){
-				 estado = MOTOR;
+				 estado = ESPERAR;
 						  }
 			
 			break;
@@ -327,14 +335,14 @@ void trigger(void){
 	CodError = TI1_Disable();	
 }
 
-void init(void){
+void reset( void){
 	Bit1_ClrVal();
 	Bit7_ClrVal();
 	found_band = 0; // Por default, para detectar el anuncio
     phi_start = phi_0-75; // 90 grados
 	phi_end = phi_0-118;  // 110 grados
-	theta_start = theta_90; // 45 grados
-	theta_end = theta_90+40; // 80 grados
+	theta_start = theta_0; // 45 grados
+	theta_end = theta_0-40; //
 	
 	step1 = phi_0-97 ;
 	step2 =theta_90+57;
