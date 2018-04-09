@@ -58,3 +58,5 @@ MC9S08QE128, el cual se encarga del control en la elaboración de una nube de pu
   * Control, Adquisición y manejo de Datos de proximidad, obtenidos a través de un sensor infrarrojo modelo SHARP GP2Y0A21
   
   * Envío de datos vía puerto serial, esto a través de un protocolo de comunicación que transmite 5 canales analógico-digital
+
+[Home](https://github.com/Lujano/PointCloudLM/wiki)
